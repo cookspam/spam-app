@@ -41,7 +41,6 @@ pub fn Landing(cx: Scope) -> Element {
                 detail: "Ore has an algorithmic supply programmed for constant linear growth. On average, one new Ore token is mined every minute by miners around the globe.",
                 section: Section::B
             }
-            
             Footer {}
         }
     }
@@ -59,6 +58,19 @@ fn Navbar(cx: Scope) -> Element {
                     class: "h-6 md:h-8"
                 }
             }
+            div {
+                class: "flex flex-row gap-4",
+                Link {
+                    to: Route::WhatIsMining {},
+                    class: "text-lg font-semibold",
+                    "Help"
+                }
+                Link {
+                    to: Route::OreTokenomics {},
+                    class: "text-lg font-semibold",
+                    "My Page"
+                }
+            }
         }
     }
 }
@@ -70,7 +82,7 @@ fn Hero(cx: Scope) -> Element {
         div {
             class: "bg-white",
             div {
-                class: "flex flex-col w-full h-screen z-20 bg-cover bg-center",
+                class: "relative w-full h-screen z-20 bg-cover bg-center p-8",
                 style: "background-image: url({bg_img})",
                 Navbar {}
                 div {
@@ -79,23 +91,62 @@ fn Hero(cx: Scope) -> Element {
                         class: "flex flex-col gap-y-4 sm:gap-y-6 md:gap-y-8",
                         p {
                             class: "text-center text-4xl min-[480px]:text-5xl min-[600px]:text-6xl md:text-7xl lg:text-8xl font-bold font-hero text-black",
-                            "It's time to mine."
+                            "Let's Spam Solana Testnet!"
                         }
                         p {
                             class: "text-xl sm:text-2xl md:text-3xl lg:text-4xl text-center max-w-[46rem] font-hero leading-7 text-black",
-                            "Ore is a digital currency you can mine from anywhere, at home or on your phone."
+                            "Contribute to the resilience of the Solana network while earning your share."
                         }
                     }
                     Link {
-                        class: "mx-auto sm:text-lg md:text-xl lg:text-2xl font-semibold bg-green-500 hover:bg-green-600 active:bg-green-700 text-white transition-colors rounded-full px-6 py-3",
+                        class: "absolute bottom-8 right-8 sm:text-lg md:text-xl lg:text-2xl font-semibold bg-green-500 hover:bg-green-600 active:bg-green-700 text-white transition-colors rounded-full px-6 py-3",
                         to: Route::Home {},
                         "Get started →"
+                    }
+                }
+                //DataSection {}
+                div {
+                    class: "absolute bottom-8 left-8 right-8 flex flex-row justify-between bg-white p-4 rounded-lg shadow-md",
+                    DataItem {
+                        title: "Live Tx",
+                        value: "wjgaljjeowfpwk" // Dummy value
+                    }
+                    DataItem {
+                        title: "Circulating Supply",
+                        value: "0 SPAM" // Dummy value
+                    }
+                    DataItem {
+                        title: "Total Supply",
+                        value: "0 SPAM" // Dummy value
+                    }
+                    DataItem {
+                        title: "Reward Rate",
+                        value: "0.001324 SPAM" // Dummy value
                     }
                 }
             }
         }
     }
 }
+
+
+#[component]
+fn DataItem(cx: Scope, title: &'static str, value: &'static str) -> Element {
+    render! {
+        div {
+            class: "flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md w-1/4",
+            p {
+                class: "text-gray-700 text-lg font-medium",
+                "{title}"
+            }
+            p {
+                class: "text-2xl font-bold",
+                "{value}"
+            }
+        }
+    }
+}
+
 
 #[component]
 fn Block<'a>(
@@ -108,11 +159,9 @@ fn Block<'a>(
     let colors = match section {
         Section::A => "bg-black text-white",
         Section::B => "bg-white text-black",
-       // Section::C => "bg-green-500 text-white",
     };
     let height = match section {
         Section::A | Section::B => "min-h-svh h-full",
-       // Section::C => "",
     };
     render! {
         div {
@@ -147,7 +196,6 @@ fn Block<'a>(
                     match section {
                         Section::A => render! { SectionA {} },
                         Section::B => render! { SectionB {} },
-                      //  _ => None
                     }
                 }
             }
@@ -172,7 +220,6 @@ fn BlockCta<'a>(cx: Scope, section: &'a Section) -> Element {
                 "Learn more →"
             }
         },
-        
     }
 }
 
@@ -180,7 +227,6 @@ fn BlockCta<'a>(cx: Scope, section: &'a Section) -> Element {
 enum Section {
     A,
     B,
-   // C,
 }
 
 #[component]
@@ -337,7 +383,6 @@ fn OreValue(cx: Scope, title: String, amount: String) -> Element {
                 }
             }
         }
-
     }
 }
 

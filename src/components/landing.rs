@@ -50,7 +50,7 @@ pub fn Landing(cx: Scope) -> Element {
 fn Navbar(cx: Scope) -> Element {
     render! {
         div {
-            class: "flex flex-row justify-between px-4 sm:px-8 py-8 w-full z-50",
+            class: "flex flex-row justify-between px-4 sm:px-8 py-8 w-full z-50 bg-white",
             Link {
                 to: Route::Landing {},
                 class: "flex flex-row h-10",
@@ -59,6 +59,7 @@ fn Navbar(cx: Scope) -> Element {
                 }
             }
             div {
+               
                 class: "flex flex-row gap-4",
                 Link {
                     to: Route::WhatIsMining {},
@@ -75,6 +76,7 @@ fn Navbar(cx: Scope) -> Element {
     }
 }
 
+
 #[component]
 fn Hero(cx: Scope) -> Element {
     let bg_img = asset_path("spam.jpg");
@@ -82,11 +84,14 @@ fn Hero(cx: Scope) -> Element {
         div {
             class: "bg-white",
             div {
-                class: "relative w-full h-screen z-20 bg-cover bg-center p-8",
-                style: "background-image: url({bg_img})",
+                class: "relative w-full h-screen z-20",
                 Navbar {}
                 div {
-                    class: "flex flex-col gap-y-8 sm:gap-y-10 md:gap-y-12 mx-auto my-auto pb-24 px-4 sm:px-8",
+                    class: "relative flex flex-col items-center gap-y-8 sm:gap-y-10 md:gap-y-12 mx-auto my-auto pb-24 px-4 sm:px-8 max-w-7xl",
+                    img {
+                        src: "{bg_img}",
+                        class: "max-w-full h-auto px-4 sm:px-8"
+                    }
                     div {
                         class: "flex flex-col gap-y-4 sm:gap-y-6 md:gap-y-8",
                         p {
@@ -99,17 +104,16 @@ fn Hero(cx: Scope) -> Element {
                         }
                     }
                     Link {
-                        class: "absolute bottom-8 right-8 sm:text-lg md:text-xl lg:text-2xl font-semibold bg-green-500 hover:bg-green-600 active:bg-green-700 text-white transition-colors rounded-full px-6 py-3",
+                        class: "mx-auto sm:text-lg md:text-xl lg:text-2xl font-semibold bg-green-500 hover:bg-green-600 text-white transition-colors rounded-full px-6 py-3",
                         to: Route::Home {},
                         "Get started →"
                     }
                 }
-                //DataSection {}
                 div {
-                    class: "absolute bottom-8 left-8 right-8 flex flex-row justify-between bg-white p-4 rounded-lg shadow-md",
+                    class: "absolute bottom-[-4rem] left-8 right-8 flex flex-row justify-between bg-white p-4 rounded-lg shadow-md",
                     DataItem {
                         title: "Live Tx",
-                        value: "wjgaljjeowfpwk" // Dummy value
+                        value: "Dummy Value" // Dummy value
                     }
                     DataItem {
                         title: "Circulating Supply",

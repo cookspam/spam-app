@@ -17,8 +17,8 @@ module.exports = {
       black: '#1d1d1f',
       green: {
         400: '#5EDCA7',
-        500: '#0acf86',
-        600: '#00b87c',
+        500: '#3498DB',
+        600: '#BDC3C7',
         700: '#00a36e',
       },
       gray: {
@@ -29,6 +29,10 @@ module.exports = {
         800: '#464648',
         900: '#313133',
       },
+      yellow: {
+        500:'#ffeb3b',
+        600: '#fdd835',
+      }
     }),
     extend: {
       fontFamily: {

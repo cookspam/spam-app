@@ -41,12 +41,7 @@ pub fn Landing(cx: Scope) -> Element {
                 detail: "Ore has an algorithmic supply programmed for constant linear growth. On average, one new Ore token is mined every minute by miners around the globe.",
                 section: Section::B
             }
-            Block {
-                title: "Fair launch.",
-                title2: "Immutable code.",
-                detail: "Ore has no insider token allocation nor pre-mined supply. The smart contract has been frozen and open-sourced to prevent tampering or removal.",
-                section: Section::C
-            }
+            
             Footer {}
         }
     }
@@ -70,7 +65,7 @@ fn Navbar(cx: Scope) -> Element {
 
 #[component]
 fn Hero(cx: Scope) -> Element {
-    let bg_img = asset_path("smoke.jpg");
+    let bg_img = asset_path("spam.jpg");
     render! {
         div {
             class: "bg-white",
@@ -113,11 +108,11 @@ fn Block<'a>(
     let colors = match section {
         Section::A => "bg-black text-white",
         Section::B => "bg-white text-black",
-        Section::C => "bg-green-500 text-white",
+       // Section::C => "bg-green-500 text-white",
     };
     let height = match section {
         Section::A | Section::B => "min-h-svh h-full",
-        Section::C => "",
+       // Section::C => "",
     };
     render! {
         div {
@@ -152,7 +147,7 @@ fn Block<'a>(
                     match section {
                         Section::A => render! { SectionA {} },
                         Section::B => render! { SectionB {} },
-                        _ => None
+                      //  _ => None
                     }
                 }
             }
@@ -177,13 +172,7 @@ fn BlockCta<'a>(cx: Scope, section: &'a Section) -> Element {
                 "Learn more →"
             }
         },
-        Section::C => render! {
-            Link {
-                class: "font-semibold mt-4",
-                to: "https://github.com/hardhatchad/ore",
-                "Read the code →"
-            }
-        },
+        
     }
 }
 
@@ -191,7 +180,7 @@ fn BlockCta<'a>(cx: Scope, section: &'a Section) -> Element {
 enum Section {
     A,
     B,
-    C,
+   // C,
 }
 
 #[component]

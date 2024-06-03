@@ -14,14 +14,14 @@ pub fn Footer(cx: Scope) -> Element {
             div {
                 class: "flex flex-row gap-8",
                 Link {
-                    to: "https://github.com/hardhatchad/ore",
+                    to: "https://github.com/cookspam",
                     class: "flex h-10 w-10 hover:bg-gray-900 active:bg-gray-800 transition-colors rounded-full text-white",
                     GithubIcon {
                         class: "w-6 h-6 m-auto"
                     }
                 }
                 Link {
-                    to: "https://x.com/oresupply",
+                    to: "https://x.com/CookHatChad",
                     class: "flex h-10 w-10 hover:bg-gray-900 active:bg-gray-800 transition-colors rounded-full text-white",
                     XIcon {
                         class: "w-5 h-5 m-auto"

@@ -674,8 +674,8 @@ h2:where(.dark, .dark *) {
   bottom: 5rem;
 }
 
-.bottom-\[-12\.5\%\] {
-  bottom: -12.5%;
+.bottom-\[-8\%\] {
+  bottom: -8%;
 }
 
 .left-0 {
@@ -692,6 +692,18 @@ h2:where(.dark, .dark *) {
 
 .top-0 {
   top: 0px;
+}
+
+.bottom-\[-12\%\] {
+  bottom: -12%;
+}
+
+.bottom-\[-12\.5\%\] {
+  bottom: -12.5%;
+}
+
+.bottom-\[-14\.5\%\] {
+  bottom: -14.5%;
 }
 
 .z-20 {
@@ -758,6 +770,10 @@ h2:where(.dark, .dark *) {
   margin-left: 0.125rem;
 }
 
+.ml-16 {
+  margin-left: 4rem;
+}
+
 .ml-2 {
   margin-left: 0.5rem;
 }
@@ -768,6 +784,10 @@ h2:where(.dark, .dark *) {
 
 .ml-auto {
   margin-left: auto;
+}
+
+.mr-16 {
+  margin-right: 4rem;
 }
 
 .mr-auto {
@@ -796,6 +816,38 @@ h2:where(.dark, .dark *) {
 
 .mt-auto {
   margin-top: auto;
+}
+
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
+.mt-\[-3\] {
+  margin-top: -3;
+}
+
+.mt-\[-10\] {
+  margin-top: -10;
+}
+
+.mt-\[-10vh\] {
+  margin-top: -10vh;
+}
+
+.-mt-\[-10vh\] {
+  margin-top: 10vh;
+}
+
+.-mt-\[10vh\] {
+  margin-top: -10vh;
+}
+
+.mr-6 {
+  margin-right: 1.5rem;
+}
+
+.mr-4 {
+  margin-right: 1rem;
 }
 
 .flex {
@@ -882,8 +934,8 @@ h2:where(.dark, .dark *) {
   height: 2rem;
 }
 
-.h-\[25\%\] {
-  height: 25%;
+.h-\[20\%\] {
+  height: 20%;
 }
 
 .h-auto {
@@ -907,6 +959,10 @@ h2:where(.dark, .dark *) {
   max-height: 80vh;
 }
 
+.max-h-full {
+  max-height: 100%;
+}
+
 .min-h-16 {
   min-height: 4rem;
 }
@@ -921,6 +977,10 @@ h2:where(.dark, .dark *) {
 
 .w-1\/4 {
   width: 25%;
+}
+
+.w-1\/5 {
+  width: 20%;
 }
 
 .w-10 {
@@ -996,6 +1056,10 @@ h2:where(.dark, .dark *) {
   width: 100vw;
 }
 
+.min-w-\[\] {
+  min-width: ;
+}
+
 .max-w-3xl {
   max-width: 48rem;
 }
@@ -1006,10 +1070,6 @@ h2:where(.dark, .dark *) {
 
 .max-w-96 {
   max-width: 24rem;
-}
-
-.max-w-\[1200px\] {
-  max-width: 1200px;
 }
 
 .max-w-\[46rem\] {
@@ -1026,6 +1086,18 @@ h2:where(.dark, .dark *) {
 
 .max-w-full {
   max-width: 100%;
+}
+
+.max-w-\[\] {
+  max-width: ;
+}
+
+.max-w-\[1280\] {
+  max-width: 1280;
+}
+
+.max-w-\[1280px\] {
+  max-width: 1280px;
 }
 
 .flex-auto {
@@ -1335,6 +1407,11 @@ h2:where(.dark, .dark *) {
      object-fit: contain;
 }
 
+.object-scale-down {
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
+}
+
 .p-2 {
   padding: 0.5rem;
 }
@@ -1423,8 +1500,16 @@ h2:where(.dark, .dark *) {
   padding-bottom: 6rem;
 }
 
+.pb-5 {
+  padding-bottom: 1.25rem;
+}
+
 .pl-4 {
   padding-left: 1rem;
+}
+
+.pr-16 {
+  padding-right: 4rem;
 }
 
 .pr-2 {
@@ -1439,8 +1524,16 @@ h2:where(.dark, .dark *) {
   padding-top: 0.375rem;
 }
 
+.pt-24 {
+  padding-top: 6rem;
+}
+
 .pt-5 {
   padding-top: 1.25rem;
+}
+
+.pt-32 {
+  padding-top: 8rem;
 }
 
 .text-left {
@@ -1476,6 +1569,11 @@ h2:where(.dark, .dark *) {
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
+}
+
+.text-7xl {
+  font-size: 4.5rem;
+  line-height: 1;
 }
 
 .text-lg {
@@ -2133,6 +2231,14 @@ h2:where(.dark, .dark *) {
     min-height: 180vh;
   }
 
+  .md\:min-h-\[150vh\] {
+    min-height: 150vh;
+  }
+
+  .md\:min-h-\[120vh\] {
+    min-height: 120vh;
+  }
+
   .md\:w-10 {
     width: 2.5rem;
   }
@@ -2231,6 +2337,11 @@ h2:where(.dark, .dark *) {
 
   .lg\:text-6xl {
     font-size: 3.75rem;
+    line-height: 1;
+  }
+
+  .lg\:text-7xl {
+    font-size: 4.5rem;
     line-height: 1;
   }
 

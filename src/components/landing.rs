@@ -55,7 +55,7 @@ fn Navbar(cx: Scope) -> Element {
                 to: Route::Landing {},
                 class: "flex flex-row h-10",
                 p {
-                    class: "text-2xl font-semibold ml-16",  // Increased the font size
+                    class: "text-2xl font-semibold",  // Increased the font size
                     "SPAM"
                 }
             }
@@ -63,17 +63,15 @@ fn Navbar(cx: Scope) -> Element {
                 class: "flex flex-row gap-8",  // Added padding to the right
                 Link {
                     to: Route::WhatIsMining {},
-                    class: "text-lg font-semibold mr-16",  // Added padding to the right
+                    class: "text-lg font-semibold ",  // Added padding to the right
                     "Help"
                 }
                 Link {
-                    to: Route::OreTokenomics {},
-                    class: "text-lg font-semibold mr-16",  // Added padding to the right
+                    to: Route::Settings {},
+                    class: "text-lg font-semibold",  // Added padding to the right
                     "My Page"
                 }
-                div {
-                    class: "pr-16"  // Added extra padding to the right side of the entire div
-                }
+                
             }
         }
     }
@@ -83,23 +81,32 @@ fn Navbar(cx: Scope) -> Element {
 
 #[component]
 fn Hero(cx: Scope) -> Element {
-    let bg_img = asset_path("spam(1).jpg");
+    let bg_img = asset_path("spam_crop.png");
     render! {
         div {
-            class: "bg-white",
+            class: "bg-white max-w-[1280px] mx-auto",
             div {
-                class: "relative w-full min-h-screen md:min-h-[180vh] z-20",
+                class: "relative w-full min-h-screen md:min-h-[120vh] z-20",
                 Navbar {}
                 div {
                     class: "relative flex flex-col items-center gap-y-8 sm:gap-y-10 md:gap-y-12 mx-auto pb-24 px-4 sm:px-8 max-w-7xl",
                     div {
-                        class: "w-full h-auto max-w-[1200px]",
+                        class: "w-full h-screen",
                         img {
                             src: "{bg_img}",
-                            class: "w-full h-auto"
+                            class: "w-full h-auto object-scale-down m-auto"
+                        }
+                        div{
+                            class: "absolute top-0 left-0 w-full",
+                            div {
+                                class: "pt-32 text-center text-7xl min-[480px]:text-5xl min-[600px]:text-6xl md:text-3xl lg:text-7xl font-bold font-hero text-black",
+                              
+                                    "Let's Spam Solana!"
+                                
+                            }
                         }
                         div {
-                            class: "absolute bottom-[-12.5%] left-1/2 transform -translate-x-1/2 w-[86%] h-[25%] items-center flex flex-row justify-between bg-white p-4 rounded-lg shadow-md",
+                            class: "absolute -mt-[10vh] left-1/2 transform -translate-x-1/2 w-[86%] h-[20%] items-center flex flex-row justify-between bg-white p-4 rounded-lg shadow-md",
                             DataItem {
                                 title: "Live Tx",
                                 value: "Dummy Value" // Dummy value
@@ -117,15 +124,14 @@ fn Hero(cx: Scope) -> Element {
                                 value: "0.001324 SPAM" // Dummy value
                             }
                             div {
-                                class: "flex flex-col justify-center h-full",
-                                div {
-                                    class: "ml-1 flex flex-col items-center justify-center bg-teal-500 hover:bg-teal-700 text-white transition-colors rounded-lg shadow-md",
+                                class: "flex flex-col items-center bg-teal-500 hover:bg-teal-700 rounded-lg p-4 shadow-md w-1/5 text-white text-lg ",
+                              
                                     Link {
-                                        class: "px-12 py-5 w-100",  // Adjusted padding and height
+                                        class: " py-4 ",  // Adjusted padding and height
                                         to: Route::Home {},
                                         "SPAM →"
                                     }
-                                }
+                                
                             }
                         }
                         
@@ -133,20 +139,7 @@ fn Hero(cx: Scope) -> Element {
 
                     
 
-                    div {
-                        class: "flex flex-col gap-y-4 sm:gap-y-6 md:gap-y-8 items-center pt8 mt-24", // Added margin to separate the text from the data section
-                        p {
-                            class: "text-center text-2xl min-[480px]:text-5xl min-[600px]:text-6xl md:text-7xl lg:text-8xl font-bold font-hero text-black",
-                            "Let's Spam Solana!"
-                        }
-                        div {
-                            class: "w-full flex justify-center",
-                            p {
-                                class: "text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl max-w-[46rem] font-hero leading-7 text-black pb-5",
-                                "Contribute to the resilience of the Solana network while earning your share."
-                            }
-                        }
-                    }
+        
                 }
             }
         }

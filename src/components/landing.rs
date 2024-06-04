@@ -8,7 +8,7 @@ use ore_types::Transfer;
 use web_time::{Duration, SystemTime, UNIX_EPOCH};
 
 use crate::{
-    components::{ActivityFilter, ActivityIndicator, Footer, OreIcon, OreLogoIcon},
+    components::{ActivityFilter, ActivityIndicator, Footer, OreIcon},
     gateway::AsyncResult,
     hooks::{use_is_onboarded, use_ore_supply, use_transfers, use_treasury},
     utils::asset_path,
@@ -54,26 +54,32 @@ fn Navbar(cx: Scope) -> Element {
             Link {
                 to: Route::Landing {},
                 class: "flex flex-row h-10",
-                OreLogoIcon {
-                    class: "h-6 md:h-8"
+                p {
+                    class: "text-2xl font-semibold ml-16",  // Increased the font size
+                    "SPAM"
                 }
             }
             div {
-                class: "flex flex-row gap-4",
+                class: "flex flex-row gap-8",  // Added padding to the right
                 Link {
                     to: Route::WhatIsMining {},
-                    class: "text-lg font-semibold",
+                    class: "text-lg font-semibold mr-16",  // Added padding to the right
                     "Help"
                 }
                 Link {
                     to: Route::OreTokenomics {},
-                    class: "text-lg font-semibold pr6",
+                    class: "text-lg font-semibold mr-16",  // Added padding to the right
                     "My Page"
+                }
+                div {
+                    class: "pr-16"  // Added extra padding to the right side of the entire div
                 }
             }
         }
     }
 }
+
+
 
 #[component]
 fn Hero(cx: Scope) -> Element {
@@ -113,9 +119,9 @@ fn Hero(cx: Scope) -> Element {
                             div {
                                 class: "flex flex-col justify-center h-full",
                                 div {
-                                    class: "flex flex-col items-center justify-center bg-teal-500 hover:bg-teal-700 text-white transition-colors rounded-lg shadow-md",
+                                    class: "ml-1 flex flex-col items-center justify-center bg-teal-500 hover:bg-teal-700 text-white transition-colors rounded-lg shadow-md",
                                     Link {
-                                        class: "px-12 py-5 w-80",  // Adjusted padding and height
+                                        class: "px-12 py-5 w-100",  // Adjusted padding and height
                                         to: Route::Home {},
                                         "SPAM →"
                                     }

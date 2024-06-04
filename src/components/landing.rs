@@ -80,48 +80,60 @@ fn Hero(cx: Scope) -> Element {
     let bg_img = asset_path("spam(1).jpg");
     render! {
         div {
-            class: "relative bg-white",
+            class: "bg-white",
             div {
-                class: "relative w-full min-h-screen z-20",
+                class: "relative w-full min-h-screen md:min-h-[180vh] z-20",
                 Navbar {}
-                img {
-                    src: "{bg_img}",
-                    class:"max-w-full h-auto px-4 sm:px-8"
-                }
                 div {
-                    class: "absolute inset-x-0 bottom-[-4rem] left-1/2 transform -translate-x-1/2 w-full max-w-7xl flex flex-row justify-between bg-white p-4 rounded-lg shadow-md",
-                    DataItem {
-                        title: "Live Tx",
-                        value: "Dummy Value" // Dummy value
+                    class: "relative flex flex-col items-center gap-y-8 sm:gap-y-10 md:gap-y-12 mx-auto pb-24 px-4 sm:px-8 max-w-7xl",
+                    div {
+                        class: "w-full px-4 sm:px-8",
+                        img {
+                            src: "{bg_img}",
+                            class: "w-full h-auto"
+                        }
+                        div {
+                            class: "absolute bottom-[-12.5%] left-1/2 transform -translate-x-1/2 w-[86%] h-[25%] items-center flex flex-row justify-between bg-white p-4 rounded-lg shadow-md",
+                            DataItem {
+                                title: "Live Tx",
+                                value: "Dummy Value" // Dummy value
+                            }
+                            DataItem {
+                                title: "Circulating Supply",
+                                value: "0 SPAM" // Dummy value
+                            }
+                            DataItem {
+                                title: "Total Supply",
+                                value: "0 SPAM" // Dummy value
+                            }
+                            DataItem {
+                                title: "Reward Rate",
+                                value: "0.001324 SPAM" // Dummy value
+                            }
+                            Link {
+                                class: "mx-auto sm:text-lg md:text-xl lg:text-xl font-semibold bg-green-500 hover:bg-green-600 text-white transition-colors px-6 py-3",
+                                to: Route::Home {},
+                                "SPAM →"
+                            }
+                        }
                     }
-                    DataItem {
-                        title: "Circulating Supply",
-                        value: "0 SPAM" // Dummy value
+
+                    
+
+                    div {
+                        class: "flex flex-col gap-y-4 sm:gap-y-6 md:gap-y-8 items-center pt8 mt-24", // Added margin to separate the text from the data section
+                        p {
+                            class: "text-center text-2xl min-[480px]:text-5xl min-[600px]:text-6xl md:text-7xl lg:text-8xl font-bold font-hero text-black",
+                            "Let's Spam Solana!"
+                        }
+                        div {
+                            class: "w-full flex justify-center",
+                            p {
+                                class: "text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl max-w-[46rem] font-hero leading-7 text-black",
+                                "Contribute to the resilience of the Solana network while earning your share."
+                            }
+                        }
                     }
-                    DataItem {
-                        title: "Total Supply",
-                        value: "0 SPAM" // Dummy value
-                    }
-                    DataItem {
-                        title: "Reward Rate",
-                        value: "0.001324 SPAM" // Dummy value
-                    }
-                }
-            }
-            div {
-                class: "relative flex flex-col items-center gap-y-8 sm:gap-y-10 md:gap-y-12 mx-auto pt-24 px-4 sm:px-8 max-w-7xl mt-[calc(100vh-4rem)]", // Adjusted the margin top
-                p {
-                    class: "text-center text-2xl min-[480px]:text-5xl min-[600px]:text-6xl md:text-7xl lg:text-8xl font-bold font-hero text-black",
-                    "Let's Spam Solana Testnet!"
-                }
-                p {
-                    class: "text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl max-w-[46rem] font-hero leading-7 text-black",
-                    "Contribute to the resilience of the Solana network while earning your share."
-                }
-                Link {
-                    class: "mx-auto sm:text-lg md:text-xl lg:text-2xl font-semibold bg-green-500 hover:bg-green-600 text-white transition-colors rounded-full px-6 py-3",
-                    to: Route::Home {},
-                    "Get started →"
                 }
             }
         }
@@ -133,13 +145,13 @@ fn Hero(cx: Scope) -> Element {
 fn DataItem(cx: Scope, title: &'static str, value: &'static str) -> Element {
     render! {
         div {
-            class: "flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md w-1/4",
+            class: "flex flex-col items-center bg-real_white rounded-lg p-4 shadow-md w-1/4",
             p {
                 class: "text-gray-700 text-lg font-medium",
                 "{title}"
             }
             p {
-                class: "text-2xl font-bold",
+                class: "text-xl",
                 "{value}"
             }
         }

@@ -10,7 +10,7 @@ use solana_client_wasm::solana_sdk::native_token::LAMPORTS_PER_SOL;
 use solana_sdk::native_token::LAMPORTS_PER_SOL;
 
 use crate::{
-    components::{BackupKeypairWarning, Copyable},
+    components::{BackupKeypairWarning, Copyable, Footer},
     gateway::{AsyncResult, RPC_URL},
     hooks::{
         use_appearance, use_explorer, use_pubkey, use_rpc_url, use_show_backup_warning,
@@ -228,6 +228,7 @@ pub fn Settings(cx: Scope) -> Element {
                     }
                 }
             }
+            Footer {}
         }
     }
 }

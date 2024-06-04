@@ -955,6 +955,10 @@ h2:where(.dark, .dark *) {
   height: 100vh;
 }
 
+.h-14 {
+  height: 3.5rem;
+}
+
 .max-h-\[80vh\] {
   max-height: 80vh;
 }
@@ -1054,6 +1058,10 @@ h2:where(.dark, .dark *) {
 
 .w-screen {
   width: 100vw;
+}
+
+.w-14 {
+  width: 3.5rem;
 }
 
 .min-w-\[\] {
@@ -1400,6 +1408,11 @@ h2:where(.dark, .dark *) {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(245 245 247 / var(--tw-bg-opacity));
+}
+
+.bg-pink-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 187 208 / var(--tw-bg-opacity));
 }
 
 .object-contain {
@@ -2237,6 +2250,10 @@ h2:where(.dark, .dark *) {
 
   .md\:min-h-\[120vh\] {
     min-height: 120vh;
+  }
+
+  .md\:min-h-\[100vh\] {
+    min-height: 100vh;
   }
 
   .md\:w-10 {

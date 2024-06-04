@@ -36,14 +36,15 @@ pub fn Navbar(cx: Scope) -> Element {
                     Link {
                         to: Route::Home {},
                         class: "flex h-10",
-                        OreWordmarkIcon {
-                            class: "h-3 md:h-4 my-auto"
+                        p {
+                            class: "text-2xl font-semibold my-auto",  // Adjust the font size and vertical alignment
+                            "SPAM"
                         }
                     }
                     div {
                         class: "flex flex-row gap-6 md:gap-8 lg:gap-10",
                         Link {
-                            class: "transition-colors flex w-10 h-10 justify-center rounded-full text-gray-300 dark:text-gray-700 hover:text-black dark:hover:text-white",
+                            class: "transition-colors flex w-14 h-14 justify-center rounded-full text-gray-300 dark:text-gray-700 hover:text-black dark:hover:text-white",
                             to: Route::Stats {},
                             PieIcon {
                                 class: "w-5 h-5 sm:w-6 sm:h-6 my-auto"
@@ -53,6 +54,7 @@ pub fn Navbar(cx: Scope) -> Element {
                     }
                 }
             }
+            
             div {
                 class: "flex flex-col h-full py-4 px-4 sm:px-8 grow w-full max-w-[96rem] mx-auto",
                 Outlet::<Route> {}

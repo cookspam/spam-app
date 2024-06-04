@@ -1,15 +1,16 @@
 use dioxus::prelude::*;
 use dioxus_router::prelude::Link;
 
-use crate::components::{GithubIcon, OreLogoIcon, XIcon};
+use crate::components::{GithubIcon, XIcon};
 
 #[component]
 pub fn Footer(cx: Scope) -> Element {
     render! {
         div {
-            class: "flex flex-row bg-black text-white w-full py-6 sm:py-10 px-4 sm:px-8 justify-between",
-            OreLogoIcon {
-                class: "h-6 md:h-8 my-auto"
+            class: "flex flex-row bg-teal-500 text-white w-full py-6 sm:py-10 px-4 sm:px-8 justify-between",
+            p {
+                class: "text-2xl font-semibold my-auto",  // Added margin to vertically center the text
+                "SPAM"
             }
             div {
                 class: "flex flex-row gap-8",

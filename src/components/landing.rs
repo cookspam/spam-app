@@ -29,18 +29,6 @@ pub fn Landing(cx: Scope) -> Element {
         div {
             class: "flex flex-col",
             Hero{}
-            Block {
-                title: "Proof of work.",
-                title2: "On Solana.",
-                detail: "Ore uses a novel mining protocol designed for fair token distribution. It guarantees no miner can ever be starved out from earning rewards.",
-                section: Section::A
-            }
-            Block {
-                title: "Stable supply.",
-                title2: "Steady growth.",
-                detail: "Ore has an algorithmic supply programmed for constant linear growth. On average, one new Ore token is mined every minute by miners around the globe.",
-                section: Section::B
-            }
             Footer {}
         }
     }
@@ -55,23 +43,17 @@ fn Navbar(cx: Scope) -> Element {
                 to: Route::Landing {},
                 class: "flex flex-row h-10",
                 p {
-                    class: "text-2xl font-semibold",  // Increased the font size
+                    class: "text-2xl font-semibold hover:text-gray-500",  // Increased the font size
                     "SPAM"
                 }
             }
             div {
                 class: "flex flex-row gap-8",  // Added padding to the right
                 Link {
-                    to: Route::WhatIsMining {},
-                    class: "text-lg font-semibold ",  // Added padding to the right
-                    "Help"
-                }
-                Link {
                     to: Route::Settings {},
                     class: "text-lg font-semibold",  // Added padding to the right
                     "My Page"
                 }
-                
             }
         }
     }
@@ -86,7 +68,7 @@ fn Hero(cx: Scope) -> Element {
         div {
             class: "bg-white max-w-[1280px] mx-auto",
             div {
-                class: "relative w-full min-h-screen md:min-h-[120vh] z-20",
+                class: "relative w-full min-h-screen md:min-h-[100vh] z-20",
                 Navbar {}
                 div {
                     class: "relative flex flex-col items-center gap-y-8 sm:gap-y-10 md:gap-y-12 mx-auto pb-24 px-4 sm:px-8 max-w-7xl",
@@ -100,6 +82,7 @@ fn Hero(cx: Scope) -> Element {
                             class: "absolute top-0 left-0 w-full",
                             div {
                                 class: "pt-32 text-center text-7xl min-[480px]:text-5xl min-[600px]:text-6xl md:text-3xl lg:text-7xl font-bold font-hero text-black",
+                                style: "text-shadow: 5px 5px 8px white, 0 0 50px white, 0 0 30px white;",
                               
                                     "Let's Spam Solana!"
                                 

@@ -33,7 +33,23 @@ module.exports = {
       yellow: {
         500:'#ffeb3b',
         600: '#fdd835',
+      },
+      pink:{
+        100: '#f8bbd0',
+        200: '#ff80ab',
+        800: '#f9a825'
+      },
+      amber:{
+        200: '#fde68a',
+        500: '#f59e0b',
+
+      },
+      teal: {
+        500: '#14b8a6',
+        700: '#0f766e',
+        900: '#134e4a'
       }
+
     }),
     extend: {
       fontFamily: {

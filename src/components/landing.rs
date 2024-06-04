@@ -67,7 +67,7 @@ fn Navbar(cx: Scope) -> Element {
                 }
                 Link {
                     to: Route::OreTokenomics {},
-                    class: "text-lg font-semibold",
+                    class: "text-lg font-semibold pr6",
                     "My Page"
                 }
             }
@@ -87,7 +87,7 @@ fn Hero(cx: Scope) -> Element {
                 div {
                     class: "relative flex flex-col items-center gap-y-8 sm:gap-y-10 md:gap-y-12 mx-auto pb-24 px-4 sm:px-8 max-w-7xl",
                     div {
-                        class: "w-full px-4 sm:px-8",
+                        class: "w-full h-auto max-w-[1200px]",
                         img {
                             src: "{bg_img}",
                             class: "w-full h-auto"
@@ -110,12 +110,19 @@ fn Hero(cx: Scope) -> Element {
                                 title: "Reward Rate",
                                 value: "0.001324 SPAM" // Dummy value
                             }
-                            Link {
-                                class: "mx-auto sm:text-lg md:text-xl lg:text-xl font-semibold bg-green-500 hover:bg-green-600 text-white transition-colors px-6 py-3",
-                                to: Route::Home {},
-                                "SPAM →"
+                            div {
+                                class: "flex flex-col justify-center h-full",
+                                div {
+                                    class: "flex flex-col items-center justify-center bg-teal-500 hover:bg-teal-700 text-white transition-colors rounded-lg shadow-md",
+                                    Link {
+                                        class: "px-12 py-5 w-80",  // Adjusted padding and height
+                                        to: Route::Home {},
+                                        "SPAM →"
+                                    }
+                                }
                             }
                         }
+                        
                     }
 
                     
@@ -129,7 +136,7 @@ fn Hero(cx: Scope) -> Element {
                         div {
                             class: "w-full flex justify-center",
                             p {
-                                class: "text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl max-w-[46rem] font-hero leading-7 text-black",
+                                class: "text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl max-w-[46rem] font-hero leading-7 text-black pb-5",
                                 "Contribute to the resilience of the Solana network while earning your share."
                             }
                         }

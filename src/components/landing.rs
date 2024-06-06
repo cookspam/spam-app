@@ -43,7 +43,7 @@ fn Navbar(cx: Scope) -> Element {
                 to: Route::Landing {},
                 class: "flex flex-row h-10",
                 p {
-                    class: "text-2xl font-semibold hover:text-gray-500",  // Increased the font size
+                    class: "text-2xl font-semibold  hover:text-gray-500",  // Increased the font size
                     "SPAM"
                 }
             }

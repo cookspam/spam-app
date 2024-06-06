@@ -8,7 +8,9 @@ module.exports = {
     "./dist/**/*.html",
   ],
   darkMode: 'selector',
-  plugins: [],
+  plugins: [
+    
+  ],
   theme: {
     colors: ({ colors }) => ({
       ...colors,
@@ -40,7 +42,7 @@ module.exports = {
         800: '#f9a825'
       },
       amber:{
-        200: '#fde68a',
+        200: '#FF9800',
         500: '#f59e0b',
 
       },

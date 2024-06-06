@@ -4,7 +4,7 @@ use crate::utils::asset_path;
 
 #[component]
 pub fn Tutorial(cx: Scope) -> Element {
-    let tool = asset_path("Tools.png");
+    let tool = asset_path("Tool1.png");
     render! {
         div {
             class: "absolute right-4 sm:right-8 bottom-20 px-2 py-2 animate-bounce text-teal-500 rounded flex items-center space-x-2", // Change background to border

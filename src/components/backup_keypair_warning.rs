@@ -12,7 +12,7 @@ pub fn BackupKeypairWarning(cx: Scope) -> Element {
     let show_backup_warning = use_show_backup_warning(cx);
     render! {
         div {
-            class: "flex flex-col gap-3 bg-pink-100 w-full rounded px-4 py-5 text-black",
+            class: "flex flex-col gap-3 bg-amber-200 border-yellow-500 w-full rounded px-4 py-5 text-black",
             p {
                 class: "font-bold text-2xl",
                 "Backup your keypair!"

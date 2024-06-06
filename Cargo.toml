@@ -64,7 +64,7 @@ is-url = { version = "1.0.4" }
 js-sys = { version = "0.3.67", optional = true }
 log = "0.4.20"
 num_cpus = { version = "1.16.0", optional = true }
-ore = { package = "ore-program", version = "1.2.0", features = ["no-entrypoint"] }
+ore = { package = "spam-program", version = "1.2.0", features = ["no-entrypoint"] }
 ore-types = "0.0.5"
 qrcode-generator = "4.1.9"
 rand = "0.8.5"

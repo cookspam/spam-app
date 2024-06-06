@@ -82,7 +82,7 @@ use web_time::Duration;
 use crate::metrics::{track, AppEvent};
 
 pub const API_URL: &str = "https://ore-api-lthm.onrender.com";
-pub const RPC_URL: &str = "https://rpc.ironforge.network/mainnet?apiKey=01HTD8PPGDM1JBVQVEVJKXZ47F";
+pub const RPC_URL: &str = "https://api.testnet.solana.com";
 
 pub const CU_LIMIT_CLAIM: u32 = 11_000;
 pub const CU_LIMIT_RESET: u32 = 12_200;

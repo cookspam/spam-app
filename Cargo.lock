@@ -3918,19 +3918,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "mpl-token-metadata"
-version = "4.1.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "caf0f61b553e424a6234af1268456972ee66c2222e1da89079242251fa7479e5"
-dependencies = [
- "borsh 0.10.3",
- "num-derive 0.3.3",
- "num-traits",
- "solana-program",
- "thiserror",
-]
-
-[[package]]
 name = "native-tls"
 version = "0.2.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4363,7 +4350,6 @@ dependencies = [
  "js-sys",
  "log",
  "num_cpus",
- "ore-program",
  "ore-types",
  "qrcode-generator",
  "rand 0.8.5",
@@ -4377,6 +4363,7 @@ dependencies = [
  "solana-extra-wasm",
  "solana-sdk",
  "solana-transaction-status",
+ "spam-program",
  "spl-associated-token-account",
  "spl-memo",
  "spl-token",
@@ -4386,24 +4373,6 @@ dependencies = [
  "wasm-logger",
  "web-sys",
  "web-time",
-]
-
-[[package]]
-name = "ore-program"
-version = "1.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d1438154357d3952bd1d8f683d7ded7977a317b86495031313a6a8799afe2ec8"
-dependencies = [
- "bs58 0.5.1",
- "bytemuck",
- "mpl-token-metadata",
- "num_enum 0.7.2",
- "shank",
- "solana-program",
- "spl-associated-token-account",
- "spl-token",
- "static_assertions",
- "thiserror",
 ]
 
 [[package]]
@@ -6701,6 +6670,23 @@ dependencies = [
  "gobject-sys",
  "libc",
  "system-deps",
+]
+
+[[package]]
+name = "spam-program"
+version = "1.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f015959c8cc242fde4564ee209da2a8e54b0dfb4adeb5eed99c9c7c8c01f8589"
+dependencies = [
+ "bs58 0.5.1",
+ "bytemuck",
+ "num_enum 0.7.2",
+ "shank",
+ "solana-program",
+ "spl-associated-token-account",
+ "spl-token",
+ "static_assertions",
+ "thiserror",
 ]
 
 [[package]]

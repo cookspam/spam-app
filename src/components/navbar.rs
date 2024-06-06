@@ -18,6 +18,16 @@ pub fn Navbar(cx: Scope) -> Element {
         Appearance::Dark => "dark",
         Appearance::Light => "",
     };
+    let route = use_route::<Route>(cx);
+
+    let hidden = if let Some(route) = route {
+        matches!(
+            route,
+            Route::Home {} | Route::Tx { .. } | Route::User { .. }
+        )
+    } else {
+        false 
+    };
     render! {
         div {
             class: "relative min-h-screen flex flex-col text-black dark:bg-black dark:text-white {dark}",
@@ -80,6 +90,9 @@ pub fn Navbar(cx: Scope) -> Element {
                 class: "flex flex-col h-full py-4 px-4 sm:px-8 grow w-full max-w-[96rem] mx-auto",
                 Outlet::<Route> {}
             }
+            Footer {
+                hidden: hidden
+            }
         }
     }
 }
@@ -132,7 +145,7 @@ pub fn SimpleNavbar(cx: Scope) -> Element {
                 class: "py-4 px-4 sm:px-8 grow h-full w-full max-w-[96rem] mx-auto",
                 Outlet::<Route> {}
             }
-            Footer {}
+            Footer {hidden:false}
         }
     }
 }

@@ -29,7 +29,7 @@ pub fn Landing(cx: Scope) -> Element {
         div {
             class: "flex flex-col",
             Hero{}
-            Footer {}
+            Footer {hidden: false}
         }
     }
 }

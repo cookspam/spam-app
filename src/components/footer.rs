@@ -4,7 +4,10 @@ use dioxus_router::prelude::Link;
 use crate::components::{GithubIcon, XIcon};
 
 #[component]
-pub fn Footer(cx: Scope) -> Element {
+pub fn Footer(cx: Scope, hidden: bool) -> Element {
+    if *hidden {
+        return None;
+    }
     render! {
         div {
             class: "flex flex-row bg-teal-500 text-white w-full py-6 sm:py-10 px-4 sm:px-8 justify-between",

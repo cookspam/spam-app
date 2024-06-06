@@ -28,10 +28,6 @@ pub fn Settings(cx: Scope) -> Element {
                 class: "flex-grow flex flex-col", // Take remaining space and make it a flex container
                 SettingsItems {}
             }
-            div {
-                class: "w-full mt-auto", // Ensure the footer spans full width and is pushed to the bottom
-                Footer {}
-            }
         }
     }
 }

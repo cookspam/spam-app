@@ -31,7 +31,6 @@ pub fn Stats(cx: Scope) -> Element {
                     TopHolders {}
                 }
             }
-            Footer {}
         }
     }
 }

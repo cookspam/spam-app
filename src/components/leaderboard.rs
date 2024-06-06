@@ -12,7 +12,7 @@ use solana_extra_wasm::account_decoder::parse_token::UiTokenAccount;
 use solana_sdk::pubkey::Pubkey;
 
 use crate::{
-    components::OreIcon,
+    components::{OreIcon, Footer},
     gateway::{AsyncResult, Gateway},
     hooks::{use_gateway, use_ore_supply, use_treasury},
     route::Route,
@@ -22,9 +22,16 @@ use crate::{
 pub fn Stats(cx: Scope) -> Element {
     render! {
         div {
-            class: "flex flex-col gap-16 pb-16",
-            SupplyStats {}
-            TopHolders {}
+            class: "flex flex-col min-h-screen", // Ensure it takes the full height of the screen
+            div {
+                class: "flex-grow", // Take remaining space
+                div {
+                    class: "flex flex-col gap-16 pb-16",
+                    SupplyStats {}
+                    TopHolders {}
+                }
+            }
+            Footer {}
         }
     }
 }

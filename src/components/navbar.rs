@@ -34,7 +34,7 @@ pub fn Navbar(cx: Scope) -> Element {
                 div {
                     class: "max-w-[96rem] w-full flex flex-row justify-between mx-auto px-4 sm:px-8 py-6",
                     Link {
-                        to: Route::Home {},
+                        to: Route::Landing {},
                         class: "flex h-10",
                         p {
                             class: "text-2xl font-semibold my-auto",

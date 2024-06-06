@@ -1,6 +1,7 @@
 use dioxus::prelude::*;
 
-use crate::components::{IsToolbarOpen, MinerToolbarInsufficientFunds, PlayIcon, Tutorial};
+use crate::{components::{IsToolbarOpen, MinerToolbarInsufficientFunds, PlayIcon, Tutorial}, 
+        };
 
 #[component]
 pub fn MinerToolbarNotStarted(cx: Scope) -> Element {

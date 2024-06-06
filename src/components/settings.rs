@@ -21,6 +21,23 @@ use crate::{
 
 #[component]
 pub fn Settings(cx: Scope) -> Element {
+    render! {
+        div {
+            class: "flex flex-col min-h-screen", // Ensure the container takes full height of the screen
+            div {
+                class: "flex-grow flex flex-col", // Take remaining space and make it a flex container
+                SettingsItems {}
+            }
+            div {
+                class: "w-full mt-auto", // Ensure the footer spans full width and is pushed to the bottom
+                Footer {}
+            }
+        }
+    }
+}
+
+#[component]
+pub fn SettingsItems(cx: Scope) -> Element {
     let pubkey = use_pubkey(cx);
     let sol_balance = use_sol_balance(cx);
     let explorer = use_explorer(cx);
@@ -41,9 +58,7 @@ pub fn Settings(cx: Scope) -> Element {
             class: "flex flex-col gap-16 w-full pb-24",
             div {
                 class: "flex flex-col gap-4 w-full",
-                h2 {
-                    "Settings"
-                }
+              
                 if cfg!(feature = "web") && show_backup_warning.read().0 {
                     render! {
                         div {
@@ -54,7 +69,7 @@ pub fn Settings(cx: Scope) -> Element {
                 }
                 h2 {
                     class: "{section_title_class} mt-8",
-                    "Account"
+                    "My Account"
                 }
                 div {
                     class: "{container_class}",
@@ -228,8 +243,9 @@ pub fn Settings(cx: Scope) -> Element {
                     }
                 }
             }
-            Footer {}
+           
         }
+       
     }
 }
 

@@ -2,7 +2,7 @@ use dioxus::prelude::*;
 use dioxus_router::prelude::*;
 
 use crate::{
-    components::{Banner, BannerType, Footer, OreLogoIcon, OreWordmarkIcon, PieIcon, UserBubble},
+    components::{Banner, BannerType, Footer, OreLogoIcon},
     gateway::AsyncResult,
     hooks::{use_appearance, use_ping},
     route::Route,
@@ -37,24 +37,45 @@ pub fn Navbar(cx: Scope) -> Element {
                         to: Route::Home {},
                         class: "flex h-10",
                         p {
-                            class: "text-2xl font-semibold my-auto",  // Adjust the font size and vertical alignment
+                            class: "text-2xl font-semibold my-auto",
                             "SPAM"
                         }
                     }
                     div {
                         class: "flex flex-row gap-6 md:gap-8 lg:gap-10",
                         Link {
-                            class: "transition-colors flex w-14 h-14 justify-center rounded-full text-gray-300 dark:text-gray-700 hover:text-black dark:hover:text-white",
-                            to: Route::Stats {},
-                            PieIcon {
-                                class: "w-5 h-5 sm:w-6 sm:h-6 my-auto"
+                            class: "transition-colors flex items-center gap-2 px-4 py-2 rounded-full text-gray-300 dark:text-gray-700 hover:text-black dark:hover:text-white",
+                            to: Route::Home {},
+                            span {
+                                class: "text-2xl font-bold sm:text-xl sm:font-bold",
+                                "⛏️"
+                            }
+                            span {
+                                class: "text-sm sm:text-base md:text-lg",
+                                "Mine"
                             }
                         }
-                        Profile {}
+                        Link {
+                            class: "transition-colors flex items-center gap-2 px-4 py-2 rounded-full text-gray-300 dark:text-gray-700 hover:text-black dark:hover:text-white",
+                            to: Route::Stats {},
+                            StatsIcon {}
+                            span {
+                                class: "text-sm sm:text-base md:text-lg",
+                                "Stats"
+                            }
+                        }
+                        Link {
+                            class: "transition-colors flex items-center gap-2 px-4 py-2 rounded-full text-gray-300 dark:text-gray-700 hover:text-black dark:hover:text-white",
+                            to: Route::Settings {},
+                            MyPageIcon {}
+                            span {
+                                class: "text-sm sm:text-base md:text-lg",
+                                "My Page"
+                            }
+                        }
                     }
                 }
             }
-            
             div {
                 class: "flex flex-col h-full py-4 px-4 sm:px-8 grow w-full max-w-[96rem] mx-auto",
                 Outlet::<Route> {}
@@ -64,13 +85,30 @@ pub fn Navbar(cx: Scope) -> Element {
 }
 
 #[component]
-pub fn Profile(cx: Scope) -> Element {
+fn StatsIcon(cx: Scope) -> Element {
     render! {
-        Link {
-            to: Route::Settings {},
-            UserBubble {
-                class: "w-10 h-10"
+        svg {
+            class: "w-5 h-5 sm:w-6 sm:h-6",
+            fill: "none",
+            stroke: "currentColor",
+            view_box: "0 0 24 24",
+            xmlns: "http://www.w3.org/2000/svg",
+            path {
+                stroke_linecap: "round",
+                stroke_linejoin: "round",
+                stroke_width: "2",
+                d: "M4 6h16M4 12h16M4 18h16"
             }
+        }
+    }
+}
+
+#[component]
+fn MyPageIcon(cx: Scope) -> Element {
+    render! {
+        span {
+            class: "w-5 h-5 sm:w-6 sm:h-6",
+            "👤"
         }
     }
 }

@@ -15,15 +15,16 @@ use crate::{
     Route,
 };
 
+
 #[component]
 pub fn Landing(cx: Scope) -> Element {
     let is_onboarded = use_is_onboarded(cx);
     let nav = use_navigator(cx);
 
     // If the user is already onboarded, redirect to home.
-    if is_onboarded.read().0 {
-        nav.replace(Route::Home {});
-    }
+  //  if is_onboarded.read().0 {
+    //    nav.replace(Route::Home {});
+   // }
 
     render! {
         div {
@@ -64,6 +65,34 @@ fn Navbar(cx: Scope) -> Element {
 #[component]
 fn Hero(cx: Scope) -> Element {
     let bg_img = asset_path("spam_crop.png");
+    let (treasury, _) = use_treasury(cx);
+    let (supply, _) = use_ore_supply(cx);
+    let difficulty = match *treasury.read().unwrap() {
+        AsyncResult::Ok(treasury) => {
+            treasury.difficulty.to_string()
+        }
+        _ => " ".to_string(),
+    };
+    let circulating_supply = match *treasury.read().unwrap() {
+        AsyncResult::Ok(treasury) => {
+            (treasury.total_claimed_rewards as f64) / 10f64.powf(ore::TOKEN_DECIMALS as f64)
+        }
+        _ => 0f64,
+    }
+    .to_string();
+    let ore_supply = match supply {
+        AsyncResult::Ok(token_amount) => token_amount.ui_amount.unwrap().to_string(),
+        AsyncResult::Loading => "-".to_string(),
+        AsyncResult::Error(_err) => "Err".to_string(),
+    };
+    let reward_rate = match *treasury.read().unwrap() {
+        AsyncResult::Ok(treasury) => {
+            (treasury.reward_rate as f64) / 10f64.powf(ore::TOKEN_DECIMALS as f64)
+        }
+        _ => 0f64,
+        
+    }.to_string();
+
     render! {
         div {
             class: "bg-white max-w-[1280px] mx-auto",
@@ -91,20 +120,20 @@ fn Hero(cx: Scope) -> Element {
                         div {
                             class: "absolute -mt-[10vh] left-1/2 transform -translate-x-1/2 w-[86%] h-[20%] items-center flex flex-row justify-between bg-white p-4 rounded-lg shadow-md",
                             DataItem {
-                                title: "Live Tx",
-                                value: "Dummy Value" // Dummy value
+                                title: "Mining Difficulty".to_string(),
+                                value: difficulty 
                             }
                             DataItem {
-                                title: "Circulating Supply",
-                                value: "0 SPAM" // Dummy value
+                                title: "Circulating Supply".to_string(),
+                                value: circulating_supply
                             }
                             DataItem {
-                                title: "Total Supply",
-                                value: "0 SPAM" // Dummy value
+                                title: "Total Supply".to_string(),
+                                value: ore_supply 
                             }
                             DataItem {
-                                title: "Reward Rate",
-                                value: "0.001324 SPAM" // Dummy value
+                                title: "Reward Rate".to_string(),
+                                value: reward_rate
                             }
                             div {
                                 class: "flex flex-col items-center bg-teal-500 hover:bg-teal-700 rounded-lg p-4 shadow-md w-1/5 text-white text-lg ",
@@ -131,7 +160,7 @@ fn Hero(cx: Scope) -> Element {
 
 
 #[component]
-fn DataItem(cx: Scope, title: &'static str, value: &'static str) -> Element {
+fn DataItem(cx: Scope, title: String, value: String) -> Element {
     render! {
         div {
             class: "flex flex-col items-center bg-real_white rounded-lg p-4 shadow-md w-1/4",
@@ -331,6 +360,8 @@ fn TransfersSection(cx: Scope, transfers: AsyncResult<Vec<Transfer>>) -> Element
         _ => None,
     }
 }
+
+
 
 #[component]
 fn SectionB(cx: Scope) -> Element {

@@ -23,7 +23,8 @@ pub enum Route {
 
     #[layout(Navbar)]
         #[layout(Miner)]
-            #[route("/home")]
+           
+            #[route("/mine")]
             Home {},
             #[route("/claim")]
             Claim {},

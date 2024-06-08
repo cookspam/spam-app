@@ -136,8 +136,9 @@ pub fn SimpleNavbar(cx: Scope) -> Element {
                 Link {
                     to: Route::Landing {},
                     class: "flex flex-row h-10",
-                    OreLogoIcon {
-                        class: "h-6 md:h-8"
+                    p {
+                        class: "text-2xl font-semibold my-auto",
+                        "SPAM"
                     }
                 }
             }

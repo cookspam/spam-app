@@ -6,6 +6,7 @@ use crate::{
     gateway::AsyncResult,
     hooks::{use_ore_balance, use_proof},
     route::Route,
+   
 };
 
 #[component]
@@ -20,8 +21,8 @@ pub fn Balance(cx: Scope) -> Element {
                         div {
                             class: "flex flex-col grow gap-2 sm:gap-4",
                             h2 {
-                                class: "text-lg sm:text-xl md:text-2xl font-bold",
-                                "Balance"
+                                class: "text-lg sm:text-xl md:text-2xl font-bold mt-12",
+                                "My Balance 💎"
                             }
                             div {
                                 class: "flex flex-row grow justify-between",
@@ -31,7 +32,7 @@ pub fn Balance(cx: Scope) -> Element {
                                         class: "my-auto w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10"
                                     }
                                     h2 {
-                                        class: "text-3xl sm:text-4xl md:text-5xl",
+                                        class: "text-xl sm:text-2xl md:text-2xl",
                                         "{b.real_number_string_trimmed()}"
                                     }
                                 }
@@ -45,6 +46,7 @@ pub fn Balance(cx: Scope) -> Element {
                     render! {
                         div {
                             class: "flex flex-row grow loading rounded",
+                        
                         }
                     }
                 }
@@ -66,7 +68,7 @@ pub fn UnclaimedRewards(cx: Scope) -> Element {
                     div {
                         class: "flex flex-col gap-2",
                         p {
-                            class: "font-medium text-xs text-gray-300",
+                            class: "font-medium text-lg text-gray-300",
                             "Mining rewards"
                         }
                         div {

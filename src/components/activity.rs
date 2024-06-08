@@ -12,6 +12,7 @@ use crate::{
     gateway::AsyncResult,
     hooks::{use_pubkey, use_transfers, ACTIVITY_TABLE_PAGE_LIMIT},
     route::Route,
+    utils::asset_path,
 };
 
 #[derive(Debug)]
@@ -25,6 +26,7 @@ pub fn Activity(cx: Scope) -> Element {
     let filter = use_state(cx, || ActivityFilter::Global);
     let offset = use_state(cx, || 0u64);
     let (transfers, has_more) = use_transfers(cx, filter, offset);
+    let spam_gang = asset_path("mining_gang_resized.png");
     match transfers {
         AsyncResult::Ok(transfers) => {
             render! {
@@ -52,7 +54,14 @@ pub fn Activity(cx: Scope) -> Element {
         _ => {
             render! {
                 div {
-                    class: "flex flex-row h-64 w-full loading rounded",
+                   // class: "flex flex-row h-64 w-full loading rounded",
+                    div {
+                        class: "flex flex-row h-64 w-full mt-24",
+                        img {
+                            src: "{spam_gang}",
+                            class: "w128 h-48 md:w-128 md:h-48",
+                        }
+                    }
                 }
             }
         }

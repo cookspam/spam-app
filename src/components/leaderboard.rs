@@ -124,28 +124,14 @@ pub fn TopHolders(cx: Scope) -> Element {
 
     render! {
         div {
-            class: "flex flex-col md:flex-row gap-4 relative border p-4 rounded-lg",  // Added border, padding, and rounded corners
+            class: "flex flex-col md:flex-row gap-16 relative border p-8 rounded-lg",  // Added border, padding, and rounded corners
             div {
                 class: "flex flex-col flex-1",
                 h2 {
-                    class: "text-lg md:text-2xl font-bold",
+                    class: "text-lg md:text-2xl font-bold mb-8",
                     "Top Holders"
                 }
-                div {
-                    class: "relative mb-4",  // Container for the search bar
-                    span {
-                        class: "absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400",
-                        "🔍"  // Simple magnifying glass icon
-                    }
-                    input {
-                        class: "pl-10 pr-4 py-2 border-b border-gray-300 focus:outline-none focus:border-black w-full",
-                        r#type: "text",
-                        placeholder: "Search your address...",
-                        oninput: move |evt| {
-                            search_query.set(evt.value.clone());
-                        }
-                    }
-                }
+                
                 match token_accounts.get() {
                     AsyncResult::Ok(token_accounts) => {
                         render! {
@@ -161,11 +147,29 @@ pub fn TopHolders(cx: Scope) -> Element {
                         }
                     }
                 }
+                div {
+                    class: "relative mb-4 mt-4",  // Container for the search bar
+                    span {
+                        class: "absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400",
+                        "🔍"  // Simple magnifying glass icon
+                    }
+                    input {
+                        class: "pl-10 pr-4 py-2 border-b border-gray-300 focus:outline-none focus:border-black w-full",
+                        r#type: "text",
+                        placeholder: "Search your address...",
+                        oninput: move |evt| {
+                            search_query.set(evt.value.clone());
+                        }
+                    }
+                }
             }
-            img {
-                src: "{solo}",  // Adjust the image path accordingly
-                class: "w-32 h-32 md:w-48 md:h-48",
-                alt: "Mining Solo"
+            div {
+                class: "flex items-end",  // Align the image at the bottom
+                img {
+                    src: "{solo}",  // Adjust the image path accordingly
+                    class: "w-48 h-48 md:w-64 md:h-64",
+                    alt: "Mining Solo"
+                }
             }
         }
     }
@@ -224,15 +228,15 @@ pub fn TokenBalanceRow<'a>(cx: Scope, i: usize, token_account: &'a UiTokenAccoun
             to: Route::User { id: token_account.owner.clone() },
             class: "flex flex-row shrink w-full justify-between rounded px-2 py-2 hover-100 active-200 transition-colors",
             p {
-                class: "w-32 text-left",
+                class: "w-10 text-left",  // Reduce the width for #
                 "{i}"
             }
             p {
-                class: "w-full text-left font-mono font-medium truncate",
+                class: "w-3/5 text-left font-mono font-medium truncate",  // Increase the width for Account
                 "{owner}"
             }
             div {
-                class: "flex flex-row gap-1 w-full text-right justify-end ml-8",
+                class: "flex flex-row gap-1 w-1/5 text-right justify-end ",  // Decrease the width for Balance
                 OreIcon {
                     class: "my-auto w-4 h-4"
                 }
@@ -251,15 +255,15 @@ pub fn LeaderboardTableHeader(cx: Scope) -> Element {
         div {
             class: "flex flex-row shrink w-full justify-between rounded px-2 py-2 transition-colors text-xs font-medium text-gray-300",
             p {
-                class: "text-left w-24",
+                class: "text-left w-10",  // Adjusted width for number
                 "#"
             }
             p {
-                class: "text-left w-full",
+                class: "text-left w-3/5",  // Adjusted width for account
                 "Account"
             }
             p {
-                class: "text-right w-full ml-4",
+                class: "text-right w-1/5",  // Adjusted width for balance
                 "Balance"
             }
         }

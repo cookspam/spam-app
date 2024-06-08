@@ -955,6 +955,10 @@ h2:where(.dark, .dark *) {
   height: 100vh;
 }
 
+.h-40 {
+  height: 10rem;
+}
+
 .max-h-\[80vh\] {
   max-height: 80vh;
 }
@@ -1050,6 +1054,26 @@ h2:where(.dark, .dark *) {
 
 .w-screen {
   width: 100vw;
+}
+
+.w-2\/5 {
+  width: 40%;
+}
+
+.w-40 {
+  width: 10rem;
+}
+
+.w-3\/5 {
+  width: 60%;
+}
+
+.w-3\/4 {
+  width: 75%;
+}
+
+.w-1\/2 {
+  width: 50%;
 }
 
 .max-w-3xl {
@@ -1193,6 +1217,10 @@ h2:where(.dark, .dark *) {
 
 .flex-nowrap {
   flex-wrap: nowrap;
+}
+
+.items-end {
+  align-items: flex-end;
 }
 
 .items-center {
@@ -1441,6 +1469,10 @@ h2:where(.dark, .dark *) {
   padding: 1.5rem;
 }
 
+.p-8 {
+  padding: 2rem;
+}
+
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -1551,6 +1583,10 @@ h2:where(.dark, .dark *) {
 
 .pr-4 {
   padding-right: 1rem;
+}
+
+.pt-4 {
+  padding-top: 1rem;
 }
 
 .text-left {
@@ -2258,6 +2294,14 @@ h2:where(.dark, .dark *) {
     height: 12rem;
   }
 
+  .md\:h-56 {
+    height: 14rem;
+  }
+
+  .md\:h-64 {
+    height: 16rem;
+  }
+
   .md\:min-h-\[100vh\] {
     min-height: 100vh;
   }
@@ -2276,6 +2320,14 @@ h2:where(.dark, .dark *) {
 
   .md\:w-48 {
     width: 12rem;
+  }
+
+  .md\:w-56 {
+    width: 14rem;
+  }
+
+  .md\:w-64 {
+    width: 16rem;
   }
 
   .md\:flex-row {

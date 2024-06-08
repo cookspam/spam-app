@@ -113,7 +113,7 @@ pub fn MinerToolbarInsufficientBalanceOpen(cx: Scope) -> Element {
                 href: "https://faucet.quicknode.com/solana/testnet",
                 target: "_blank",
                 class: "font-medium text-center text-sm text-gray-300 hover:underline",
-                "Help! I don't have any SOL."
+                "Help! I don't have any testnet SOL."
             }
         }
     }

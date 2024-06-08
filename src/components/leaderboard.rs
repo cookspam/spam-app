@@ -12,7 +12,7 @@ use solana_extra_wasm::account_decoder::parse_token::UiTokenAccount;
 use solana_sdk::pubkey::Pubkey;
 
 use crate::{
-    components::{OreIcon, Footer},
+    components::{SpamIcon, Footer},
     gateway::{AsyncResult, Gateway},
     hooks::{use_gateway, use_ore_supply, use_treasury},
     route::Route,
@@ -94,7 +94,7 @@ fn OreValue(cx: Scope, title: String, detail: String, amount: String) -> Element
             }
             div {
                 class: "flex flex-row gap-1.5",
-                OreIcon {
+                SpamIcon {
                     class: "w-4 h-4 my-auto"
                 }
                 p {
@@ -237,7 +237,7 @@ pub fn TokenBalanceRow<'a>(cx: Scope, i: usize, token_account: &'a UiTokenAccoun
             }
             div {
                 class: "flex flex-row gap-1 w-1/5 text-right justify-end ",  // Decrease the width for Balance
-                OreIcon {
+                SpamIcon {
                     class: "my-auto w-4 h-4"
                 }
                 p {

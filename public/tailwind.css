@@ -698,12 +698,24 @@ h2:where(.dark, .dark *) {
   bottom: 5rem;
 }
 
+.bottom-24 {
+  bottom: 6rem;
+}
+
 .left-0 {
   left: 0px;
 }
 
 .left-1\/2 {
   left: 50%;
+}
+
+.left-3 {
+  left: 0.75rem;
+}
+
+.left-8 {
+  left: 2rem;
 }
 
 .right-4 {
@@ -714,28 +726,8 @@ h2:where(.dark, .dark *) {
   top: 0px;
 }
 
-.left-3 {
-  left: 0.75rem;
-}
-
 .top-1\/2 {
   top: 50%;
-}
-
-.top-4 {
-  top: 1rem;
-}
-
-.bottom-12 {
-  bottom: 3rem;
-}
-
-.left-8 {
-  left: 2rem;
-}
-
-.bottom-24 {
-  bottom: 6rem;
 }
 
 .z-20 {
@@ -790,6 +782,10 @@ h2:where(.dark, .dark *) {
   margin-top: -10vh;
 }
 
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
 .mb-8 {
   margin-bottom: 2rem;
 }
@@ -808,10 +804,6 @@ h2:where(.dark, .dark *) {
 
 .ml-2 {
   margin-left: 0.5rem;
-}
-
-.ml-8 {
-  margin-left: 2rem;
 }
 
 .ml-auto {
@@ -834,6 +826,14 @@ h2:where(.dark, .dark *) {
   margin-top: 0.125rem;
 }
 
+.mt-12 {
+  margin-top: 3rem;
+}
+
+.mt-24 {
+  margin-top: 6rem;
+}
+
 .mt-4 {
   margin-top: 1rem;
 }
@@ -846,40 +846,12 @@ h2:where(.dark, .dark *) {
   margin-top: auto;
 }
 
-.mb-4 {
-  margin-bottom: 1rem;
-}
-
-.ml-4 {
-  margin-left: 1rem;
-}
-
-.mt-16 {
-  margin-top: 4rem;
-}
-
-.mt-20 {
-  margin-top: 5rem;
-}
-
-.mt-24 {
-  margin-top: 6rem;
-}
-
-.mt-12 {
-  margin-top: 3rem;
-}
-
 .flex {
   display: flex;
 }
 
 .inline-flex {
   display: inline-flex;
-}
-
-.table {
-  display: table;
 }
 
 .contents {
@@ -983,10 +955,6 @@ h2:where(.dark, .dark *) {
   height: 100vh;
 }
 
-.h-40 {
-  height: 10rem;
-}
-
 .max-h-\[80vh\] {
   max-height: 80vh;
 }
@@ -1043,6 +1011,10 @@ h2:where(.dark, .dark *) {
   width: 0.875rem;
 }
 
+.w-3\/5 {
+  width: 60%;
+}
+
 .w-32 {
   width: 8rem;
 }
@@ -1084,26 +1056,6 @@ h2:where(.dark, .dark *) {
   width: 100vw;
 }
 
-.w-2\/5 {
-  width: 40%;
-}
-
-.w-40 {
-  width: 10rem;
-}
-
-.w-3\/5 {
-  width: 60%;
-}
-
-.w-3\/4 {
-  width: 75%;
-}
-
-.w-1\/2 {
-  width: 50%;
-}
-
 .max-w-3xl {
   max-width: 48rem;
 }
@@ -1132,16 +1084,16 @@ h2:where(.dark, .dark *) {
   max-width: 100%;
 }
 
+.flex-1 {
+  flex: 1 1 0%;
+}
+
 .flex-auto {
   flex: 1 1 auto;
 }
 
 .flex-none {
   flex: none;
-}
-
-.flex-1 {
-  flex: 1 1 0%;
 }
 
 .flex-shrink {
@@ -1180,6 +1132,20 @@ h2:where(.dark, .dark *) {
 
 .transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 1s infinite;
 }
 
 @keyframes bounce {
@@ -1399,6 +1365,11 @@ h2:where(.dark, .dark *) {
   border-bottom-width: 1px;
 }
 
+.border-gray-300 {
+  --tw-border-opacity: 1;
+  border-color: rgb(176 176 178 / var(--tw-border-opacity));
+}
+
 .border-white\/30 {
   border-color: rgb(245 245 247 / 0.3);
 }
@@ -1406,11 +1377,6 @@ h2:where(.dark, .dark *) {
 .border-yellow-500 {
   --tw-border-opacity: 1;
   border-color: rgb(255 235 59 / var(--tw-border-opacity));
-}
-
-.border-gray-300 {
-  --tw-border-opacity: 1;
-  border-color: rgb(176 176 178 / var(--tw-border-opacity));
 }
 
 .border-t-white {
@@ -1565,6 +1531,10 @@ h2:where(.dark, .dark *) {
   padding-bottom: 2.5rem;
 }
 
+.pb-16 {
+  padding-bottom: 4rem;
+}
+
 .pb-20 {
   padding-bottom: 5rem;
 }
@@ -1573,12 +1543,24 @@ h2:where(.dark, .dark *) {
   padding-bottom: 6rem;
 }
 
+.pl-10 {
+  padding-left: 2.5rem;
+}
+
+.pl-2 {
+  padding-left: 0.5rem;
+}
+
 .pl-4 {
   padding-left: 1rem;
 }
 
 .pr-2 {
   padding-right: 0.5rem;
+}
+
+.pr-4 {
+  padding-right: 1rem;
 }
 
 .pt-1 {
@@ -1599,22 +1581,6 @@ h2:where(.dark, .dark *) {
 
 .pt-5 {
   padding-top: 1.25rem;
-}
-
-.pb-16 {
-  padding-bottom: 4rem;
-}
-
-.pl-10 {
-  padding-left: 2.5rem;
-}
-
-.pr-4 {
-  padding-right: 1rem;
-}
-
-.pt-4 {
-  padding-top: 1rem;
 }
 
 .text-left {
@@ -2306,28 +2272,20 @@ h2:where(.dark, .dark *) {
     height: 2.5rem;
   }
 
-  .md\:h-5 {
-    height: 1.25rem;
-  }
-
-  .md\:h-7 {
-    height: 1.75rem;
-  }
-
-  .md\:h-8 {
-    height: 2rem;
-  }
-
   .md\:h-48 {
     height: 12rem;
   }
 
-  .md\:h-56 {
-    height: 14rem;
+  .md\:h-5 {
+    height: 1.25rem;
   }
 
   .md\:h-64 {
     height: 16rem;
+  }
+
+  .md\:h-7 {
+    height: 1.75rem;
   }
 
   .md\:min-h-\[100vh\] {
@@ -2342,20 +2300,12 @@ h2:where(.dark, .dark *) {
     width: 1.25rem;
   }
 
-  .md\:w-7 {
-    width: 1.75rem;
-  }
-
-  .md\:w-48 {
-    width: 12rem;
-  }
-
-  .md\:w-56 {
-    width: 14rem;
-  }
-
   .md\:w-64 {
     width: 16rem;
+  }
+
+  .md\:w-7 {
+    width: 1.75rem;
   }
 
   .md\:flex-row {

@@ -8,7 +8,7 @@ use ore_types::Transfer;
 use web_time::{Duration, SystemTime, UNIX_EPOCH};
 
 use crate::{
-    components::{ActivityFilter, ActivityIndicator, Footer, OreIcon},
+    components::{ActivityFilter, ActivityIndicator, Footer, SpamIcon},
     gateway::AsyncResult,
     hooks::{use_is_onboarded, use_ore_supply, use_transfers, use_treasury},
     utils::asset_path,
@@ -334,7 +334,7 @@ fn TransfersSection(cx: Scope, transfers: AsyncResult<Vec<Transfer>>) -> Element
                                             "mined "
                                             span {
                                                 class: "flex flex-row font-semibold gap-0.5",
-                                                OreIcon {
+                                                SpamIcon {
                                                     class: "w-3.5 h-3.5 my-auto",
                                                 }
                                                 "{amount:.4}"
@@ -405,7 +405,7 @@ fn OreValue(cx: Scope, title: String, amount: String) -> Element {
             }
             div {
                 class: "flex flex-row gap-2",
-                OreIcon {
+                SpamIcon {
                     class: "w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 my-auto"
                 }
                 p {

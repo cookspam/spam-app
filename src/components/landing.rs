@@ -67,12 +67,13 @@ fn Hero(cx: Scope) -> Element {
     let bg_img = asset_path("spam_crop.png");
     let (treasury, _) = use_treasury(cx);
     let (supply, _) = use_ore_supply(cx);
-    let difficulty = match *treasury.read().unwrap() {
-        AsyncResult::Ok(treasury) => {
-            treasury.difficulty.to_string()
-        }
-        _ => " ".to_string(),
-    };
+    // TODO: calculate difficulty in number
+    // let difficulty = match *treasury.read().unwrap() {
+    //     AsyncResult::Ok(treasury) => {
+    //         treasury.difficulty.to_string()
+    //     }
+    //     _ => " ".to_string(),
+    // };
     let circulating_supply = match *treasury.read().unwrap() {
         AsyncResult::Ok(treasury) => {
             (treasury.total_claimed_rewards as f64) / 10f64.powf(ore::TOKEN_DECIMALS as f64)
@@ -121,7 +122,7 @@ fn Hero(cx: Scope) -> Element {
                             class: "absolute -mt-[10vh] left-1/2 transform -translate-x-1/2 w-[86%] h-[20%] items-center flex flex-row justify-between bg-white p-4 rounded-lg shadow-md",
                             DataItem {
                                 title: "Mining Difficulty".to_string(),
-                                value: difficulty 
+                                value: "1/256".to_string()
                             }
                             DataItem {
                                 title: "Circulating Supply".to_string(),

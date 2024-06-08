@@ -22,7 +22,7 @@ pub fn Download(cx: Scope) -> Element {
                     "Desktop"
                 }
                 p {
-                    "Use the Ore desktop app to avoid the limitations of browser-based mining and get the most out of your machine. "
+                    "Use the Spam desktop app to avoid the limitations of browser-based mining and get the most out of your machine. "
                 }
                 li {
                     a {
@@ -42,7 +42,7 @@ pub fn Download(cx: Scope) -> Element {
                     "CLI"
                 }
                 p {
-                    "Use the Ore CLI to run a miner on any machine. "
+                    "Use the Spam CLI to run a miner on any machine. "
                     "To get started, ensure you have Rust and cargo installed. "
                 }
                 CodeBlock {
@@ -55,24 +55,24 @@ pub fn Download(cx: Scope) -> Element {
                     text: "sh -c \"$(curl -sSfL https://release.solana.com/v1.18.4/install)\"\nsolana-keygen new"
                 }
                 p {
-                    "Now, install the Ore CLI."
+                    "Now, install the Spam CLI."
                 }
                 CodeBlock {
-                    text: "cargo install ore-cli"
+                    text: "cargo install spam-cli"
                 }
                 p {
-                    "The Ore CLI uses your default Solana CLI config and identity. "
+                    "The Spam CLI uses your default Solana CLI config and identity. "
                     "Ensure you have enough SOL topped up on this account to pay for transaction fees. "
                     "To begin mining, use the mine command."
                 }
                 CodeBlock {
-                    text: "ore \\\n    --rpc <RPC_URL> \\\n    --keypair <KEYPAIR_FILEPATH> \\\n    --priority-fee <MICROLAMPORTS> \\\n    mine \\\n    --threads <TRHEAD_COUNT>"
+                    text: "spam \\\n    --rpc <RPC_URL> \\\n    --keypair <KEYPAIR_FILEPATH> \\\n    --priority-fee <MICROLAMPORTS> \\\n    mine \\\n    --threads <TRHEAD_COUNT>"
                 }
                 p {
                     "To mine in detached mode, use nohup."
                 }
                 CodeBlock {
-                    text: "nohup ore mine > output.log 2>&1 &"
+                    text: "nohup spam mine > output.log 2>&1 &"
                 }
             }
         }

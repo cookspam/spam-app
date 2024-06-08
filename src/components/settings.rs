@@ -51,7 +51,7 @@ pub fn SettingsItems(cx: Scope) -> Element {
 
     render! {
         div {
-            class: "flex flex-col gap-16 w-full pb-24",
+            class: "flex flex-col gap-16 w-full pb-16",
             div {
                 class: "flex flex-col gap-4 w-full",
               

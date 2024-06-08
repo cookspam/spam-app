@@ -16,6 +16,7 @@ use crate::{
     gateway::{AsyncResult, Gateway},
     hooks::{use_gateway, use_ore_supply, use_treasury},
     route::Route,
+    utils::asset_path,  // Add this line to use asset_path function
 };
 
 #[component]
@@ -26,7 +27,7 @@ pub fn Stats(cx: Scope) -> Element {
             div {
                 class: "flex-grow", // Take remaining space
                 div {
-                    class: "flex flex-col gap-16 pb-16",
+                    class: "flex flex-col gap-16 pt-10 pb-10",
                     SupplyStats {}
                     TopHolders {}
                 }
@@ -53,8 +54,9 @@ pub fn SupplyStats(cx: Scope) -> Element {
     };
     render! {
         div {
-            class: "flex flex-col gap-6",
+            class: "flex flex-col gap-6 text-lg",
             h2 {
+                class: "text-lg md:text-2xl font-bold",
                 "Supply"
             }
             div {
@@ -109,6 +111,8 @@ fn OreValue(cx: Scope, title: String, detail: String, amount: String) -> Element
 pub fn TopHolders(cx: Scope) -> Element {
     let token_accounts = use_state(cx, || AsyncResult::Loading);
     let gateway = use_gateway(cx);
+    let solo = asset_path("mining_solo.png");
+    let search_query = use_state(cx, || "".to_string());
 
     use_future(cx, (), |_| {
         let gateway = gateway.clone();
@@ -120,31 +124,66 @@ pub fn TopHolders(cx: Scope) -> Element {
 
     render! {
         div {
-            class: "flex flex-col gap-4",
-            h2 {
-                "Top holders"
-            }
-            match token_accounts.get() {
-                AsyncResult::Ok(token_accounts) => {
-                    render! {
-                        LeaderboardTable {
-                            token_accounts: token_accounts
+            class: "flex flex-col md:flex-row gap-4 relative border p-4 rounded-lg",  // Added border, padding, and rounded corners
+            div {
+                class: "flex flex-col flex-1",
+                h2 {
+                    class: "text-lg md:text-2xl font-bold",
+                    "Top Holders"
+                }
+                div {
+                    class: "relative mb-4",  // Container for the search bar
+                    span {
+                        class: "absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400",
+                        "🔍"  // Simple magnifying glass icon
+                    }
+                    input {
+                        class: "pl-10 pr-4 py-2 border-b border-gray-300 focus:outline-none focus:border-black w-full",
+                        r#type: "text",
+                        placeholder: "Search your address...",
+                        oninput: move |evt| {
+                            search_query.set(evt.value.clone());
                         }
                     }
                 }
-                _ => render! {
-                    div {
-                        class: "flex flex-row w-full h-32 loading rounded",
+                match token_accounts.get() {
+                    AsyncResult::Ok(token_accounts) => {
+                        render! {
+                            LeaderboardTable {
+                                token_accounts: token_accounts,
+                                search_query: search_query.get()
+                            }
+                        }
+                    }
+                    _ => render! {
+                        div {
+                            class: "flex flex-row w-full h-32 loading rounded",
+                        }
                     }
                 }
+            }
+            img {
+                src: "{solo}",  // Adjust the image path accordingly
+                class: "w-32 h-32 md:w-48 md:h-48",
+                alt: "Mining Solo"
             }
         }
     }
 }
 
+#[derive(Props)]
+struct LeaderboardTableProps<'a> {
+    token_accounts: &'a Vec<UiTokenAccount>,
+    search_query: &'a str,
+}
+
 #[component]
-pub fn LeaderboardTable<'a>(cx: Scope, token_accounts: &'a Vec<UiTokenAccount>) -> Element {
-    if token_accounts.is_empty() {
+pub fn LeaderboardTable<'a>(cx: Scope<'a, LeaderboardTableProps<'a>>) -> Element {
+    let filtered_accounts: Vec<&UiTokenAccount> = cx.props.token_accounts.iter()
+        .filter(|account| account.owner.contains(cx.props.search_query))
+        .collect();
+
+    if filtered_accounts.is_empty() {
         render! {
             p {
                 class: "text-sm text-gray-300 py-2 px-1",
@@ -154,11 +193,11 @@ pub fn LeaderboardTable<'a>(cx: Scope, token_accounts: &'a Vec<UiTokenAccount>) 
     } else {
         render! {
             div {
-                class: "flex flex-col gap-4",
+                class: "flex flex-col gap-2",
                 div {
                     class: "flex flex-col gap-0 justify-start grow h-full",
                     LeaderboardTableHeader {}
-                    for (i, token_account) in token_accounts.iter().enumerate() {
+                    for (i, token_account) in filtered_accounts.iter().enumerate() {
                         render! {
                             TokenBalanceRow {
                                 i: i + 1,
@@ -212,7 +251,7 @@ pub fn LeaderboardTableHeader(cx: Scope) -> Element {
         div {
             class: "flex flex-row shrink w-full justify-between rounded px-2 py-2 transition-colors text-xs font-medium text-gray-300",
             p {
-                class: "text-left w-32",
+                class: "text-left w-24",
                 "#"
             }
             p {
@@ -220,7 +259,7 @@ pub fn LeaderboardTableHeader(cx: Scope) -> Element {
                 "Account"
             }
             p {
-                class: "text-right w-full ml-8",
+                class: "text-right w-full ml-4",
                 "Balance"
             }
         }

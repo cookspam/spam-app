@@ -147,21 +147,21 @@ pub fn TopHolders(cx: Scope) -> Element {
                         }
                     }
                 }
-                div {
-                    class: "relative mb-4 mt-4",  // Container for the search bar
-                    span {
-                        class: "absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400",
-                        "🔍"  // Simple magnifying glass icon
-                    }
-                    input {
-                        class: "pl-10 pr-4 py-2 border-b border-gray-300 focus:outline-none focus:border-black w-full",
-                        r#type: "text",
-                        placeholder: "Search your address...",
-                        oninput: move |evt| {
-                            search_query.set(evt.value.clone());
-                        }
-                    }
-                }
+                // div {
+                //     class: "relative mb-4 mt-4",  // Container for the search bar
+                //     span {
+                //         class: "absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400",
+                //         "🔍"  // Simple magnifying glass icon
+                //     }
+                //     input {
+                //         class: "pl-10 pr-4 py-2 border-b border-gray-300 focus:outline-none focus:border-black w-full",
+                //         r#type: "text",
+                //         placeholder: "Search your address...",
+                //         oninput: move |evt| {
+                //             search_query.set(evt.value.clone());
+                //         }
+                //     }
+                // }
             }
             div {
                 class: "flex items-end",  // Align the image at the bottom

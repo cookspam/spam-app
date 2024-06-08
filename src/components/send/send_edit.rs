@@ -77,11 +77,11 @@ pub fn SendEdit<'a>(cx: Scope<'a, SendEditProps<'a>>) -> Element {
                 }
                 p {
                     class: "text-lg",
-                    "Send Ore to another user."
+                    "Send Spam to another user."
                 }
                 // p {
                 //     class: "text-gray-300 text-sm",
-                //     "This will transfer Ore from your account to another."
+                //     "This will transfer Spam from your account to another."
                 // }
             }
             div {

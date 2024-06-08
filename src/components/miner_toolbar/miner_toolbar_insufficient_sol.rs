@@ -110,7 +110,7 @@ pub fn MinerToolbarInsufficientBalanceOpen(cx: Scope) -> Element {
             }
             a {
                 // TODO Get referal code
-                href: "https://www.coinbase.com/price/solana",
+                href: "https://faucet.quicknode.com/solana/testnet",
                 target: "_blank",
                 class: "font-medium text-center text-sm text-gray-300 hover:underline",
                 "Help! I don't have any SOL."

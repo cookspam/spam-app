@@ -734,6 +734,10 @@ h2:where(.dark, .dark *) {
   left: 2rem;
 }
 
+.bottom-24 {
+  bottom: 6rem;
+}
+
 .z-20 {
   z-index: 20;
 }

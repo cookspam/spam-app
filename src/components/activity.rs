@@ -58,7 +58,7 @@ pub fn Activity(cx: Scope) -> Element {
                    class: "relative flex flex-col h-64 w-full mt-24",
                    img {
                        src: "{spam_gang}",
-                       class: "absolute bottom-12 left-8 w-128 h-48 md:w-128 md:h-48",
+                       class: "absolute bottom-24 left-8 w-128 h-48 md:w-128 md:h-48",
                    
                     }
                 }

@@ -3,8 +3,8 @@ use dioxus::prelude::*;
 
 use crate::components::CodeBlock;
 
-const DESKTOP_DOWNLOAD_MAC: &str =
-    "https://github.com/HardhatChad/ore-app/releases/download/v1.0.1/Ore-MacOS.zip";
+// const DESKTOP_DOWNLOAD_MAC: &str =
+//     "https://github.com/HardhatChad/ore-app/releases/download/v1.0.1/Ore-MacOS.zip";
 
 #[component]
 pub fn Download(cx: Scope) -> Element {
@@ -13,30 +13,30 @@ pub fn Download(cx: Scope) -> Element {
             class: "flex flex-col gap-4 h-full font-hero max-w-3xl w-full mx-auto pb-20 leading-7",
             div {
                 class: "flex flex-col gap-4",
-                p {
-                    class: "text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-hero",
-                    "Download"
-                }
-                p {
-                    class: "text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-8 font-hero",
-                    "Desktop"
-                }
-                p {
-                    "Use the Spam desktop app to avoid the limitations of browser-based mining and get the most out of your machine. "
-                }
-                li {
-                    a {
-                        class: "font-semibold hover:underline hover:text-green-500",
-                        href: "{DESKTOP_DOWNLOAD_MAC}",
-                        "Download for Mac"
-                    }
-                }
-                li {
-                    "Linux (coming soon...)"
-                }
-                li {
-                    "Windows (coming soon...)"
-                }
+                // p {
+                //     class: "text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-hero",
+                //     "Download"
+                // }
+                // p {
+                //     class: "text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-8 font-hero",
+                //     "Desktop"
+                // }
+                // p {
+                //     "Use the Spam desktop app to avoid the limitations of browser-based mining and get the most out of your machine. "
+                // }
+                // li {
+                //     a {
+                //         class: "font-semibold hover:underline hover:text-green-500",
+                //         href: "{DESKTOP_DOWNLOAD_MAC}",
+                //         "Download for Mac"
+                //     }
+                // }
+                // li {
+                //     "Linux (coming soon...)"
+                // }
+                // li {
+                //     "Windows (coming soon...)"
+                // }
                 p {
                     class: "text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-8 font-hero",
                     "CLI"
@@ -55,10 +55,12 @@ pub fn Download(cx: Scope) -> Element {
                     text: "sh -c \"$(curl -sSfL https://release.solana.com/v1.18.4/install)\"\nsolana-keygen new"
                 }
                 p {
-                    "Now, install the Spam CLI."
+                    "Now, install the Spam CLI. Clone the Spam CLI repository from GitHub"
                 }
                 CodeBlock {
-                    text: "cargo install spam-cli"
+                    text: "git clone https://github.com/cookspam/spam-cli.git \n
+                    cd spam-cli \n
+                    cargo build --release"
                 }
                 p {
                     "The Spam CLI uses your default Solana CLI config and identity. "
@@ -66,7 +68,19 @@ pub fn Download(cx: Scope) -> Element {
                     "To begin mining, use the mine command."
                 }
                 CodeBlock {
-                    text: "spam \\\n    --rpc <RPC_URL> \\\n    --keypair <KEYPAIR_FILEPATH> \\\n    --priority-fee <MICROLAMPORTS> \\\n    mine \\\n    --threads <TRHEAD_COUNT>"
+                    text: "cargo run --release -- --rpc $RPC_URL --keypair $KEY_PATH mine"
+                }
+                p {
+                    "To see your mining rewards, run in terminal"
+                }
+                CodeBlock {
+                    text: "cargo run --release -- --rpc $RPC_URL --keypair $KEY_PATH rewards"
+                }
+                p {
+                    "To claim your rewards, run in terminal"
+                }
+                CodeBlock {
+                    text: "cargo run --release -- --rpc $RPC_URL --keypair $KEY_PATH claim"
                 }
                 p {
                     "To mine in detached mode, use nohup."
@@ -74,6 +88,7 @@ pub fn Download(cx: Scope) -> Element {
                 CodeBlock {
                     text: "nohup spam mine > output.log 2>&1 &"
                 }
+               
             }
         }
     }

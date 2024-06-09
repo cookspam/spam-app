@@ -188,6 +188,7 @@ fn OreValue(cx: Scope, title: String, detail: String, amount: String) -> Element
                 p {
                     class: "text-gray-300 font-medium my-auto text-black dark:text-white",
                     "{title}"
+                    
                 }
                 p {
                     class: "text-gray-300 text-sm",

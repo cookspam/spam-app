@@ -2,7 +2,7 @@ use dioxus::prelude::*;
 use dioxus_router::prelude::*;
 
 use crate::{
-    components::{Banner, BannerType, Footer, OreLogoIcon},
+    components::{Banner, BannerType, Footer, SpamIcon},
     gateway::AsyncResult,
     hooks::{use_appearance, use_ping},
     route::Route,
@@ -45,7 +45,10 @@ pub fn Navbar(cx: Scope) -> Element {
                     class: "max-w-[96rem] w-full flex flex-row justify-between mx-auto px-4 sm:px-8 py-6",
                     Link {
                         to: Route::Landing {},
-                        class: "flex h-10",
+                        class: "flex flex-row h-10 gap-1",
+                        SpamIcon {
+                            class: "w-6 h-6 my-auto "
+                        }
                         p {
                             class: "text-2xl font-semibold my-auto",
                             "SPAM"
@@ -135,10 +138,9 @@ pub fn SimpleNavbar(cx: Scope) -> Element {
                 class: "flex flex-row justify-between px-4 sm:px-8 py-8 w-full z-50",
                 Link {
                     to: Route::Landing {},
-                    class: "flex flex-row h-10",
-                    p {
-                        class: "text-2xl font-semibold my-auto",
-                        "SPAM"
+                    class: "flex h-10",
+                    SpamIcon{
+                        class: "h-3 md:h-4 my-auto"
                     }
                 }
             }

@@ -1509,9 +1509,6 @@ h2:where(.dark, .dark *) {
   background-color: rgb(189 195 199 / var(--tw-bg-opacity));
 }
 
-.bg-real_white {
-  background-color: #00000;
-}
 
 .bg-red-500 {
   --tw-bg-opacity: 1;
@@ -2385,6 +2382,14 @@ h2:where(.dark, .dark *) {
 
   .md\:h-7 {
     height: 1.75rem;
+  }
+
+  .md\:h-20 {
+    height: 5rem;
+  }
+
+  .md\:h-4 {
+    height: 1rem;
   }
 
   .md\:min-h-\[100vh\] {

@@ -42,9 +42,13 @@ fn Navbar(cx: Scope) -> Element {
             class: "flex flex-row justify-between px-4 sm:px-8 py-8 w-full z-50 bg-white",
             Link {
                 to: Route::Landing {},
-                class: "flex flex-row h-10",
+                
+                class: "flex flex-row h-10 gap-1",
+                SpamIcon {
+                    class: "w-6 h-6 my-auto "
+                }
                 p {
-                    class: "text-2xl font-semibold  hover:text-gray-500",  // Increased the font size
+                    class: "text-2xl font-semibold my-auto hover:text-gray-500",  // Increased the font size
                     "SPAM"
                 }
             }
@@ -129,7 +133,7 @@ fn Hero(cx: Scope) -> Element {
                                 value: circulating_supply
                             }
                             DataItem {
-                                title: "Total Supply".to_string(),
+                                title: " Total Supply ".to_string(),
                                 value: ore_supply 
                             }
                             DataItem {

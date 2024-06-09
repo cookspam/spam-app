@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com
+! tailwindcss v3.4.4 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -211,6 +211,8 @@ textarea {
   /* 1 */
   line-height: inherit;
   /* 1 */
+  letter-spacing: inherit;
+  /* 1 */
   color: inherit;
   /* 1 */
   margin: 0;
@@ -234,9 +236,9 @@ select {
 */
 
 button,
-[type='button'],
-[type='reset'],
-[type='submit'] {
+input:where([type='button']),
+input:where([type='reset']),
+input:where([type='submit']) {
   -webkit-appearance: button;
   /* 1 */
   background-color: transparent;
@@ -542,6 +544,10 @@ h2:where(.dark, .dark *) {
   --tw-backdrop-opacity:  ;
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
 }
 
 ::backdrop {
@@ -592,6 +598,10 @@ h2:where(.dark, .dark *) {
   --tw-backdrop-opacity:  ;
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
 }
 
 .container {
@@ -720,10 +730,6 @@ h2:where(.dark, .dark *) {
 
 .left-8 {
   left: 2rem;
-}
-
-.right-0 {
-  right: 0px;
 }
 
 .right-4 {
@@ -979,10 +985,6 @@ h2:where(.dark, .dark *) {
   min-height: 100svh;
 }
 
-.w-1\/2 {
-  width: 50%;
-}
-
 .w-1\/4 {
   width: 25%;
 }
@@ -1045,6 +1047,10 @@ h2:where(.dark, .dark *) {
 
 .w-6 {
   width: 1.5rem;
+}
+
+.w-64 {
+  width: 16rem;
 }
 
 .w-7 {
@@ -1218,12 +1224,26 @@ h2:where(.dark, .dark *) {
   }
 
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-10px) scale(2);
   }
 }
 
 .animate-jump_up {
   animation: jump_up 1s ease-in-out;
+}
+
+@keyframes move_left {
+  0% {
+    transform: translateX(100vw);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-move_left {
+  animation: move_left 10s linear 13s infinite;
 }
 
 @keyframes ping {
@@ -1245,20 +1265,6 @@ h2:where(.dark, .dark *) {
 
 .animate-spin {
   animation: spin 1s linear infinite;
-}
-
-@keyframes move_left {
-  0% {
-    transform: translateX(100vw);
-  }
-
-  100% {
-    transform: translateX(0);
-  }
-}
-
-.animate-move_left {
-  animation: move_left 10s linear 13s infinite;
 }
 
 .cursor-pointer {
@@ -1353,6 +1359,10 @@ h2:where(.dark, .dark *) {
   gap: 0.75rem;
 }
 
+.gap-32 {
+  gap: 8rem;
+}
+
 .gap-4 {
   gap: 1rem;
 }
@@ -1389,6 +1399,10 @@ h2:where(.dark, .dark *) {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.375rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.375rem * var(--tw-space-y-reverse));
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }
 
 .overflow-visible {
@@ -2353,6 +2367,10 @@ h2:where(.dark, .dark *) {
     height: 4rem;
   }
 
+  .md\:h-20 {
+    height: 5rem;
+  }
+
   .md\:h-48 {
     height: 12rem;
   }
@@ -2367,10 +2385,6 @@ h2:where(.dark, .dark *) {
 
   .md\:h-7 {
     height: 1.75rem;
-  }
-
-  .md\:h-20 {
-    height: 5rem;
   }
 
   .md\:min-h-\[100vh\] {

@@ -30,7 +30,7 @@ pub fn Navbar(cx: Scope) -> Element {
     };
     render! {
         div {
-            class: "relative min-h-screen flex flex-col text-black dark:bg-black dark:text-white {dark}",
+            class: "relative min-h-screen flex flex-col text-black dark:bg-black dark:text-white {dark} overflow-hidden",
             if let AsyncResult::Error(_) = ping {
                 render! {
                     Banner {

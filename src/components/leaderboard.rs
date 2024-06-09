@@ -143,10 +143,12 @@ pub fn SupplyStats(cx: Scope) -> Element {
     if let Err(e) = draw_pie_chart(circulating_supply, spam_supply) {
         eprintln!("Error drawing pie chart: {}", e);
     }
+
+    let pie = (circulating_supply as f64) / (spam_supply as f64) * 100.0;
     
     render! {
         div {
-            class: "flex flex-col md:flex-row gap-16 relative border p-8 border-teal-500 rounded-lg",
+            class: "flex flex-col md:flex-row gap-32 relative border p-8 border-teal-500 rounded-lg",
             div {
                 class: "flex flex-col gap-6 text-lg w-3/5",
                 h2 {
@@ -169,11 +171,8 @@ pub fn SupplyStats(cx: Scope) -> Element {
             }
             // 파이 차트 이미지 표시
             div {
-                class: "w-1/2 h-64 flex justify-center items-center",
-                img {
-                    src: "pie_chart.png",
-                    alt: "Pie Chart"
-                }
+                class: "w-64 h-64 flex justify-center items-center rounded-full",
+                style: "background: conic-gradient(white {pie}%, black {pie}%)"
             }
         }
     }
@@ -189,16 +188,6 @@ fn OreValue(cx: Scope, title: String, detail: String, amount: String) -> Element
                 p {
                     class: "text-gray-300 font-medium my-auto text-black dark:text-white",
                     "{title}"
-                    div {
-                        class: "flex flex-row gap-1.5",
-                        SpamIcon {
-                            class: "w-4 h-4 my-auto"
-                        }
-                        p {
-                            class: "font-medium my-auto",
-                            "{amount}"
-                        }
-                    }
                 }
                 p {
                     class: "text-gray-300 text-sm",

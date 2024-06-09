@@ -722,6 +722,10 @@ h2:where(.dark, .dark *) {
   left: 2rem;
 }
 
+.right-0 {
+  right: 0px;
+}
+
 .right-4 {
   right: 1rem;
 }
@@ -975,6 +979,10 @@ h2:where(.dark, .dark *) {
   min-height: 100svh;
 }
 
+.w-1\/2 {
+  width: 50%;
+}
+
 .w-1\/4 {
   width: 25%;
 }
@@ -1154,7 +1162,7 @@ h2:where(.dark, .dark *) {
   animation: bounce 1s infinite;
 }
 
-@keyframes jump {
+@keyframes jump_right {
   0% {
     transform: translateY(0) translateX(0);
   }
@@ -1186,10 +1194,22 @@ h2:where(.dark, .dark *) {
   70% {
     transform: translateY(-30px) translateX(70vw);
   }
+
+  80% {
+    transform: translateY(0px) translateX(80vw);
+  }
+
+  90% {
+    transform: translateY(-30px) translateX(90vw);
+  }
+
+  100% {
+    transform: translateY(0) translateX(100vw);
+  }
 }
 
-.animate-jump {
-  animation: jump 10s ease-in-out infinite;
+.animate-jump_right {
+  animation: jump_right 10s ease-in-out;
 }
 
 @keyframes jump_up {
@@ -1225,6 +1245,20 @@ h2:where(.dark, .dark *) {
 
 .animate-spin {
   animation: spin 1s linear infinite;
+}
+
+@keyframes move_left {
+  0% {
+    transform: translateX(100vw);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-move_left {
+  animation: move_left 10s linear 13s infinite;
 }
 
 .cursor-pointer {
@@ -1410,6 +1444,11 @@ h2:where(.dark, .dark *) {
 .border-gray-300 {
   --tw-border-opacity: 1;
   border-color: rgb(176 176 178 / var(--tw-border-opacity));
+}
+
+.border-teal-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(20 184 166 / var(--tw-border-opacity));
 }
 
 .border-white\/30 {
@@ -2328,6 +2367,10 @@ h2:where(.dark, .dark *) {
 
   .md\:h-7 {
     height: 1.75rem;
+  }
+
+  .md\:h-20 {
+    height: 5rem;
   }
 
   .md\:min-h-\[100vh\] {

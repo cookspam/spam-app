@@ -28,6 +28,7 @@ pub fn Activity(cx: Scope) -> Element {
     let (transfers, has_more) = use_transfers(cx, filter, offset);
     let spam_gang = asset_path("mining_gang_resized.png");
     let go = asset_path("letsgo.png");
+    let back = asset_path("letsback.png");
     
     match transfers {
         AsyncResult::Ok(transfers) => {
@@ -65,7 +66,11 @@ pub fn Activity(cx: Scope) -> Element {
                     }
                     img {
                         src: "{go}",
-                        class: "absolute bottom-24 left-72 w-32 h-16 md:w-32 md:h-16 animate-jump",
+                        class: "absolute bottom-24 left-72 w-32 h-16 md:w-32 md:h-16 animate-jump_right",
+                    }
+                    img {
+                        src: "{back}",
+                        class: "absolute bottom-24 left-72 w-32 h-20 md:w-32 md:h-20 animate-move_left",
                     }
                 }
             }

@@ -65,7 +65,7 @@ module.exports = {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-10px)' },
         },
-        jump: {
+        jump_right: {
           '0%': { transform: 'translateY(0) translateX(0)' },
           '10%': { transform: 'translateY(-30px) translateX(10vw)' },
           '20%': { transform: 'translateY(0) translateX(20vw)' },
@@ -74,12 +74,19 @@ module.exports = {
           '50%': { transform: 'translateY(-30px) translateX(50vw)' },
           '60%': { transform: 'translateY(0) translateX(60vw)' },
           '70%': { transform: 'translateY(-30px) translateX(70vw)' },
-         
+          '80%': { transform: 'translateY(0px) translateX(80vw)' },
+          '90%': { transform: 'translateY(-30px) translateX(90vw)' },
+          '100%': { transform: 'translateY(0) translateX(100vw)' },
         },
+        move_left: {
+          '0%': { transform: 'translateX(100vw)' },
+          '100%': { transform: 'translateX(0)' },
       },
+    },
       animation: {
         jump_up:  'jump_up 1s ease-in-out',
-        jump: 'jump 10s ease-in-out infinite',
+        jump_right: 'jump_right 10s ease-in-out',
+        move_left: 'move_left 10s linear 13s infinite',
       },
     },
     },

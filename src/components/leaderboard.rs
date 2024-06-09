@@ -1,7 +1,13 @@
-use std::{rc::Rc, str::FromStr};
+use std::{rc::Rc, str::FromStr, fs::File, path::Path};
+use plotters::prelude::*;
+use std::error::Error;
+use plotters_svg::SVGBackend;
+use wasm_bindgen::prelude::*;
+use web_sys::console;
 
 use dioxus::prelude::*;
 use dioxus_router::prelude::*;
+
 #[cfg(feature = "desktop")]
 use solana_account_decoder::parse_token::UiTokenAccount;
 #[cfg(feature = "web")]
@@ -11,14 +17,95 @@ use solana_extra_wasm::account_decoder::parse_token::UiTokenAccount;
 #[cfg(feature = "desktop")]
 use solana_sdk::pubkey::Pubkey;
 
+#[cfg(feature = "web")]
+fn log_to_console(message: &str) {
+    web_sys::console::log_1(&message.into());
+}
+
+#[cfg(not(feature = "web"))]
+fn log_to_console(message: &str) {
+    println!("{}", message);
+}
+
+
 use crate::{
     components::{SpamIcon, Footer},
     gateway::{AsyncResult, Gateway},
     hooks::{use_gateway, use_ore_supply, use_treasury},
     route::Route,
     utils::asset_path,  // Add this line to use asset_path function
+    
 };
 
+
+
+fn linspace(start: f64, end: f64, n: usize) -> Vec<f64> {
+    let step = (end - start) / (n - 1) as f64;
+    (0..n).map(|i| start + i as f64 * step).collect()
+}
+
+fn draw_pie_chart(circulating_supply: f64, total_supply: f64) -> Result<(), Box<dyn std::error::Error>> {
+    let file_path = "pie_chart.svg";
+    let backend = SVGBackend::new(file_path, (640, 480)).into_drawing_area();
+    backend.fill(&WHITE)?;
+
+    let data = vec![
+        ("Circulating Supply", circulating_supply),
+        ("Remaining Supply", total_supply - circulating_supply),
+    ];
+
+    let total_value: f64 = data.iter().map(|(_, value)| value).sum();
+
+    let mut chart = ChartBuilder::on(&backend)
+        .caption("Spam Supply Distribution", ("sans-serif", 40))
+        .build_cartesian_2d(0.0..100.0, 0.0..100.0)?;
+
+    chart.configure_mesh().disable_mesh().draw()?;
+
+    let mut start_angle = 0.0;
+
+    for (label, value) in data {
+        let end_angle = start_angle + 360.0 * value / total_value;
+        let points: Vec<_> = linspace(start_angle, end_angle, 100)
+            .into_iter()
+            .map(|angle| {
+                (
+                    50.0 + 25.0 * angle.to_radians().cos(),
+                    50.0 - 25.0 * angle.to_radians().sin(),
+                )
+            })
+            .collect();
+
+        chart.draw_series(std::iter::once(
+            Polygon::new(
+                vec![
+                    (50.0, 50.0),
+                    (50.0 + 25.0 * start_angle.to_radians().cos(), 50.0 - 25.0 * start_angle.to_radians().sin()),
+                ]
+                .into_iter()
+                .chain(points.into_iter())
+                .chain(vec![(50.0 + 25.0 * end_angle.to_radians().cos(), 50.0 - 25.0 * end_angle.to_radians().sin())])
+                .collect::<Vec<_>>(),
+                match label {
+                    "Circulating Supply" => RED.filled(),
+                    _ => BLUE.filled(),
+                },
+            )
+        ))?;
+
+        start_angle = end_angle;
+    }
+
+    backend.present()?;
+
+    if Path::new(file_path).exists() {
+        log_to_console(&format!("SVG file created successfully at {}", file_path));
+    } else {
+        log_to_console(&format!("Failed to create SVG file at {}", file_path));
+    }
+    Ok(())
+}
+            
 #[component]
 pub fn Stats(cx: Scope) -> Element {
     render! {
@@ -45,31 +132,47 @@ pub fn SupplyStats(cx: Scope) -> Element {
             (treasury.total_claimed_rewards as f64) / 10f64.powf(ore::TOKEN_DECIMALS as f64)
         }
         _ => 0f64,
-    }
-    .to_string();
-    let ore_supply = match supply {
-        AsyncResult::Ok(token_amount) => token_amount.ui_amount.unwrap().to_string(),
-        AsyncResult::Loading => "-".to_string(),
-        AsyncResult::Error(_err) => "Err".to_string(),
     };
+   
+    let spam_supply = match supply {
+        AsyncResult::Ok(token_amount) => token_amount.ui_amount.unwrap(),
+        AsyncResult::Loading => 0f64,
+        AsyncResult::Error(_err) => 0f64,
+    };
+
+    if let Err(e) = draw_pie_chart(circulating_supply, spam_supply) {
+        eprintln!("Error drawing pie chart: {}", e);
+    }
+    
     render! {
         div {
-            class: "flex flex-col gap-6 text-lg",
-            h2 {
-                class: "text-lg md:text-2xl font-bold",
-                "Supply"
-            }
+            class: "flex flex-col md:flex-row gap-16 relative border p-8 border-teal-500 rounded-lg",
             div {
-                class: "flex flex-col gap-8 my-auto",
-                OreValue {
-                    title: "Circulating supply".to_string(),
-                    detail: "The total amount of Ore that has been mined and claimed.".to_string(),
-                    amount: circulating_supply
+                class: "flex flex-col gap-6 text-lg w-3/5",
+                h2 {
+                    class: "text-lg md:text-2xl font-bold",
+                    "Supply"
                 }
-                OreValue {
-                    title: "Total supply".to_string(),
-                    detail: "The total amount of Ore that has ever been mined.".to_string(),
-                    amount: ore_supply
+                div {
+                    class: "flex flex-col gap-8 my-auto",
+                    OreValue {
+                        title: "Circulating supply".to_string(),
+                        detail: "The total amount of Spam that has been mined and claimed.".to_string(),
+                        amount: circulating_supply.to_string()
+                    }
+                    OreValue {
+                        title: "Total supply".to_string(),
+                        detail: "The total amount of Spam that has ever been mined.".to_string(),
+                        amount: spam_supply.to_string()
+                    }
+                }
+            }
+            // 파이 차트 이미지 표시
+            div {
+                class: "w-1/2 h-64 flex justify-center items-center",
+                img {
+                    src: "pie_chart.png",
+                    alt: "Pie Chart"
                 }
             }
         }
@@ -86,6 +189,16 @@ fn OreValue(cx: Scope, title: String, detail: String, amount: String) -> Element
                 p {
                     class: "text-gray-300 font-medium my-auto text-black dark:text-white",
                     "{title}"
+                    div {
+                        class: "flex flex-row gap-1.5",
+                        SpamIcon {
+                            class: "w-4 h-4 my-auto"
+                        }
+                        p {
+                            class: "font-medium my-auto",
+                            "{amount}"
+                        }
+                    }
                 }
                 p {
                     class: "text-gray-300 text-sm",
@@ -124,7 +237,7 @@ pub fn TopHolders(cx: Scope) -> Element {
 
     render! {
         div {
-            class: "flex flex-col md:flex-row gap-16 relative border p-8 rounded-lg",  // Added border, padding, and rounded corners
+            class: "flex flex-col md:flex-row gap-16 relative border p-8 border-teal-500 rounded-lg",  // Added border, padding, and rounded corners
             div {
                 class: "flex flex-col flex-1",
                 h2 {

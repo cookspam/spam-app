@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.4.4 | MIT License | https://tailwindcss.com
+! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -211,8 +211,6 @@ textarea {
   /* 1 */
   line-height: inherit;
   /* 1 */
-  letter-spacing: inherit;
-  /* 1 */
   color: inherit;
   /* 1 */
   margin: 0;
@@ -236,9 +234,9 @@ select {
 */
 
 button,
-input:where([type='button']),
-input:where([type='reset']),
-input:where([type='submit']) {
+[type='button'],
+[type='reset'],
+[type='submit'] {
   -webkit-appearance: button;
   /* 1 */
   background-color: transparent;
@@ -544,10 +542,6 @@ h2:where(.dark, .dark *) {
   --tw-backdrop-opacity:  ;
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
-  --tw-contain-size:  ;
-  --tw-contain-layout:  ;
-  --tw-contain-paint:  ;
-  --tw-contain-style:  ;
 }
 
 ::backdrop {
@@ -598,10 +592,6 @@ h2:where(.dark, .dark *) {
   --tw-backdrop-opacity:  ;
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
-  --tw-contain-size:  ;
-  --tw-contain-layout:  ;
-  --tw-contain-paint:  ;
-  --tw-contain-style:  ;
 }
 
 .container {
@@ -860,6 +850,14 @@ h2:where(.dark, .dark *) {
   margin-top: auto;
 }
 
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
 .flex {
   display: flex;
 }
@@ -969,6 +967,10 @@ h2:where(.dark, .dark *) {
   height: 100vh;
 }
 
+.h-56 {
+  height: 14rem;
+}
+
 .max-h-\[80vh\] {
   max-height: 80vh;
 }
@@ -1072,6 +1074,10 @@ h2:where(.dark, .dark *) {
 
 .w-screen {
   width: 100vw;
+}
+
+.w-56 {
+  width: 14rem;
 }
 
 .max-w-3xl {
@@ -1224,7 +1230,7 @@ h2:where(.dark, .dark *) {
   }
 
   50% {
-    transform: translateY(-10px) scale(2);
+    transform: translateY(-10px);
   }
 }
 
@@ -1357,10 +1363,6 @@ h2:where(.dark, .dark *) {
 
 .gap-3 {
   gap: 0.75rem;
-}
-
-.gap-32 {
-  gap: 8rem;
 }
 
 .gap-4 {
@@ -1509,6 +1511,9 @@ h2:where(.dark, .dark *) {
   background-color: rgb(189 195 199 / var(--tw-bg-opacity));
 }
 
+.bg-real_white {
+  background-color: #00000;
+}
 
 .bg-red-500 {
   --tw-bg-opacity: 1;
@@ -1643,6 +1648,10 @@ h2:where(.dark, .dark *) {
   padding-left: 1rem;
 }
 
+.pr-10 {
+  padding-right: 2.5rem;
+}
+
 .pr-2 {
   padding-right: 0.5rem;
 }
@@ -1669,6 +1678,22 @@ h2:where(.dark, .dark *) {
 
 .pt-5 {
   padding-top: 1.25rem;
+}
+
+.pl-24 {
+  padding-left: 6rem;
+}
+
+.pr-20 {
+  padding-right: 5rem;
+}
+
+.pl-20 {
+  padding-left: 5rem;
+}
+
+.pl-5 {
+  padding-left: 1.25rem;
 }
 
 .text-left {
@@ -1779,6 +1804,26 @@ h2:where(.dark, .dark *) {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(245 245 247 / var(--tw-text-opacity));
+}
+
+.text-teal-700 {
+  --tw-text-opacity: 1;
+  color: rgb(15 118 110 / var(--tw-text-opacity));
+}
+
+.text-gray-100 {
+  --tw-text-opacity: 1;
+  color: rgb(232 232 234 / var(--tw-text-opacity));
+}
+
+.text-gray-900 {
+  --tw-text-opacity: 1;
+  color: rgb(49 49 51 / var(--tw-text-opacity));
+}
+
+.text-gray-800 {
+  --tw-text-opacity: 1;
+  color: rgb(70 70 72 / var(--tw-text-opacity));
 }
 
 .underline {
@@ -2168,6 +2213,11 @@ h2:where(.dark, .dark *) {
   color: rgb(245 245 247 / var(--tw-text-opacity));
 }
 
+.hover\:text-gray-700:hover {
+  --tw-text-opacity: 1;
+  color: rgb(112 112 113 / var(--tw-text-opacity));
+}
+
 .hover\:underline:hover {
   text-decoration-line: underline;
 }
@@ -2368,6 +2418,10 @@ h2:where(.dark, .dark *) {
     height: 5rem;
   }
 
+  .md\:h-4 {
+    height: 1rem;
+  }
+
   .md\:h-48 {
     height: 12rem;
   }
@@ -2382,14 +2436,6 @@ h2:where(.dark, .dark *) {
 
   .md\:h-7 {
     height: 1.75rem;
-  }
-
-  .md\:h-20 {
-    height: 5rem;
-  }
-
-  .md\:h-4 {
-    height: 1rem;
   }
 
   .md\:min-h-\[100vh\] {

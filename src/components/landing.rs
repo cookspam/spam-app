@@ -36,28 +36,81 @@ pub fn Landing(cx: Scope) -> Element {
 }
 
 #[component]
+fn MyPageIcon(cx: Scope) -> Element {
+    render! {
+        span {
+            class: "w-5 h-5 sm:w-6 sm:h-6",
+            "👤"
+        }
+    }
+}
+
+#[component]
+fn StatsIcon(cx: Scope) -> Element {
+    render! {
+        svg {
+            class: "w-5 h-5 sm:w-6 sm:h-6",
+            fill: "none",
+            stroke: "currentColor",
+            view_box: "0 0 24 24",
+            xmlns: "http://www.w3.org/2000/svg",
+            path {
+                stroke_linecap: "round",
+                stroke_linejoin: "round",
+                stroke_width: "2",
+                d: "M4 6h16M4 12h16M4 18h16"
+            }
+        }
+    }
+}
+
+#[component]
 fn Navbar(cx: Scope) -> Element {
     render! {
         div {
-            class: "flex flex-row justify-between px-4 sm:px-8 py-8 w-full z-50 bg-white",
+            class: "max-w-[96rem] w-full flex flex-row justify-between mx-auto px-4 sm:px-8 py-6",
             Link {
                 to: Route::Landing {},
-                
                 class: "flex flex-row h-10 gap-1",
                 SpamIcon {
                     class: "w-6 h-6 my-auto "
                 }
                 p {
-                    class: "text-2xl font-semibold my-auto hover:text-gray-500",  // Increased the font size
+                    class: "text-2xl font-semibold my-auto",
                     "SPAM"
                 }
             }
             div {
-                class: "flex flex-row gap-8",  // Added padding to the right
+                class: "flex flex-row gap-6 md:gap-8 lg:gap-10",
                 Link {
+                    class: "transition-colors flex items-center gap-2 px-4 py-2 rounded-full text-black dark:text-gray-600 hover:text-gray-700 dark:hover:text-white",
+                    to: Route::Home {},
+                    span {
+                        class: "text-2xl font-bold sm:text-xl sm:font-bold",
+                        "⛏️"
+                    }
+                    span {
+                        class: "text-sm font-semibold sm:text-base md:text-lg",
+                        "Mine"
+                    }
+                }
+                Link {
+                    class: "transition-colors flex items-center gap-2 px-4 py-2 rounded-full text-black dark:text-gray-700 hover:text-gray-600 dark:hover:text-white",
+                    to: Route::Stats {},
+                    StatsIcon {}
+                    span {
+                        class: "text-sm font-semibold sm:text-base md:text-lg",
+                        "Stats"
+                    }
+                }
+                Link {
+                    class: "transition-colors flex items-center gap-2 px-4 py-2 rounded-full text-black dark:text-gray-700 hover:text-gray-600 dark:hover:text-white",
                     to: Route::Settings {},
-                    class: "text-lg font-semibold",  // Added padding to the right
-                    "My Page"
+                    MyPageIcon {}
+                    span {
+                        class: "text-sm font-semibold sm:text-base md:text-lg",
+                        "My Page"
+                    }
                 }
             }
         }
@@ -83,20 +136,23 @@ fn Hero(cx: Scope) -> Element {
             (treasury.total_claimed_rewards as f64) / 10f64.powf(ore::TOKEN_DECIMALS as f64)
         }
         _ => 0f64,
-    }
-    .to_string();
-    let ore_supply = match supply {
-        AsyncResult::Ok(token_amount) => token_amount.ui_amount.unwrap().to_string(),
-        AsyncResult::Loading => "-".to_string(),
-        AsyncResult::Error(_err) => "Err".to_string(),
     };
+    
+    let ore_supply = match supply {
+        AsyncResult::Ok(token_amount) => token_amount.ui_amount.unwrap(),
+        AsyncResult::Loading => 0f64,
+        AsyncResult::Error(_err) => 0f64,
+    };
+    
     let reward_rate = match *treasury.read().unwrap() {
         AsyncResult::Ok(treasury) => {
             (treasury.reward_rate as f64) / 10f64.powf(ore::TOKEN_DECIMALS as f64)
         }
         _ => 0f64,
-        
-    }.to_string();
+    };
+    let circulating_supply = format!("{:.3}", circulating_supply);
+    let ore_supply = format!("{:.3}", ore_supply);
+    let reward_rate = format!("{:.3}", reward_rate);
 
     render! {
         div {
@@ -181,223 +237,6 @@ fn DataItem(cx: Scope, title: String, value: String) -> Element {
     }
 }
 
-
-#[component]
-fn Block<'a>(
-    cx: Scope,
-    title: &'a str,
-    title2: Option<&'a str>,
-    detail: &'a str,
-    section: Section,
-) -> Element {
-    let colors = match section {
-        Section::A => "bg-black text-white",
-        Section::B => "bg-white text-black",
-    };
-    let height = match section {
-        Section::A | Section::B => "min-h-svh h-full",
-    };
-    render! {
-        div {
-            class: "flex w-full z-20 {colors} {height}",
-            div {
-                class: "flex flex-col h-full w-full py-16 gap-24 px-4 sm:px-8",
-                div {
-                    class: "flex flex-col gap-4 sm:gap-6 md:gap-8",
-                    p {
-                        class: "text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-hero",
-                        "{title}"
-                        if let Some(title2) = title2 {
-                            render! {
-                                br{}
-                                span {
-                                    class: "opacity-50",
-                                    "{title2}"
-                                }
-                            }
-                        }
-                    }
-                    p {
-                        class: "text-lg sm:text-xl md:text-2xl lg:text-3xl leading-relaxed max-w-[48rem] font-hero",
-                        "{detail}"
-                    }
-                    BlockCta {
-                        section: section
-                    }
-                }
-                div {
-                    class: "flex h-full w-full",
-                    match section {
-                        Section::A => render! { SectionA {} },
-                        Section::B => render! { SectionB {} },
-                    }
-                }
-            }
-        }
-    }
-}
-
-#[component]
-fn BlockCta<'a>(cx: Scope, section: &'a Section) -> Element {
-    match section {
-        Section::A => render! {
-            Link {
-                class: "font-semibold mt-4",
-                to: Route::WhatIsMining {},
-                "Learn more →"
-            }
-        },
-        Section::B => render! {
-            Link {
-                class: "font-semibold mt-4",
-                to: Route::OreTokenomics {},
-                "Learn more →"
-            }
-        },
-    }
-}
-
-#[derive(PartialEq, Eq)]
-enum Section {
-    A,
-    B,
-}
-
-#[component]
-fn SectionA(cx: Scope) -> Element {
-    let filter = use_state(cx, || ActivityFilter::Global);
-    let offset = use_state(cx, || 0);
-    let (transfers, _) = use_transfers(cx, filter, offset);
-
-    render! {
-        div {
-            class: "flex flex-col w-full my-auto gap-4 max-w-[48rem]",
-            div {
-                class: "flex flex-row gap-2",
-                ActivityIndicator {}
-                p {
-                    class: "font-semibold text-xl opacity-50",
-                    "Live transactions"
-                }
-            }
-            div {
-                class: "flex flex-col w-full",
-                TransfersSection {
-                    transfers: transfers
-                }
-            }
-        }
-    }
-}
-
-#[component]
-fn TransfersSection(cx: Scope, transfers: AsyncResult<Vec<Transfer>>) -> Element {
-    match transfers {
-        AsyncResult::Ok(transfers) => {
-            if transfers.is_empty() {
-                render! {
-                    p {
-                        class: "text-sm opacity-50",
-                        "No transactions yet"
-                    }
-                }
-            } else {
-                render! {
-                    for (i, transfer) in transfers.iter().enumerate() {
-                        if i.lt(&5) {
-                            let addr = transfer.to_address[..5].to_string();
-                            let amount = (transfer.amount as f64) / (10f64.powf(ore::TOKEN_DECIMALS as f64));
-
-                            let now = SystemTime::now().duration_since(UNIX_EPOCH).unwrap();
-                            let ts = Duration::from_secs(transfer.ts as u64);
-                            let time = now.saturating_sub(ts);
-                            let t = time.as_secs();
-                            const ONE_MIN: u64 = 60;
-                            const ONE_HOUR: u64 = ONE_MIN * 60;
-                            const ONE_DAY: u64 = ONE_HOUR * 24;
-                            let time_str = if t.gt(&ONE_DAY) {
-                                format!("{}d ago", t.saturating_div(ONE_DAY))
-                            } else if t.gt(&ONE_HOUR) {
-                                format!("{}h ago", t.saturating_div(ONE_HOUR))
-                            } else if t.gt(&ONE_MIN) {
-                                format!("{}m ago", t.saturating_div(ONE_MIN))
-                            } else {
-                                format!("{}s ago", t)
-                            };
-
-                            render! {
-                                div {
-                                    class: "flex flex-row py-3 gap-3 w-full transition-colors rounded hover:bg-gray-900 px-2 -mx-2",
-                                    div {
-                                        class: "flex flex-col pt-1",
-                                        p {
-                                            class: "flex flex-row gap-2",
-                                            span {
-                                                class: "font-mono font-bold",
-                                                "{addr}"
-                                            }
-                                            "mined "
-                                            span {
-                                                class: "flex flex-row font-semibold gap-0.5",
-                                                SpamIcon {
-                                                    class: "w-3.5 h-3.5 my-auto",
-                                                }
-                                                "{amount:.4}"
-                                            }
-                                        }
-                                    }
-                                    div {
-                                        class: "flex pt-1.5 ml-auto",
-                                        p {
-                                            class: "opacity-50 text-right text-nowrap text-sm",
-                                            "{time_str}"
-                                        }
-                                    }
-                                }
-                            }
-                        } else {
-                            None
-                        }
-                    }
-                }
-            }
-        }
-        _ => None,
-    }
-}
-
-
-
-#[component]
-fn SectionB(cx: Scope) -> Element {
-    let (treasury, _) = use_treasury(cx);
-    let (supply, _) = use_ore_supply(cx);
-    let circulating_supply = match *treasury.read().unwrap() {
-        AsyncResult::Ok(treasury) => {
-            (treasury.total_claimed_rewards as f64) / 10f64.powf(ore::TOKEN_DECIMALS as f64)
-        }
-        _ => 0f64,
-    }
-    .to_string();
-    let ore_supply = match supply {
-        AsyncResult::Ok(token_amount) => token_amount.ui_amount.unwrap().to_string(),
-        AsyncResult::Loading => "-".to_string(),
-        AsyncResult::Error(_err) => "Err".to_string(),
-    };
-    render! {
-        div {
-            class: "flex flex-col gap-12 my-auto",
-            OreValue {
-                title: "Circulating supply".to_string(),
-                amount: circulating_supply
-            }
-            OreValue {
-                title: "Total supply".to_string(),
-                amount: ore_supply
-            }
-        }
-    }
-}
 
 #[component]
 fn OreValue(cx: Scope, title: String, amount: String) -> Element {

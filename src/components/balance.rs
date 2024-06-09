@@ -28,12 +28,12 @@ pub fn Balance(cx: Scope) -> Element {
                             div {
                                 class: "flex flex-row grow justify-between",
                                 div {
-                                    class: "flex flex-row my-auto gap-2.5 md:gap-4",
+                                    class: "flex flex-row items-center my-auto gap-1.5 md:gap-4",
                                     SpamIcon {
                                         class: "my-auto w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10"
                                     }
                                     h2 {
-                                        class: "text-xl sm:text-2xl md:text-2xl",
+                                        class: "text-xl sm:text-2xl md:text-2xl my-auto",
                                         "{b.real_number_string_trimmed()}"
                                     }
                                 }
@@ -86,7 +86,7 @@ pub fn UnclaimedRewards(cx: Scope) -> Element {
             let rewards = (proof.claimable_rewards as f64) / (10f64.powf(ore::TOKEN_DECIMALS as f64));
             render! {
                 div {
-                    class: "flex flex-row grow justify-between mt-4 -mr-2",
+                    class: "flex flex-row grow justify-between mt-8 -mr-2",
                     div {
                         class: "flex flex-col gap-2",
                         p {

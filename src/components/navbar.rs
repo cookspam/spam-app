@@ -50,7 +50,7 @@ pub fn Navbar(cx: Scope) -> Element {
                             class: "w-6 h-6 my-auto "
                         }
                         p {
-                            class: "text-2xl font-semibold my-auto",
+                            class: "text-2xl font-semibold my-auto text-gray-300 dark:text-gray-700 hover:text-black dark:hover:text-white",
                             "SPAM"
                         }
                     }

@@ -22,7 +22,7 @@ pub fn Balance(cx: Scope) -> Element {
                             class: "flex flex-col grow gap-2 sm:gap-4",
                             h2 {
                                 class: "text-lg sm:text-xl md:text-2xl font-bold mt-12",
-                                "My Balance 💎"
+                                "My Balance"
                             }
                             div {
                                 class: "flex flex-row grow justify-between",
@@ -77,8 +77,8 @@ pub fn UnclaimedRewards(cx: Scope) -> Element {
                                 class: "my-auto w-4 h-4"
                             }
                             p {
-                                class: "font-semibold",
-                                "{rewards}"
+                                class: "font-semibold animate-blink",
+                                "{rewards} 💎"
                             }
                         }
                     }

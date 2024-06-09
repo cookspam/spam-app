@@ -714,6 +714,10 @@ h2:where(.dark, .dark *) {
   left: 0.75rem;
 }
 
+.left-72 {
+  left: 18rem;
+}
+
 .left-8 {
   left: 2rem;
 }
@@ -1145,7 +1149,7 @@ h2:where(.dark, .dark *) {
 }
 
 .animate-blink {
-  animation: blink 1s infinite;
+  animation: blink 2s infinite;
 }
 
 @keyframes bounce {
@@ -1162,6 +1166,44 @@ h2:where(.dark, .dark *) {
 
 .animate-bounce {
   animation: bounce 1s infinite;
+}
+
+@keyframes jump {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+
+  10% {
+    transform: translateY(-30px) translateX(10vw);
+  }
+
+  20% {
+    transform: translateY(0) translateX(20vw);
+  }
+
+  30% {
+    transform: translateY(-30px) translateX(30vw);
+  }
+
+  40% {
+    transform: translateY(0) translateX(40vw);
+  }
+
+  50% {
+    transform: translateY(-30px) translateX(50vw);
+  }
+
+  60% {
+    transform: translateY(0) translateX(60vw);
+  }
+
+  70% {
+    transform: translateY(-30px) translateX(70vw);
+  }
+}
+
+.animate-jump {
+  animation: jump 10s ease-in-out infinite;
 }
 
 @keyframes ping {
@@ -1545,10 +1587,6 @@ h2:where(.dark, .dark *) {
 
 .pl-10 {
   padding-left: 2.5rem;
-}
-
-.pl-2 {
-  padding-left: 0.5rem;
 }
 
 .pl-4 {
@@ -2272,6 +2310,10 @@ h2:where(.dark, .dark *) {
     height: 2.5rem;
   }
 
+  .md\:h-16 {
+    height: 4rem;
+  }
+
   .md\:h-48 {
     height: 12rem;
   }
@@ -2294,6 +2336,10 @@ h2:where(.dark, .dark *) {
 
   .md\:w-10 {
     width: 2.5rem;
+  }
+
+  .md\:w-32 {
+    width: 8rem;
   }
 
   .md\:w-5 {

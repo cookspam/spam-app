@@ -8,9 +8,6 @@ module.exports = {
     "./dist/**/*.html",
   ],
   darkMode: 'selector',
-  plugins: [
-    
-  ],
   theme: {
     colors: ({ colors }) => ({
       ...colors,
@@ -68,9 +65,21 @@ module.exports = {
           '0%, 100%': { opacity: '1' },
           '50%': { opacity: '0' },
         },
+        jump: {
+          '0%': { transform: 'translateY(0) translateX(0)' },
+          '10%': { transform: 'translateY(-30px) translateX(10vw)' },
+          '20%': { transform: 'translateY(0) translateX(20vw)' },
+          '30%': { transform: 'translateY(-30px) translateX(30vw)' },
+          '40%': { transform: 'translateY(0) translateX(40vw)' },
+          '50%': { transform: 'translateY(-30px) translateX(50vw)' },
+          '60%': { transform: 'translateY(0) translateX(60vw)' },
+          '70%': { transform: 'translateY(-30px) translateX(70vw)' },
+         
+        },
       },
       animation: {
-        blink: 'blink 1s infinite',
+        blink: 'blink 2s infinite',
+        jump: 'jump 10s ease-in-out infinite',
       },
     },
     },

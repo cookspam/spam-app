@@ -22,7 +22,9 @@ pub fn MinerToolbarNotStarted(cx: Scope) -> Element {
                     class: "flex flex-row gap-2 sm:gap-4",
                     StartButton {}
                 }
+                div {
                 Tutorial {}
+                }
             }
         }
     }

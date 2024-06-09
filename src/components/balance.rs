@@ -1,5 +1,6 @@
 use dioxus::prelude::*;
 use dioxus_router::components::Link;
+use web_sys::console;
 
 use crate::{
     components::OreIcon,
@@ -58,10 +59,31 @@ pub fn Balance(cx: Scope) -> Element {
 #[component]
 pub fn UnclaimedRewards(cx: Scope) -> Element {
     let proof = use_proof(cx);
+    let last_reward = use_state(cx, || 0f64);
+
+    let reward_change = {
+        if let AsyncResult::Ok(proof) = *proof.read() {
+            let rewards = (proof.claimable_rewards as f64) / (10f64.powf(ore::TOKEN_DECIMALS as f64));
+            if *last_reward != rewards {
+                last_reward.set(rewards);
+                true
+            } else {
+                false
+            }
+        } else {
+            false
+        }
+    };
+
+    // reward_change check
+    console::log_2(
+        &"Last Reward:".into(),
+        &format!("{} {}", *last_reward.get(), reward_change).into(),
+    );
+
     if let AsyncResult::Ok(proof) = *proof.read() {
         if proof.claimable_rewards.gt(&0) {
-            let rewards =
-                (proof.claimable_rewards as f64) / (10f64.powf(ore::TOKEN_DECIMALS as f64));
+            let rewards = (proof.claimable_rewards as f64) / (10f64.powf(ore::TOKEN_DECIMALS as f64));
             render! {
                 div {
                     class: "flex flex-row grow justify-between mt-4 -mr-2",
@@ -77,8 +99,12 @@ pub fn UnclaimedRewards(cx: Scope) -> Element {
                                 class: "my-auto w-4 h-4"
                             }
                             p {
-                                class: "font-semibold animate-blink",
-                                "{rewards} 💎"
+                                class: "font-semibold",
+                                "{rewards}"
+                                span {
+                                    class: if reward_change { "animate-jump_up ml-2" } else { "ml-2" },
+                                    "💎"
+                                }
                             }
                         }
                     }
@@ -95,7 +121,6 @@ pub fn UnclaimedRewards(cx: Scope) -> Element {
         None
     }
 }
-
 #[component]
 pub fn SendButton(cx: Scope, to: Option<String>) -> Element {
     render! {

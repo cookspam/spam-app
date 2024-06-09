@@ -61,9 +61,9 @@ module.exports = {
         'height': 'height'
       },
       keyframes: {
-        blink: {
-          '0%, 100%': { opacity: '1' },
-          '50%': { opacity: '0' },
+        jump_up: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
         },
         jump: {
           '0%': { transform: 'translateY(0) translateX(0)' },
@@ -78,7 +78,7 @@ module.exports = {
         },
       },
       animation: {
-        blink: 'blink 2s infinite',
+        jump_up:  'jump_up 1s ease-in-out',
         jump: 'jump 10s ease-in-out infinite',
       },
     },

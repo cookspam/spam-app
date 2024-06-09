@@ -1138,20 +1138,6 @@ h2:where(.dark, .dark *) {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-@keyframes blink {
-  0%, 100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0;
-  }
-}
-
-.animate-blink {
-  animation: blink 2s infinite;
-}
-
 @keyframes bounce {
   0%, 100% {
     transform: translateY(-25%);
@@ -1204,6 +1190,20 @@ h2:where(.dark, .dark *) {
 
 .animate-jump {
   animation: jump 10s ease-in-out infinite;
+}
+
+@keyframes jump_up {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-jump_up {
+  animation: jump_up 1s ease-in-out;
 }
 
 @keyframes ping {

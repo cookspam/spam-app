@@ -1,7 +1,7 @@
 use dioxus::prelude::*;
 
 use crate::{
-    components::{BackButton, OreIcon, Spinner},
+    components::{BackButton, SpamIcon, Spinner},
     hooks::{use_gateway, use_priority_fee, use_pubkey, BalanceHandle, PriorityFee},
     metrics::{track, AppEvent},
     ProofHandle,
@@ -45,7 +45,7 @@ pub fn ClaimConfirm(cx: Scope, amount: u64, claim_step: UseState<ClaimStep>) -> 
                 class: "flex flex-col gap-8",
                 div {
                     class: "flex flex-row gap-2.5 md:gap-4 mx-auto",
-                    OreIcon {
+                    SpamIcon {
                         class: "my-auto w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10"
                     }
                     p {

@@ -10,7 +10,7 @@ use solana_sdk::pubkey::Pubkey;
 
 use crate::{
     components::{
-        ActivityTable, BackButton, BusBubble, Copyable, OreIcon, SendButton, TreasuryBubble,
+        ActivityTable, BackButton, BusBubble, Copyable, SpamIcon, SendButton, TreasuryBubble,
         UserBubble,
     },
     gateway::AsyncResult,
@@ -154,7 +154,7 @@ pub fn User(cx: Scope, id: String) -> Element {
                                 render! {
                                     span {
                                         class: "flex flex-row gap-1.5",
-                                        OreIcon {
+                                        SpamIcon {
                                             class: "w-3.5 h-3.5 my-auto",
                                         }
                                         p {
@@ -183,7 +183,7 @@ pub fn User(cx: Scope, id: String) -> Element {
                                 }
                                 span {
                                     class: "flex flex-row gap-1.5",
-                                    OreIcon {
+                                    SpamIcon {
                                         class: "w-3.5 h-3.5 my-auto",
                                     }
                                     p {

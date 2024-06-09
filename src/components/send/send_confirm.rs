@@ -5,7 +5,7 @@ use solana_client_wasm::solana_sdk::pubkey::Pubkey;
 use solana_sdk::pubkey::Pubkey;
 
 use crate::{
-    components::{BackButton, OreIcon, Spinner},
+    components::{BackButton, SpamIcon, Spinner},
     hooks::{use_gateway, use_ore_balance_handle},
     metrics::{track, AppEvent},
 };
@@ -63,7 +63,7 @@ pub fn SendConfirm<'a>(cx: Scope<'a, SendConfirmProps<'a>>) -> Element {
                     }
                     div {
                         class: "flex flex-row gap-2",
-                        OreIcon {
+                        SpamIcon {
                             class: "my-auto w-5 h-5"
                         }
                         p {

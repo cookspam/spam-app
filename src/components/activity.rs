@@ -8,7 +8,7 @@ use dioxus::prelude::*;
 use ore_types::{Transfer, TransferType};
 
 use crate::{
-    components::{GlobeIcon, OreIcon, UserBubble, UserIcon},
+    components::{GlobeIcon, SpamIcon, UserBubble, UserIcon},
     gateway::AsyncResult,
     hooks::{use_pubkey, use_transfers, ACTIVITY_TABLE_PAGE_LIMIT},
     route::Route,
@@ -315,7 +315,7 @@ pub fn ActivityRow(cx: Scope<ActivityRowProps>) -> Element {
                         "{action} "
                         span {
                             class: "flex flex-row font-semibold gap-[0.16rem]",
-                            OreIcon {
+                            SpamIcon {
                                 class: "ml-0.5 w-3.5 h-3.5 my-auto",
                             }
                             "{amount}"

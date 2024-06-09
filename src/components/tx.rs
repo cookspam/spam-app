@@ -10,7 +10,7 @@ use solana_client_wasm::solana_sdk::pubkey::Pubkey;
 use solana_sdk::pubkey::Pubkey;
 
 use crate::{
-    components::{BackButton, Copyable, OreIcon},
+    components::{BackButton, Copyable, SpamIcon},
     gateway::AsyncResult,
     hooks::{use_datetime, use_explorer_transaction_url, use_transfer},
     route::Route,
@@ -118,7 +118,7 @@ pub fn Tx(cx: Scope, sig: String) -> Element {
                             }
                             span {
                                 class: "flex flex-row gap-1",
-                                OreIcon {
+                                SpamIcon {
                                     class: "w-3.5 h-3.5 my-auto",
                                 }
                                 p {

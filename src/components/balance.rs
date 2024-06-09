@@ -3,7 +3,7 @@ use dioxus_router::components::Link;
 use web_sys::console;
 
 use crate::{
-    components::OreIcon,
+    components::SpamIcon,
     gateway::AsyncResult,
     hooks::{use_ore_balance, use_proof},
     route::Route,
@@ -29,7 +29,7 @@ pub fn Balance(cx: Scope) -> Element {
                                 class: "flex flex-row grow justify-between",
                                 div {
                                     class: "flex flex-row my-auto gap-2.5 md:gap-4",
-                                    OreIcon {
+                                    SpamIcon {
                                         class: "my-auto w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10"
                                     }
                                     h2 {
@@ -95,7 +95,7 @@ pub fn UnclaimedRewards(cx: Scope) -> Element {
                         }
                         div {
                             class: "flex flex-row gap-2",
-                            OreIcon {
+                            SpamIcon {
                                 class: "my-auto w-4 h-4"
                             }
                             p {

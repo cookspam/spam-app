@@ -98,7 +98,7 @@ pub fn SupplyStats(cx: Scope) -> Element {
                         class: "absolute text-gray-800 font-bold text-center",
                         style: "transform: translateY(2.5rem);", // Adjust as needed to position the text
                         p {
-                            "Unmined Spam"
+                            "Unclaimed Spam"
                         }
                         p {
                             class: "mt-1", // Add margin-top for spacing

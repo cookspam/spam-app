@@ -25,36 +25,36 @@ pub enum ActivityFilter {
 pub fn Activity(cx: Scope) -> Element {
     let filter = use_state(cx, || ActivityFilter::Global);
     let offset = use_state(cx, || 0u64);
-    let (transfers, has_more) = use_transfers(cx, filter, offset);
+    // let (transfers, has_more) = use_transfers(cx, filter, offset);
     let spam_gang = asset_path("mining_gang_resized.png");
     let go = asset_path("letsgo.png");
     let back = asset_path("letsback.png");
     
-    match transfers {
-        AsyncResult::Ok(transfers) => {
-            render! {
-                div {
-                    class: "flex flex-col gap-4 grow w-full h-2/3 pb-20 min-h-16 rounded justify-start",
-                    div {
-                        class: "flex flex-row justify-between",
-                        h2 {
-                            class: "text-lg md:text-2xl font-bold my-auto",
-                            "Activity"
-                        }
-                        FilterButtons {
-                            filter: filter,
-                            offset: offset
-                        }
-                    }
-                    ActivityTable{
-                        offset: offset,
-                        transfers: transfers,
-                        has_more: has_more
-                    }
-                }
-            }
-        }
-        _ => {
+    // match transfers {
+        // AsyncResult::Ok(transfers) => {
+        //     render! {
+        //         div {
+        //             class: "flex flex-col gap-4 grow w-full h-2/3 pb-20 min-h-16 rounded justify-start",
+        //             div {
+        //                 class: "flex flex-row justify-between",
+        //                 h2 {
+        //                     class: "text-lg md:text-2xl font-bold my-auto",
+        //                     "Activity"
+        //                 }
+        //                 FilterButtons {
+        //                     filter: filter,
+        //                     offset: offset
+        //                 }
+        //             }
+        //             ActivityTable{
+        //                 offset: offset,
+        //                 transfers: transfers,
+        //                 has_more: has_more
+        //             }
+        //         }
+        //     }
+        // }
+        // _ => {
             render! {
                 div {
                    // class: "flex flex-row h-64 w-full loading rounded",
@@ -74,8 +74,8 @@ pub fn Activity(cx: Scope) -> Element {
                     }
                 }
             }
-        }
-    }
+    //     }
+    // }
 }
 
 #[derive(Props, PartialEq)]

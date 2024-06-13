@@ -81,40 +81,42 @@ pub fn MinerToolbarInsufficientBalanceOpen(cx: Scope) -> Element {
             div {
                 class: "flex flex-col gap-2",
                 p {
-                    class: "text-3xl md:text-4xl lg:text-5xl font-bold",
-                    "Pay transaction fees"
+                    class: "text-3xl md:text-4xl lg:text-5xl font-bold text-center",
+                    "Help! I don't have any testnet SOL"
                 }
-                p {
-                    class: "text-lg",
-                    "Scan the QR code from your Solana wallet to top up your miner."
+                a {
+                    // TODO Get referal code
+                    href: "https://faucet.quicknode.com/solana/testnet",
+                    target: "_blank",
+                    class: "font-medium text-center text-2xl text-gray-300 hover:underline pt-8",
+                    "🔗 Let's go to the tesetnet faucet"
                 }
-                p {
-                    class: "text-sm text-gray-300",
-                    "Your miner keypair is stored on your local device and can be exported at anytime from settings."
-                }
+                
             }
             div {
                 class: "flex flex-col gap-4 sm:gap-6 md:gap-8",
                 div {
+                    class: "flex flex-col items-center",
+                    p {
+                        class: "text-lg font-medium",
+                        "Your address:"
+                    }
+                    Copyable {
+                        class: "mx-auto max-w-full",
+                        value: pubkey.to_string(),
+                        p {
+                            class: "rounded p-2 font-mono font-medium truncate",
+                            "{pubkey}"
+                        }
+                    }
+                }
+                div {
                     class: "text-center w-48 h-48 bg-gray-100 mx-auto",
                     dangerous_inner_html: "{qrcode}",
                 }
-                Copyable {
-                    class: "mx-auto max-w-full",
-                    value: pubkey.to_string(),
-                    p {
-                        class: "rounded p-2 font-mono font-medium truncate",
-                        "{pubkey}"
-                    }
-                }
             }
-            a {
-                // TODO Get referal code
-                href: "https://faucet.quicknode.com/solana/testnet",
-                target: "_blank",
-                class: "font-medium text-center text-sm text-gray-300 hover:underline",
-                "Help! I don't have any testnet SOL."
-            }
+            
+            
         }
     }
 }

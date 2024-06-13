@@ -858,6 +858,10 @@ h2:where(.dark, .dark *) {
   margin-top: 0.25rem;
 }
 
+.mt-5 {
+  margin-top: 1.25rem;
+}
+
 .flex {
   display: flex;
 }
@@ -1696,6 +1700,10 @@ h2:where(.dark, .dark *) {
   padding-left: 1.25rem;
 }
 
+.pt-8 {
+  padding-top: 2rem;
+}
+
 .text-left {
   text-align: left;
 }
@@ -2346,6 +2354,10 @@ h2:where(.dark, .dark *) {
     gap: 1.5rem;
   }
 
+  .sm\:gap-1 {
+    gap: 0.25rem;
+  }
+
   .sm\:gap-y-10 {
     row-gap: 2.5rem;
   }
@@ -2476,6 +2488,10 @@ h2:where(.dark, .dark *) {
 
   .md\:gap-8 {
     gap: 2rem;
+  }
+
+  .md\:gap-1 {
+    gap: 0.25rem;
   }
 
   .md\:gap-y-12 {

@@ -258,7 +258,7 @@ pub fn LeaderboardTable<'a>(cx: Scope<'a, LeaderboardTableProps<'a>>) -> Element
 #[component]
 pub fn TokenBalanceRow<'a>(cx: Scope, i: usize, token_account: &'a UiTokenAccount) -> Element {
     let owner = if token_account.owner.eq(&ore::TREASURY_ADDRESS.to_string()) {
-        "Ore Treasury".to_string()
+        "Spam Treasury".to_string()
     } else {
         token_account.owner.clone()
     };

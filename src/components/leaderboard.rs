@@ -1,9 +1,14 @@
 use std::{rc::Rc, str::FromStr, fs::File, path::Path};
+use std::time::{Duration, SystemTime};
 use plotters::prelude::*;
 use std::error::Error;
 use plotters_svg::SVGBackend;
 use wasm_bindgen::prelude::*;
 use web_sys::console;
+
+use reqwest::Client;
+use serde::Deserialize;
+use wasm_bindgen::prelude::*;
 
 use dioxus::prelude::*;
 use dioxus_router::prelude::*;
@@ -43,8 +48,50 @@ pub fn Stats(cx: Scope) -> Element {
     }
 }
 
+#[derive(Deserialize, Clone)]
+struct TransactionCount {
+    count: u32,
+    timestamp: String,
+}
+
+async fn fetch_transaction_counts(url: &str) -> Result<Vec<TransactionCount>, reqwest::Error> {
+    let client = Client::new();
+    let response = client.get(url).send().await?;
+    let data = response.json::<Vec<TransactionCount>>().await?;
+    Ok(data)
+}
+
 #[component]
 pub fn SupplyStats(cx: Scope) -> Element {
+
+    let transaction_counts = use_state(&cx, Vec::new);
+    use_future(&cx, (), move |_| {
+        to_owned![transaction_counts];
+        async move {
+            let from = SystemTime::UNIX_EPOCH + Duration::from_secs(1718496000); // 06/16 00:00
+            let to = from + Duration::from_secs(12 * 3600); // 12 hours later
+
+            let from = from.duration_since(SystemTime::UNIX_EPOCH).unwrap().as_secs() * 1000;
+            let to = to.duration_since(SystemTime::UNIX_EPOCH).unwrap().as_secs() * 1000;
+
+
+            let url = format!("https://transactionscounthourly-uud64dt76q-uc.a.run.app/?from={}&to={}", from, to);
+
+           
+            match fetch_transaction_counts(&url).await {
+                Ok(data) => {
+                    transaction_counts.set(data.clone());
+                    for tx in data {
+                        console::log_1(&format!("Count: {}, Timestamp: {}", tx.count, tx.timestamp).into());
+                    }
+                },
+                Err(err) => console::log_1(&format!("Error fetching transaction counts: {}", err).into()),
+            }
+        }
+    });
+
+    
+
     let (treasury, _) = use_treasury(cx);
     let (supply, _) = use_ore_supply(cx);
     let circulating_supply = match *treasury.read().unwrap() {
@@ -89,23 +136,10 @@ pub fn SupplyStats(cx: Scope) -> Element {
             }
             // 파이 차트 이미지 표시
             div {
-                class: "flex items-end pr-10", 
-                div {
-                    class: "w-56 h-56 flex justify-center items-center rounded-full",
-                    style: "background: conic-gradient(white {pie}%, teal {pie}%)",
-                    
-                    div {
-                        class: "absolute text-gray-800 font-bold text-center",
-                        style: "transform: translateY(2.5rem);", // Adjust as needed to position the text
-                        p {
-                            "Unclaimed Spam"
-                        }
-                        p {
-                            class: "mt-1", // Add margin-top for spacing
-                            "{remaining_spam_text}"
-                        }
-                       
-                       
+                class: "flex flex-col gap-2",
+                for tx in transaction_counts.iter() {
+                    p {
+                        format!("Count: {}, Timestamp: {}", tx.count, tx.timestamp)
                     }
                 }
             }
@@ -325,3 +359,4 @@ async fn fetch_top_accounts(gateway: Rc<Gateway>) -> Vec<UiTokenAccount> {
     }
     fetched_accounts
 }
+

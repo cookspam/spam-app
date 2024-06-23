@@ -3,7 +3,7 @@ module.exports = {
   mode: "all",
   content: [
     // include all rust, html and css files in the src directory
-    "./src/**/*.{rs,html,css}",
+    "./src/**/*.{rs,html,css,}",
     // include all html files in the output (dist) directory
     "./dist/**/*.html",
   ],
@@ -47,7 +47,13 @@ module.exports = {
         500: '#14b8a6',
         700: '#0f766e',
         900: '#134e4a'
+      },
+      sky: {
+        200: '#bae6fd',
+        300: '#7dd3fc'
       }
+
+
 
     }),
     extend: {

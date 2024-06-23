@@ -1,10 +1,13 @@
 use std::{rc::Rc, str::FromStr, fs::File, path::Path};
-use std::time::{Duration, SystemTime};
+use std::borrow::Cow;
+use std::string::String;
 use plotters::prelude::*;
 use std::error::Error;
 use plotters_svg::SVGBackend;
 use wasm_bindgen::prelude::*;
 use web_sys::console;
+use chrono::{NaiveDateTime, Datelike, Timelike, Utc, DateTime};
+use web_time::{SystemTime, Duration, UNIX_EPOCH};
 
 use reqwest::Client;
 use serde::Deserialize;
@@ -30,6 +33,7 @@ use crate::{
     utils::asset_path,  // Add this line to use asset_path function
     
 };
+
             
 #[component]
 pub fn Stats(cx: Scope) -> Element {
@@ -54,6 +58,13 @@ struct TransactionCount {
     timestamp: String,
 }
 
+#[derive(Clone)]
+struct TransactionWithHeight {
+    count: u32,
+    timestamp: String,
+    height: f64,
+}
+
 async fn fetch_transaction_counts(url: &str) -> Result<Vec<TransactionCount>, reqwest::Error> {
     let client = Client::new();
     let response = client.get(url).send().await?;
@@ -65,25 +76,79 @@ async fn fetch_transaction_counts(url: &str) -> Result<Vec<TransactionCount>, re
 pub fn SupplyStats(cx: Scope) -> Element {
 
     let transaction_counts = use_state(&cx, Vec::new);
-    use_future(&cx, (), move |_| {
-        to_owned![transaction_counts];
+    let max_count = use_state(&cx, || 200);
+    let selected_option = use_state(&cx, || "hourly");
+    //let selected_option = use_state(&cx, || "hourly".to_string());
+    let count_sum = use_state(&cx, || 0);
+    let show_dropdown = use_state(&cx, || false);
+    
+    use_future(&cx, selected_option, |selected_option| {
+        to_owned![transaction_counts, max_count, selected_option, count_sum];
         async move {
-            let from = SystemTime::UNIX_EPOCH + Duration::from_secs(1718496000); // 06/16 00:00
-            let to = from + Duration::from_secs(12 * 3600); // 12 hours later
-
-            let from = from.duration_since(SystemTime::UNIX_EPOCH).unwrap().as_secs() * 1000;
-            let to = to.duration_since(SystemTime::UNIX_EPOCH).unwrap().as_secs() * 1000;
-
-
-            let url = format!("https://transactionscounthourly-uud64dt76q-uc.a.run.app/?from={}&to={}", from, to);
-
+            transaction_counts.set(Vec::new());
+            let url = match *selected_option.get() {
+                "daily" => {
+                    let now = SystemTime::now();
+                    let to = now.duration_since(UNIX_EPOCH).unwrap().as_secs() * 1000;
+                    let from = (now - Duration::from_secs(7 * 24 * 3600)).duration_since(UNIX_EPOCH).unwrap().as_secs() * 1000;
+                    format!("https://transactionscountdaily-uud64dt76q-uc.a.run.app/?from={}&to={}", from, to)
+                }
+                "daily_30" => {
+                    let now = SystemTime::now();
+                    let to = now.duration_since(UNIX_EPOCH).unwrap().as_secs() * 1000;
+                    let from = (now - Duration::from_secs(30 * 24 * 3600)).duration_since(UNIX_EPOCH).unwrap().as_secs() * 1000;
+                    format!("https://transactionscountdaily-uud64dt76q-uc.a.run.app/?from={}&to={}", from, to)
+                }
+                "weekly" => {
+                    let now = SystemTime::now();
+                    let to = now.duration_since(UNIX_EPOCH).unwrap().as_secs() * 1000;
+                    let from = (now - Duration::from_secs(90 * 24 * 3600)).duration_since(UNIX_EPOCH).unwrap().as_secs() * 1000;
+                    format!("https://transactionscountweekly-uud64dt76q-uc.a.run.app/?from={}&to={}", from, to)
+                }
+                "monthly" => {
+                    let now = SystemTime::now();
+                    let to = now.duration_since(UNIX_EPOCH).unwrap().as_secs() * 1000;
+                    let from = (now - Duration::from_secs(365 * 24 * 3600)).duration_since(UNIX_EPOCH).unwrap().as_secs() * 1000;
+                    format!("https://transactionscountmonthly-uud64dt76q-uc.a.run.app/?from={}&to={}", from, to)
+                }
+                _ => {
+                    let now = SystemTime::now();
+                    let to = now.duration_since(UNIX_EPOCH).unwrap().as_secs() * 1000;
+                    let from = (now - Duration::from_secs(12 * 3600)).duration_since(UNIX_EPOCH).unwrap().as_secs() * 1000;
+        
+                    format!("https://transactionscounthourly-uud64dt76q-uc.a.run.app/?from={}&to={}", from, to)
+                }
+            };
            
             match fetch_transaction_counts(&url).await {
                 Ok(data) => {
-                    transaction_counts.set(data.clone());
-                    for tx in data {
-                        console::log_1(&format!("Count: {}, Timestamp: {}", tx.count, tx.timestamp).into());
+                    let max: u32 = data.iter().map(|tx| tx.count).max().unwrap_or(200);
+                    max_count.set(max);
+                    let total_count: u32 = data.iter().map(|tx| tx.count).sum();
+                    count_sum.set(total_count);
+                    console::log_1(&format!("max {}", max).into());
+                    //console::log_1(&format!("max_count {}", *max_count.get()).into());
+
+                    let transformed_data: Vec<TransactionWithHeight> = data.iter().map(|tx| {
+                        let date_time = NaiveDateTime::parse_from_str(&tx.timestamp, "%Y-%m-%dT%H:%M:%S%.fZ").unwrap();
+                        let formatted_timestamp = match *selected_option.get() {
+                            "daily" | "daily_30" => format!("{:02}/{:02}", date_time.month(), date_time.day()),
+                            "weekly" => format!("{:02}/{:02}", date_time.month(), date_time.day()),
+                            "monthly" => format!("{}", date_time.format("%B")), // Full month name
+                            _ => format!("{:02}:{:02}", date_time.hour(), date_time.minute()), // hourly
+                        };
+                        TransactionWithHeight {
+                            count: tx.count,
+                            timestamp: formatted_timestamp,
+                            height: (tx.count as f64 / max as f64) * 100.0,
+                            //total_count: total_count as f64
+                        }
+                    }).collect();
+                    transaction_counts.set(transformed_data.clone());
+                    for tx in transformed_data.iter() {
+                        console::log_1(&format!("Count: {}, Height: {}, Timestamp: {}", tx.count, tx.height, tx.timestamp).into());
                     }
+
                 },
                 Err(err) => console::log_1(&format!("Error fetching transaction counts: {}", err).into()),
             }
@@ -91,7 +156,6 @@ pub fn SupplyStats(cx: Scope) -> Element {
     });
 
     
-
     let (treasury, _) = use_treasury(cx);
     let (supply, _) = use_ore_supply(cx);
     let circulating_supply = match *treasury.read().unwrap() {
@@ -111,39 +175,193 @@ pub fn SupplyStats(cx: Scope) -> Element {
     let remaining_pie = 100.0 - pie;
     let remaining_spam_text = format!("{:.2} %", remaining_pie);
 
+    let ITEMS_PER_PAGE = match *selected_option.get() {
+        "daily" => 7,
+        "dialy_30" => 30,
+        "weekly" => 12,//
+        "monthly" => 12,
+        _ => 12, // hourly
+    };
+
+    let page_data: Vec<_> = transaction_counts.iter()
+    .take(ITEMS_PER_PAGE)
+    .collect();
+
+    let y_max = ((*max_count.get() as f64) / 1000.0).ceil() * 1000.0;
+    let y_20 = (y_max as f64 * 0.20).round();
+    let y_40 = (y_max as f64 * 0.40).round();
+    let y_60 = (y_max as f64 * 0.60).round();
+    let y_80 = (y_max as f64 * 0.80).round();
     render! {
         div {
-            class: "flex flex-col md:flex-row gap-24 relative border p-8 border-teal-500 rounded-lg",
+            class: "flex flex-col md:flex-row gap-10 relative",
+            div{
+                class: "w-2/5 flex flex-col gap-20 border p-8 border-teal-500 rounded-lg",
+                div {
+                    class: "flex flex-col flex-1 pr-10",
+                    h2 {
+                        class: "text-lg md:text-2xl font-bold mb-20",
+                        "Supply"
+                    }
+                    div {
+                        class: "flex flex-col gap-8 my-auto",
+                        OreValue {
+                            title: "Circulating supply".to_string(),
+                            detail: "The total amount of Spam that has been mined and claimed.".to_string(),
+                            amount: circulating_supply.to_string()
+                        }
+                        OreValue {
+                            title: "Total supply".to_string(),
+                            detail: "The total amount of Spam that has ever been mined.".to_string(),
+                            amount: spam_supply.to_string()
+                        }
+                    }
+                }
+                // 파이 차트 이미지 표시
+                div {
+                    class: "flex justify-center items-center pb-12", 
+                    div {
+                        class: "w-56 h-56 flex justify-center items-center rounded-full",
+                        style: "background: conic-gradient(white {pie}%, #14b8a6 {pie}%)",
+                        
+                        div {
+                            class: "absolute text-gray-800 font-bold text-center",
+                            style: "transform: translateY(2.5rem);", // Adjust as needed to position the text
+                            p {
+                                "Unclaimed Spam"
+                            }
+                            p {
+                                class: "mt-1", // Add margin-top for spacing
+                                "{remaining_spam_text}"
+                            }   
+                           
+                        }
+                    }
+                }  
+        }
+                
+            // Right section: Transaction count chart
+        div {
+            class: "w-3/5 flex flex-col gap-48  border p-8 border-teal-500 rounded-lg",
+            // Upper section with total transaction and dropdown
             div {
-                class: "flex flex-col flex-1 pr-10",
+                class: "flex justify-between items-center h-1/10",
                 h2 {
                     class: "text-lg md:text-2xl font-bold mb-8",
-                    "Supply"
+                    "Total Transaction: "
+                    span {
+                        class: "text-teal-500",
+                        format!("{}", *count_sum.get())
+                    }
+                } 
+               // console::log_1(&format!("max {}", max).into());
+                div {
+                    class: "relative inline-block",
+                    button {
+                        class: "mr-20 dropdown-button border text-center w-20 border-teal-500 rounded-lg text-black dark:text-white",
+                        onclick: move |_| {
+                            console::log_1(&JsValue::from_str(&format!("{}", *show_dropdown.get())));
+                            show_dropdown.set(!*show_dropdown.get());
+                        },
+                        match *selected_option.get() {
+                            "hourly" => "12H",
+                            "daily" => "1W",
+                            "daily_30" => "30D",
+                            "weekly" => "Weekly",
+                            "monthly" => "Monthly",
+                            _ => "12H",
+                        }
+                    }
+                    if *show_dropdown.get() {
+                        render!{
+                            div {
+                                class: "dropdown-content w-20 text-center absolute dark:text-white border border-teal-500 rounded mt-2",
+                                button {
+                                    class: "block w-full px-4 py-2 text-sm ",
+                                    onclick: move |_| {
+                                        selected_option.set("hourly");
+                                        show_dropdown.set(false);
+                                    },
+                                    "12H"
+                                }
+                                button {
+                                    class: "block w-full px-4 py-2 text-sm ",
+                                    onclick: move |_| {
+                                        selected_option.set("daily");
+                                        show_dropdown.set(false);
+                                    },
+                                    "1W"
+                                }
+                                button {
+                                    class: "block w-full px-4 py-2 text-sm ",
+                                    onclick: move |_| {
+                                        selected_option.set("daily_30");
+                                        show_dropdown.set(false);
+                                    },
+                                    "30D"
+                                }
+                                // button {
+                                //     class: "block w-full px-4 py-2 text-sm ",
+                                //     onclick: move |_| {
+                                //         selected_option.set("weekly");
+                                //         show_dropdown.set(false);
+                                //     },
+                                //     "Weekly"
+                                // }
+                                // button {
+                                //     class: "block w-full px-4 py-2 text-sm ",
+                                //     onclick: move |_| {
+                                //         selected_option.set("monthly");
+                                //         show_dropdown.set(false);
+                                //     },
+                                //     "Monthly"
+                                // }
+                            }
+                        }
+                        
+                    }
+                    
+                }
+            }
+            div {
+                class: "relative flex w-full flex-col",
+                div {
+                    class: "absolute ml-2 top-[100%] text-xs text-gray-500",
+                    p {"(UTC)"}
                 }
                 div {
-                    class: "flex flex-col gap-8 my-auto",
-                    OreValue {
-                        title: "Circulating supply".to_string(),
-                        detail: "The total amount of Spam that has been mined and claimed.".to_string(),
-                        amount: circulating_supply.to_string()
-                    }
-                    OreValue {
-                        title: "Total supply".to_string(),
-                        detail: "The total amount of Spam that has ever been mined.".to_string(),
-                        amount: spam_supply.to_string()
+                    class: "absolute ml-2 top-[76%] text-xs text-gray-500",
+                    p { format!("{:.0}", y_20) }
+                }
+                div {
+                    class: "absolute ml-2 top-[56%] text-xs text-gray-500",
+                    p { format!("{:.0}", y_40) }
+                }
+                div {
+                    class: "absolute ml-2 top-[36%] text-xs text-gray-500",
+                    p { format!("{:.0}", y_60) }
+                }
+                div {
+                    class: "absolute ml-2 top-[16%] text-xs text-gray-500",
+                    p { format!("{:.0}", y_80) }
+                }
+                ul {
+                    class: "chart h-auto dark:chart_dark",
+                    for tx in page_data.iter() {
+                        li {
+                            span {
+                                style:"height: {tx.height}%; --bar-height: {tx.height}%;",
+                                title: "{tx.timestamp}",
+                                "data-count": "{tx.count}",
+                            }
+                        }
                     }
                 }
-            }
-            // 파이 차트 이미지 표시
-            div {
-                class: "flex flex-col gap-2",
-                for tx in transaction_counts.iter() {
-                    p {
-                        format!("Count: {}, Timestamp: {}", tx.count, tx.timestamp)
-                    }
-                }
+            
             }
             
+        }
+
         }
     }
 }

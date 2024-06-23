@@ -178,7 +178,7 @@ pub fn SupplyStats(cx: Scope) -> Element {
 
     let ITEMS_PER_PAGE = match *selected_option.get() {
         "daily" => 7,
-        "dialy_30" => 30,
+        "daily_30" => 30,
         "weekly" => 12,//
         "monthly" => 12,
         _ => 12, // hourly

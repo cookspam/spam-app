@@ -187,7 +187,7 @@
 .chart {
     display: table;
     table-layout: fixed;
-    width: 80%;
+    width: 85%;
     max-width: 1000px;
     height: 300px;
     margin: 0 auto;
@@ -213,7 +213,7 @@
     left: 0;
     right: 0;
     top: 100%;
-    padding: 2px 0; /* Adjust padding to ensure the text is closer to the bar */
+    padding: 1px 0; /* Adjust padding to ensure the text is closer to the bar */
     display: block;
     text-align: center;
     content: attr(title);

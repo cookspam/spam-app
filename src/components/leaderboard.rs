@@ -131,6 +131,7 @@ pub fn SupplyStats(cx: Scope) -> Element {
 
                     let transformed_data: Vec<TransactionWithHeight> = data.iter().map(|tx| {
                         let date_time = NaiveDateTime::parse_from_str(&tx.timestamp, "%Y-%m-%dT%H:%M:%S%.fZ").unwrap();
+                       
                         let formatted_timestamp = match *selected_option.get() {
                             "daily" | "daily_30" => format!("{:02}/{:02}", date_time.month(), date_time.day()),
                             "weekly" => format!("{:02}/{:02}", date_time.month(), date_time.day()),
@@ -265,7 +266,7 @@ pub fn SupplyStats(cx: Scope) -> Element {
                         },
                         match *selected_option.get() {
                             "hourly" => "12H",
-                            "daily" => "1W",
+                            "daily" => "7D",
                             "daily_30" => "30D",
                             "weekly" => "Weekly",
                             "monthly" => "Monthly",
@@ -290,7 +291,7 @@ pub fn SupplyStats(cx: Scope) -> Element {
                                         selected_option.set("daily");
                                         show_dropdown.set(false);
                                     },
-                                    "1W"
+                                    "7D"
                                 }
                                 button {
                                     class: "block w-full px-4 py-2 text-sm ",

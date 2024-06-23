@@ -166,7 +166,6 @@ pub fn SettingsItems(cx: Scope) -> Element {
                             }
                         },
                         option { initial_selected: explorer.read().eq(&Explorer::Solana), value: "{Explorer::Solana}", "{Explorer::Solana}" }
-                        option { initial_selected: explorer.read().eq(&Explorer::SolanaFm), value: "{Explorer::SolanaFm}", "{Explorer::SolanaFm}" }
                         option { initial_selected: explorer.read().eq(&Explorer::Solscan), value: "{Explorer::Solscan}", "{Explorer::Solscan}" }
                         option { initial_selected: explorer.read().eq(&Explorer::Xray), value: "{Explorer::Xray}", "{Explorer::Xray}" }
                     }
@@ -249,7 +248,7 @@ pub fn SettingsItems(cx: Scope) -> Element {
 pub enum Explorer {
     #[default]
     Solana,
-    SolanaFm,
+  
     Solscan,
     Xray,
 }
@@ -258,7 +257,7 @@ impl fmt::Display for Explorer {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             Explorer::Solana => write!(f, "Solana Explorer"),
-            Explorer::SolanaFm => write!(f, "SolanaFM"),
+           
             Explorer::Solscan => write!(f, "Solscan"),
             Explorer::Xray => write!(f, "Xray"),
         }
@@ -271,7 +270,6 @@ impl FromStr for Explorer {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
             "Solana Explorer" => Ok(Explorer::Solana),
-            "SolanaFM" => Ok(Explorer::SolanaFm),
             "Solscan" => Ok(Explorer::Solscan),
             "Xray" => Ok(Explorer::Xray),
             _ => Err(io::Error::new(

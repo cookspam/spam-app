@@ -24,19 +24,17 @@ pub fn use_explorer_provider(cx: &ScopeState) {
 pub fn use_explorer_account_url(cx: &ScopeState, address: &String) -> String {
     let explorer = use_explorer(cx);
     match explorer.read().deref() {
-        Explorer::Solana => format!("https://explorer.solana.com/address/{}", address),
-        Explorer::SolanaFm => format!("https://solana.fm/address/{}", address),
-        Explorer::Solscan => format!("https://solscan.io/account/{}", address),
-        Explorer::Xray => format!("https://xray.helius.xyz/account/{}", address),
+        Explorer::Solana => format!("https://explorer.solana.com/address/{}?cluster=testnet", address),
+        Explorer::Solscan => format!("https://solscan.io/account/{}?cluster=testnet", address),
+        Explorer::Xray => format!("https://xray.helius.xyz/account/{}?cluster=testnet", address),
     }
 }
 
 pub fn use_explorer_transaction_url(cx: &ScopeState, signature: &String) -> String {
     let explorer = use_explorer(cx);
     match explorer.read().deref() {
-        Explorer::Solana => format!("https://explorer.solana.com/tx/{}", signature),
-        Explorer::SolanaFm => format!("https://solana.fm/tx/{}", signature),
-        Explorer::Solscan => format!("https://solscan.io/tx/{}", signature),
-        Explorer::Xray => format!("https://xray.helius.xyz/tx/{}", signature),
+        Explorer::Solana => format!("https://explorer.solana.com/tx/{}?cluster=testnet", signature),
+        Explorer::Solscan => format!("https://solscan.io/tx/{}?cluster=testnet", signature),
+        Explorer::Xray => format!("https://xray.helius.xyz/tx/{}?cluster=testnet", signature),
     }
 }

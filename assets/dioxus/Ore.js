@@ -1595,6 +1595,10 @@ function __wbg_get_imports() {
         const ret = new Error(getStringFromWasm0(arg0, arg1));
         return addHeapObject(ret);
     };
+    imports.wbg.__wbg_trackEvent_98caa075b26a8bc5 = function() { return handleError(function (arg0, arg1, arg2, arg3) {
+        var v0 = getCachedStringFromWasm0(arg0, arg1);
+        fathom.trackEvent(v0, arg2 === 0 ? undefined : arg3 >>> 0);
+    }, arguments) };
     imports.wbg.__wbindgen_is_object = function(arg0) {
         const val = getObject(arg0);
         const ret = typeof(val) === 'object' && val !== null;
@@ -1629,10 +1633,6 @@ function __wbg_get_imports() {
         const ret = +getObject(arg0);
         return ret;
     };
-    imports.wbg.__wbg_trackEvent_98caa075b26a8bc5 = function() { return handleError(function (arg0, arg1, arg2, arg3) {
-        var v0 = getCachedStringFromWasm0(arg0, arg1);
-        fathom.trackEvent(v0, arg2 === 0 ? undefined : arg3 >>> 0);
-    }, arguments) };
     imports.wbg.__wbindgen_is_string = function(arg0) {
         const ret = typeof(getObject(arg0)) === 'string';
         _assertBoolean(ret);

@@ -2220,10 +2220,8 @@ h2:where(.dark, .dark *) {
 
 .chart span::after {
   content: attr(data-count);
-  position: absolute;
-  bottom: calc(100% + var(--tooltip-offset));
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
+  bottom: 30px;
   padding: 2px 5px;
   background: rgba(250, 192, 192, 0.75);
   border-radius: 4px;

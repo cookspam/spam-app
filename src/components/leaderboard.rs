@@ -136,7 +136,17 @@ pub fn SupplyStats(cx: Scope) -> Element {
                             "daily" | "daily_30" => format!("{:02}/{:02}", date_time.month(), date_time.day()),
                             "weekly" => format!("{:02}/{:02}", date_time.month(), date_time.day()),
                             "monthly" => format!("{}", date_time.format("%B")), // Full month name
-                            _ => format!("{:02}:{:02}", date_time.hour(), date_time.minute()), // hourly
+                            _ => {
+                                    let mut hourly_hour = date_time.hour();
+                                    if (date_time.minute() != 0) {
+                                        hourly_hour += 1;
+                                        if (hourly_hour > 24) {
+                                            hourly_hour -= 24;
+                                        }
+                                    }
+                                    format!("{:02}:{:02}", hourly_hour, 0)
+
+                                }, // hourly
                         };
                         TransactionWithHeight {
                             count: tx.count,

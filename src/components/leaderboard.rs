@@ -269,7 +269,7 @@ pub fn SupplyStats(cx: Scope) -> Element {
                 div {
                     class: "relative inline-block",
                     button {
-                        class: "mr-20 dropdown-button border text-center w-20 border-teal-500 rounded-lg text-black dark:text-white",
+                        class: "mr-10 dropdown-button border text-center w-20 border-teal-500 rounded-lg text-black dark:text-white",
                         onclick: move |_| {
                             console::log_1(&JsValue::from_str(&format!("{}", *show_dropdown.get())));
                             show_dropdown.set(!*show_dropdown.get());

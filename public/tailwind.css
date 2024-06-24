@@ -890,6 +890,10 @@ h2:where(.dark, .dark *) {
   margin-right: 2.5rem;
 }
 
+.mr-12 {
+  margin-right: 3rem;
+}
+
 .block {
   display: block;
 }

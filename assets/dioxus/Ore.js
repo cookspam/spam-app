@@ -2835,11 +2835,11 @@ imports.wbg.__wbindgen_memory = function() {
     return addHeapObject(ret);
 };
 imports.wbg.__wbindgen_closure_wrapper954 = function() { return logError(function (arg0, arg1, arg2) {
-    const ret = makeClosure(arg0, arg1, 469, __wbg_adapter_50);
+    const ret = makeClosure(arg0, arg1, 468, __wbg_adapter_50);
     return addHeapObject(ret);
 }, arguments) };
 imports.wbg.__wbindgen_closure_wrapper956 = function() { return logError(function (arg0, arg1, arg2) {
-    const ret = makeMutClosure(arg0, arg1, 469, __wbg_adapter_53);
+    const ret = makeMutClosure(arg0, arg1, 468, __wbg_adapter_53);
     return addHeapObject(ret);
 }, arguments) };
 imports.wbg.__wbindgen_closure_wrapper2008 = function() { return logError(function (arg0, arg1, arg2) {

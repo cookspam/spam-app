@@ -140,7 +140,7 @@ pub fn SupplyStats(cx: Scope) -> Element {
                                     let mut hourly_hour = date_time.hour();
                                     if (date_time.minute() != 0) {
                                         hourly_hour += 1;
-                                        if hourly_hour > 24 {
+                                        if hourly_hour >= 24 {
                                             hourly_hour -= 24;
                                         }
                                     }

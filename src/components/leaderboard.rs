@@ -114,7 +114,7 @@ pub fn SupplyStats(cx: Scope) -> Element {
                 _ => {
                     let now = SystemTime::now();
                     let to = now.duration_since(UNIX_EPOCH).unwrap().as_secs() * 1000;
-                    let from = (now - Duration::from_secs(12 * 3600)).duration_since(UNIX_EPOCH).unwrap().as_secs() * 1000;
+                    let from = (now - Duration::from_secs(125 * 360)).duration_since(UNIX_EPOCH).unwrap().as_secs() * 1000;
         
                     format!("https://transactionscounthourly-uud64dt76q-uc.a.run.app/?from={}&to={}", from, to)
                 }

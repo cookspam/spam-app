@@ -126,7 +126,7 @@ pub fn SupplyStats(cx: Scope) -> Element {
                     max_count.set(max);
                     let total_count: u32 = data.iter().map(|tx| tx.count).sum();
                     count_sum.set(total_count);
-                    console::log_1(&format!("max {}", max).into());
+                    // console::log_1(&format!("max {}", max).into());
                     //console::log_1(&format!("max_count {}", *max_count.get()).into());
 
                     let transformed_data: Vec<TransactionWithHeight> = data.iter().map(|tx| {
@@ -156,9 +156,9 @@ pub fn SupplyStats(cx: Scope) -> Element {
                         }
                     }).collect();
                     transaction_counts.set(transformed_data.clone());
-                    for tx in transformed_data.iter() {
-                        console::log_1(&format!("Count: {}, Height: {}, Timestamp: {}", tx.count, tx.height, tx.timestamp).into());
-                    }
+                    // for tx in transformed_data.iter() {
+                    //     console::log_1(&format!("Count: {}, Height: {}, Timestamp: {}", tx.count, tx.height, tx.timestamp).into());
+                    // }
 
                 },
                 Err(err) => console::log_1(&format!("Error fetching transaction counts: {}", err).into()),

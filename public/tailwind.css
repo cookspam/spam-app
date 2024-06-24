@@ -838,8 +838,8 @@ h2:where(.dark, .dark *) {
   margin-left: auto;
 }
 
-.mr-20 {
-  margin-right: 5rem;
+.mr-12 {
+  margin-right: 3rem;
 }
 
 .mr-4 {
@@ -884,14 +884,6 @@ h2:where(.dark, .dark *) {
 
 .mt-auto {
   margin-top: auto;
-}
-
-.mr-10 {
-  margin-right: 2.5rem;
-}
-
-.mr-12 {
-  margin-right: 3rem;
 }
 
 .block {
@@ -2203,8 +2195,11 @@ h2:where(.dark, .dark *) {
   display: block;
   background: rgba(97, 170, 207, 0.75);
   animation: draw 0.5s ease-in-out;
-  --tooltip-offset: calc(var(--bar-height) / 10);
-  /* Adjust this value if necessary */
+}
+
+.chart span:hover {
+  background: rgba(55, 146, 191, 0.75);
+  /* Change the color on hover */
 }
 
 .chart span:before {

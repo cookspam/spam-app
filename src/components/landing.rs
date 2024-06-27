@@ -150,9 +150,9 @@ fn Hero(cx: Scope) -> Element {
         }
         _ => 0f64,
     };
-    let circulating_supply = format!("{:.3}", circulating_supply);
-    let ore_supply = format!("{:.3}", ore_supply);
-    let reward_rate = format!("{:.3}", reward_rate);
+    let circulating_supply = format!("{:.2}", circulating_supply);
+    let ore_supply = format!("{:.2}", ore_supply);
+    let reward_rate = format!("{:.4}", reward_rate);
 
     render! {
         div {

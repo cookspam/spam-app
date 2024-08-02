@@ -117,8 +117,6 @@ fn Navbar(cx: Scope) -> Element {
     }
 }
 
-
-
 #[component]
 fn Hero(cx: Scope) -> Element {
     let bg_img = asset_path("spam_crop.png");

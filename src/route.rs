@@ -3,8 +3,9 @@ use dioxus_router::prelude::*;
 
 use crate::components::{
     Claim, Download, ExportKey, Home, ImportKey, Landing, Miner, Navbar, OreTokenomics,
-    PageNotFound, Send, Settings, SimpleNavbar, Stats, Tx, User, WhatIsMining,
+    PageNotFound, Privacy, Send, Settings, SimpleNavbar, Stats, Tx, User, WhatIsMining,
 };
+
 
 #[rustfmt::skip]
 #[derive(Routable, Clone)]
@@ -19,6 +20,8 @@ pub enum Route {
         OreTokenomics {},
         #[route("/download")]
         Download {},
+        #[route("/privacy")]
+        Privacy {},
     #[end_layout]
 
     #[layout(Navbar)]

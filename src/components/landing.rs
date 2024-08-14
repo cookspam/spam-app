@@ -20,6 +20,7 @@ use crate::{
 pub fn Landing(cx: Scope) -> Element {
     let is_onboarded = use_is_onboarded(cx);
     let nav = use_navigator(cx);
+    
 
     // If the user is already onboarded, redirect to home.
   //  if is_onboarded.read().0 {
@@ -101,6 +102,18 @@ fn Navbar(cx: Scope) -> Element {
                     span {
                         class: "text-sm font-semibold sm:text-base md:text-lg",
                         "Stats"
+                    }
+                }
+                Link {
+                    class: "transition-colors flex items-center gap-2 px-4 py-2 rounded-full text-black dark:text-gray-700 hover:text-gray-600 dark:hover:text-white",
+                    to: Route::Apps {},
+                    span {
+                        class: "text-2xl font-bold sm:text-xl sm:font-bold",
+                        "📦"
+                    }
+                    span {
+                        class: "text-sm font-semibold sm:text-base md:text-lg",
+                        "Apps"
                     }
                 }
                 Link {

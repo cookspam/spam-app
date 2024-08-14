@@ -10,7 +10,6 @@ pub fn Privacy(cx: Scope) -> Element {
                 "Spam Chrome Extension Privacy Policy"
             }
             p {
-               
                "This extension does not collect, store, or transmit any personal information from users. All operations and functionalities are executed locally on the user's device. "}
 			p {   "Any data required for the extension's functionality, such as public and private keys or RPC URLs, is stored securely on the user's device and not accessed by or transmitted to any external servers. "}
 			   

@@ -2,7 +2,7 @@ use dioxus::prelude::*;
 use dioxus_router::prelude::*;
 
 use crate::components::{
-    Claim, Download, ExportKey, Home, ImportKey, Landing, Miner, Navbar, OreTokenomics,
+    Claim, Download, ExportKey, Home, ImportKey, Landing, Miner, Navbar, OreTokenomics, Apps,
     PageNotFound, Privacy, Send, Settings, SimpleNavbar, Stats, Tx, User, WhatIsMining,
 };
 
@@ -33,6 +33,8 @@ pub enum Route {
             Claim {},
             #[route("/stats")]
             Stats {},
+            #[route("/apps")]
+            Apps {},
             #[route("/settings")]
             Settings {},
             #[route("/settings/export-key")]

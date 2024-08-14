@@ -78,6 +78,18 @@ pub fn Navbar(cx: Scope) -> Element {
                             }
                         }
                         Link {
+                            class: "transition-colors flex items-center gap-2 px-4 py-2 rounded-full text-black dark:text-gray-700 hover:text-gray-600 dark:hover:text-white",
+                            to: Route::Apps {},
+                            span {
+                                class: "text-2xl font-bold sm:text-xl sm:font-bold",
+                                "📦"
+                            }
+                            span {
+                                class: "text-sm font-semibold sm:text-base md:text-lg",
+                                "Apps"
+                            }
+                        }
+                        Link {
                             class: "transition-colors flex items-center gap-2 px-4 py-2 rounded-full text-gray-300 dark:text-gray-700 hover:text-black dark:hover:text-white",
                             to: Route::Settings {},
                             MyPageIcon {}

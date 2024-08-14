@@ -31,9 +31,11 @@ mod tx;
 mod user;
 mod user_bubble;
 mod what_is_mining;
+mod apps;
 
 pub use activity::*;
 pub use activity_indicator::*;
+pub use apps::*;
 pub use back_button::*;
 pub use backup_keypair_warning::*;
 pub use balance::*;

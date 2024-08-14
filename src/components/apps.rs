@@ -125,29 +125,26 @@ pub fn Apps(cx: Scope) -> Element {
 						class: "h-16", // This adds a 5rem (80px) space above the element
 					}
 					p {
-						class: "text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-8 font-hero px-6",
-						"Desktop App ($Ore Dual Mining)"
+						class: "text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-8 font-hero",
+						"Desktop App (Ore Dual Mining)"
 					}
 					p {
-						class: "text-lg leading-relaxed mb-4",
-						"The Spam desktop app is designed for users who want the power of CLI mining with a more user-friendly interface. "
+						class: "text-lg leading-relaxed mb-8",
+						 "The Spam desktop application delivers the power of CLI mining with a user-friendly interface, offering the same level of effectiveness while providing an improved user experience, making mining accessible to a wider audience."
+					}
+					
+					h3 {
+						class: "text-xl sm:text-2xl md:text-3xl font-semibold mb-8 mt-8",
+						"Features include:"
+					}
+					ul {
+						class:  "list-disc list-inside pl-4 text-lg",
+						li { "Same effectiveness as CLI mining, with improved user experience" }
+						li { "Dual mining: mine both Ore (CPU/GPU) and Spam (network)" }
+						li { "Maximizes efficiency and rewards by combining both processes" }
 					}
 					p {
-						class: "text-lg leading-relaxed mb-4",
-						"While the CLI is the most effective option for mining, we understand that it might not be the easiest to use for everyone. "
-						"This desktop app combines the same level of effectiveness with an improved user experience, making it accessible to a wider audience."
-					}
-					p {
-						class: "text-lg leading-relaxed mb-4",
-						"In addition to a better interface, the app introduces a dual mining feature, allowing you to mine both Ore and Spam simultaneously. "
-					}
-					p {
-						class: "text-lg leading-relaxed mb-4",
-						"Ore mining requires CPU/GPU-intensive work, while Spam mining focuses on network-intensive tasks. "
-						"By combining these two processes, the app maximizes efficiency and rewards, ensuring you get the most out of your mining activities."
-					}
-					p {
-						class: "text-teal-500 text-lg leading-relaxed mb-4",
+						class: "text-teal-500 text-lg leading-relaxed mb-8 mt-8",
 						"⚙️ Desktop app is coming soon "
 					}
 					// Uncomment and update when download link is available

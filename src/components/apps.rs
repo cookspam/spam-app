@@ -147,8 +147,8 @@ pub fn Apps(cx: Scope) -> Element {
 						"By combining these two processes, the app maximizes efficiency and rewards, ensuring you get the most out of your mining activities."
 					}
 					p {
-						class: "text-lg leading-relaxed mb-4",
-						"Desktop app is coming soon."
+						class: "text-teal-500 text-lg leading-relaxed mb-4",
+						"⚙️ Desktop app is coming soon "
 					}
 					// Uncomment and update when download link is available
 					// a {

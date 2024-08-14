@@ -102,7 +102,7 @@ pub fn Apps(cx: Scope) -> Element {
             class: "list-disc list-inside pl-4 text-lg",
             li { "Browser integration for seamless mining" }
             li { "Background operation with minimal impact on browsing speed" }
-            li { "Real-time mining statistics displayed in the extension" }
+            li { "RPC-friendly, consuming fewer RPC counts compared to other options" }
         }
         a {
 			class: "text-teal-500 text-lg hover:text-teal-700 font-semibold mt-8 inline-flex items-center",

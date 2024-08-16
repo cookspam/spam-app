@@ -18,10 +18,14 @@ use dioxus_router::prelude::*;
 
 #[cfg(feature = "desktop")]
 use solana_account_decoder::parse_token::UiTokenAccount;
+#[cfg(feature = "desktop")]
+use solana_account_decoder::parse_token::UiTokenAmount;
 #[cfg(feature = "web")]
 use solana_client_wasm::solana_sdk::pubkey::Pubkey;
 #[cfg(feature = "web")]
 use solana_extra_wasm::account_decoder::parse_token::UiTokenAccount;
+#[cfg(feature = "web")]
+use solana_extra_wasm::account_decoder::parse_token::UiTokenAmount;
 #[cfg(feature = "desktop")]
 use solana_sdk::pubkey::Pubkey;
 
@@ -414,7 +418,7 @@ fn OreValue(cx: Scope, title: String, detail: String, amount: String) -> Element
 #[component]
 pub fn QuerySpamBalance(cx: Scope) -> Element {
     let address = use_state(cx, || "".to_string());
-    // let spam_balance = use_state(cx, || None);
+    let spam_balance = use_state(cx, || None);
     let claimable_spam_balance = use_state(cx, || None);
     let loading = use_state(cx, || false);
     let pubkey = use_state(cx, || "".to_string());
@@ -423,20 +427,44 @@ pub fn QuerySpamBalance(cx: Scope) -> Element {
     use_future(cx, (pubkey), |pubkey| {
         let gateway = gateway.clone();
         let claimable_spam_balance = claimable_spam_balance.clone();
+        let spam_balance = spam_balance.clone();
+        let loading = loading.clone();
 
         async move {
+            loading.set(true);
             let pubkey_result = Pubkey::from_str(&pubkey);
             if let Ok(authority) = pubkey_result {
+                let token_account_address = ore_token_account_address(authority);
                 let proof_pubkey = proof_pubkey(authority);
                 if let Ok(data) = gateway.rpc.get_account_data(&proof_pubkey).await {
                     if let Ok(p) = Proof::try_from_bytes(data.as_ref()) {
-                        // let proof_result = AsyncResult::Ok(*p);
                         let claimable = (p.claimable_rewards as f64) / 10f64.powf(ore::TOKEN_DECIMALS as f64);
                         claimable_spam_balance.set(Some(claimable));
-                        // proof.set(proof_result);
                     }
-                } 
+                }
+                match gateway
+                .rpc
+                .get_token_account_balance(&token_account_address)
+                .await
+                {
+                    Ok(token_account_balance) => {
+                        spam_balance.set(Some(token_account_balance.ui_amount_string))
+                    }
+                    Err(err) => {
+                        let err = GatewayError::from(err);
+                        match err {
+                            GatewayError::AccountNotFound => {
+                                spam_balance.set(None)
+                            }
+                            _ => {
+                                spam_balance.set(None)
+                            }
+                        }
+                    }
+                }                
+                
             }
+            loading.set(false);
         }
     });
 
@@ -467,6 +495,13 @@ pub fn QuerySpamBalance(cx: Scope) -> Element {
 
             } else {
                 rsx! {
+                    spam_balance.as_ref().map(|balance| {
+                        let balance_text = format!("Spam Balance: {}", balance);
+                        rsx!(p {
+                            class: "mt-4 text-lg text-black dark:text-white",
+                            "{balance_text}"
+                        })
+                    })
                     claimable_spam_balance.get().map(|claimable_balance| {
                         let claimable_balance_text = format!("Claimable Spam Balance: {}", claimable_balance);
                         rsx!(p {

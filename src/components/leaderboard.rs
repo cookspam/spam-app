@@ -1,7 +1,7 @@
-use std::{rc::Rc, str::FromStr, fs::File, path::Path};
+use std::{rc::Rc, str::FromStr,};
 use std::borrow::Cow;
 use std::string::String;
-use plotters::prelude::*;
+//use plotters::prelude::*;
 use std::error::Error;
 use plotters_svg::SVGBackend;
 use wasm_bindgen::prelude::*;
@@ -27,12 +27,13 @@ use solana_sdk::pubkey::Pubkey;
 
 use crate::{
     components::{SpamIcon, Footer},
-    gateway::{AsyncResult, Gateway},
-    hooks::{use_gateway, use_ore_supply, use_treasury},
+    gateway::{ore_token_account_address, AsyncResult, Gateway, GatewayError, proof_pubkey},
+    hooks::{use_gateway, use_ore_supply, use_treasury, use_ore_balance_user, use_user_proof},
     route::Route,
     utils::asset_path,  // Add this line to use asset_path function
-    
 };
+use ore::{state::Proof, utils::AccountDeserialize};
+
 
             
 #[component]
@@ -45,6 +46,7 @@ pub fn Stats(cx: Scope) -> Element {
                 div {
                     class: "flex flex-col gap-16 pt-10 pb-10",
                     SupplyStats {}
+                    QuerySpamBalance {}
                     TopHolders {}
                 }
             }
@@ -408,6 +410,101 @@ fn OreValue(cx: Scope, title: String, detail: String, amount: String) -> Element
 
     }
 }
+
+#[component]
+pub fn QuerySpamBalance(cx: Scope) -> Element {
+    let address = use_state(cx, || "".to_string());
+    // let spam_balance = use_state(cx, || None);
+    let claimable_spam_balance = use_state(cx, || None);
+    let loading = use_state(cx, || false);
+    let pubkey = use_state(cx, || "".to_string());
+    let gateway = use_gateway(cx);
+
+    use_future(cx, (pubkey), |pubkey| {
+        let gateway = gateway.clone();
+        let claimable_spam_balance = claimable_spam_balance.clone();
+
+        async move {
+            let pubkey_result = Pubkey::from_str(&pubkey);
+            if let Ok(authority) = pubkey_result {
+                let proof_pubkey = proof_pubkey(authority);
+                if let Ok(data) = gateway.rpc.get_account_data(&proof_pubkey).await {
+                    if let Ok(p) = Proof::try_from_bytes(data.as_ref()) {
+                        // let proof_result = AsyncResult::Ok(*p);
+                        let claimable = (p.claimable_rewards as f64) / 10f64.powf(ore::TOKEN_DECIMALS as f64);
+                        claimable_spam_balance.set(Some(claimable));
+                        // proof.set(proof_result);
+                    }
+                } 
+            }
+        }
+    });
+
+    render! {
+        div {
+            class: "flex flex-col gap-6 border p-8 border-teal-500 rounded-lg",
+            h2 {
+                class: "text-lg md:text-2xl font-bold mb-8",
+                "Query Spam Balance"
+            }
+            input {
+                class: "p-4 border border-gray-300 rounded-lg text-black w-full",
+                r#type: "text",
+                placeholder: "Enter Solana Address",
+                value: "{address}",
+                oninput: move |evt| address.set(evt.value.clone()),
+                onfocus: move |_| address.set("".to_string()),
+            }
+            button {
+                class: "mt-4 bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded-lg",
+                onclick: move |_| {
+                    pubkey.set(address.get().to_string());
+                },
+                "Query"
+            }
+            if *loading.get() {
+                rsx!(p { "Loading..." })
+
+            } else {
+                rsx! {
+                    claimable_spam_balance.get().map(|claimable_balance| {
+                        let claimable_balance_text = format!("Claimable Spam Balance: {}", claimable_balance);
+                        rsx!(p {
+                            class: "mt-4 text-lg text-black dark:text-white",
+                            "{claimable_balance_text}"
+                        })
+                    })
+                }
+            }
+                   
+        }
+    }
+}
+
+
+// async fn query_spam_balance(pubkey: Pubkey) -> f64 {
+//     // Replace with actual implementation to fetch the user's spam balance using use_ore_balance_user
+//     let balance = use_ore_balance_user(&cx, pubkey);  
+//     match balance {
+//         AsyncResult::Ok(balance) => {
+//             // Convert the string to a float
+//             balance.real_number_string().parse::<f64>().unwrap_or(0.0)
+//         },
+//         _ => 0.0,
+//     }
+// }
+
+// async fn query_claimable_spam_balance(pubkey: Pubkey) -> f64 {
+//     // Replace with actual implementation to fetch the user's claimable spam balance using use_user_proof
+//     let proof = use_user_proof(&cx, pubkey); 
+//     match proof {
+//         AsyncResult::Ok(proof) => {
+//             // Calculate the claimable rewards as a float
+//             (proof.claimable_rewards as f64) / 10f64.powf(ore::TOKEN_DECIMALS as f64)
+//         },
+//         _ => 0.0,
+//     }
+// }
 
 #[component]
 pub fn TopHolders(cx: Scope) -> Element {

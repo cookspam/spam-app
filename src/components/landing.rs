@@ -3,14 +3,11 @@ use std::time::{Duration, SystemTime, UNIX_EPOCH};
 
 use dioxus::prelude::*;
 use dioxus_router::prelude::*;
-use ore_types::Transfer;
-#[cfg(feature = "web")]
-use web_time::{Duration, SystemTime, UNIX_EPOCH};
 
 use crate::{
-    components::{ActivityFilter, ActivityIndicator, Footer, SpamIcon},
+    components::{Footer, SpamIcon},
     gateway::AsyncResult,
-    hooks::{use_is_onboarded, use_ore_supply, use_transfers, use_treasury},
+    hooks::{use_is_onboarded, use_ore_supply, use_treasury},
     utils::asset_path,
     Route,
 };
@@ -18,8 +15,8 @@ use crate::{
 
 #[component]
 pub fn Landing(cx: Scope) -> Element {
-    let is_onboarded = use_is_onboarded(cx);
-    let nav = use_navigator(cx);
+    // let is_onboarded = use_is_onboarded(cx);
+    // let nav = use_navigator(cx);
     
 
     // If the user is already onboarded, redirect to home.

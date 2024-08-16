@@ -1,38 +1,30 @@
 use std::{rc::Rc, str::FromStr,};
-use std::borrow::Cow;
 use std::string::String;
 //use plotters::prelude::*;
-use std::error::Error;
-use plotters_svg::SVGBackend;
 use wasm_bindgen::prelude::*;
 use web_sys::console;
-use chrono::{NaiveDateTime, Datelike, Timelike, Utc, DateTime};
+use chrono::{NaiveDateTime, Datelike, Timelike};
 use web_time::{SystemTime, Duration, UNIX_EPOCH};
 
 use reqwest::Client;
 use serde::Deserialize;
-use wasm_bindgen::prelude::*;
 
 use dioxus::prelude::*;
 use dioxus_router::prelude::*;
 
 #[cfg(feature = "desktop")]
 use solana_account_decoder::parse_token::UiTokenAccount;
-#[cfg(feature = "desktop")]
-use solana_account_decoder::parse_token::UiTokenAmount;
 #[cfg(feature = "web")]
 use solana_client_wasm::solana_sdk::pubkey::Pubkey;
 #[cfg(feature = "web")]
 use solana_extra_wasm::account_decoder::parse_token::UiTokenAccount;
-#[cfg(feature = "web")]
-use solana_extra_wasm::account_decoder::parse_token::UiTokenAmount;
 #[cfg(feature = "desktop")]
 use solana_sdk::pubkey::Pubkey;
 
 use crate::{
-    components::{SpamIcon, Footer},
+    components::{SpamIcon},
     gateway::{ore_token_account_address, AsyncResult, Gateway, GatewayError, proof_pubkey},
-    hooks::{use_gateway, use_ore_supply, use_treasury, use_ore_balance_user, use_user_proof},
+    hooks::{use_gateway, use_ore_supply, use_treasury},
     route::Route,
     utils::asset_path,  // Add this line to use asset_path function
 };
@@ -144,7 +136,7 @@ pub fn SupplyStats(cx: Scope) -> Element {
                             "monthly" => format!("{}", date_time.format("%B")), // Full month name
                             _ => {
                                     let mut hourly_hour = date_time.hour();
-                                    if (date_time.minute() != 0) {
+                                    if date_time.minute() != 0 {
                                         hourly_hour += 1;
                                         if hourly_hour >= 24 {
                                             hourly_hour -= 24;
@@ -424,7 +416,7 @@ pub fn QuerySpamBalance(cx: Scope) -> Element {
     let pubkey = use_state(cx, || "".to_string());
     let gateway = use_gateway(cx);
 
-    use_future(cx, (pubkey), |pubkey| {
+    use_future(cx, pubkey, |pubkey| {
         let gateway = gateway.clone();
         let claimable_spam_balance = claimable_spam_balance.clone();
         let spam_balance = spam_balance.clone();

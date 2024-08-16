@@ -9,8 +9,7 @@ use ore_types::{Transfer, TransferType};
 
 use crate::{
     components::{GlobeIcon, SpamIcon, UserBubble, UserIcon},
-    gateway::AsyncResult,
-    hooks::{use_pubkey, use_transfers, ACTIVITY_TABLE_PAGE_LIMIT},
+    hooks::{use_pubkey, ACTIVITY_TABLE_PAGE_LIMIT},
     route::Route,
     utils::asset_path,
 };
@@ -18,13 +17,13 @@ use crate::{
 #[derive(Debug)]
 pub enum ActivityFilter {
     Global,
-    Personal,
+    Personal
 }
 
 #[component]
 pub fn Activity(cx: Scope) -> Element {
-    let filter = use_state(cx, || ActivityFilter::Global);
-    let offset = use_state(cx, || 0u64);
+    // let filter = use_state(cx, || ActivityFilter::Global);
+    // let offset = use_state(cx, || 0u64);
     // let (transfers, has_more) = use_transfers(cx, filter, offset);
     let spam_gang = asset_path("mining_gang_resized.png");
     let go = asset_path("letsgo.png");

@@ -3,7 +3,7 @@ use dioxus_router::prelude::*;
 
 use crate::components::{
     Claim, Download, ExportKey, Home, ImportKey, Landing, Miner, Navbar, OreTokenomics, Apps,
-    PageNotFound, Privacy, Send, Settings, SimpleNavbar, Stats, Tx, User, WhatIsMining,
+    PageNotFound, Privacy, Send, Settings, SimpleNavbar, Stats, SpamDoc, Tx, User, WhatIsMining,
 };
 
 
@@ -20,8 +20,11 @@ pub enum Route {
         OreTokenomics {},
         #[route("/download")]
         Download {},
-        #[route("/privacy")]
-        Privacy {},
+        // #[route("/privacy")]
+        // Privacy {},
+        // #[route("/spam-doc")]
+        // SpamDoc {},
+       
     #[end_layout]
 
     #[layout(Navbar)]
@@ -37,6 +40,10 @@ pub enum Route {
             Apps {},
             #[route("/settings")]
             Settings {},
+            #[route("/privacy")]
+            Privacy {},
+            #[route("/spam-doc")]
+            SpamDoc {},
             #[route("/settings/export-key")]
             ExportKey {},
             #[route("/settings/import-key")]

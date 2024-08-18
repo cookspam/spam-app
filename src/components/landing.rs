@@ -28,6 +28,7 @@ pub fn Landing(cx: Scope) -> Element {
         div {
             class: "flex flex-col",
             Hero{}
+            Description {}
             Footer {hidden: false}
         }
     }
@@ -277,6 +278,126 @@ fn QuestionBreak(cx: Scope) -> Element {
             p {
                 class: "text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold font-hero text-center",
                 "How much will you mine?"
+            }
+        }
+    }
+}
+
+#[component]
+pub fn Description(cx: Scope) -> Element {
+    render! {
+        div {
+            class: "flex flex-col",
+            // New section starts here
+            div {
+                class: "text-center text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-20 px-8",
+                p {
+                    class: "mt-8 mb-4",  
+                    "Spam is a low-difficulty proof-of-work token."
+                }
+                p {
+                    class: "mb-12 ",  
+                    "Anyone can mine to help stress-test and improve Solana's performance."
+                }
+            }
+            div {
+                class: "flex flex-col md:flex-row gap-8 max-w-7xl mx-auto px-4 sm:px-8 mb-20",
+                
+                div {
+                    class: "flex-1 bg-white p-6 rounded-lg shadow-md mb-20",
+                    h3 {
+                        class: "text-xl font-semibold mb-8",
+                        "Why Spam?"
+                    }
+                    ul {
+                        class: "list-disc pl-5",
+                        li { class: "mb-4", "Boost Solana’s Network: Your mining efforts contribute directly to stress-testing and enhancing Solana’s blockchain stability." }
+                        li { class: "mb-4", "Easy to Start: No complex setup required—just start mining with minimal resources." }
+                        li { "Earn Rewards: Get rewarded for helping to optimize the Solana network." }
+                    }
+                }
+                
+                div {
+                    class: "flex-1 bg-white p-6 rounded-lg shadow-md mb-20",
+                    h3 {
+                        class: "text-xl font-semibold mb-8",
+                        "Start Mining in 3 Simple Steps:"
+                    }
+                    ul {
+                        class: "list-disc pl-5",
+                        li {
+                            class: "mb-4",
+                            "Set Up: "
+                            a {
+                                class: "text-teal-500 hover:text-teal-700",
+                                href: "https://chromewebstore.google.com/detail/spam-chrome-extension/okchhmhmdibmceakkjehbfjipibmonbe",
+                                "Install the SPAM Chrome Extension"
+                            }
+                            " or "
+                            a {
+                                class: "text-teal-500 hover:text-teal-700",
+                                href: "https://spam.supply/apps",
+                                "SPAM CLI"
+                            }
+                            "."
+                        }
+                        li { class: "mb-4", "Configure: Enter your mining key and select your preferred settings." }
+                        li { "Mine: Your browser or CLI will automatically mine SPAM tokens, contributing to Solana's stress tests." }
+                    }
+                    
+                }
+                
+                div {
+                    class: "flex-1 bg-white p-6 rounded-lg shadow-md mb-20",
+                    h3 {
+                        class: "text-xl font-semibold mb-8",
+                        "Get Started"
+                    }
+                    p {
+                        class: "mb-4", 
+                        "Ready to join the SPAM network? - Choose your tool ⚒️:"
+                        ul {
+                            class: "pl-5 mt-2",
+                            style: "list-style-type: circle; margin-left: 1rem;",
+                            li {
+                                "Start mining with "
+                                a {
+                                    class: "text-teal-500 hover:text-teal-700",
+                                    href: "https://spam.supply/mine",
+                                    "Web"
+                                }
+                            }
+                            
+                            li {
+                                "Start mining with "
+                                a {
+                                    class: "text-teal-500 hover:text-teal-700",
+                                    href: "https://chromewebstore.google.com/detail/spam-chrome-extension/okchhmhmdibmceakkjehbfjipibmonbe",
+                                    "Chrome Extension"
+                                }
+                            }
+                            
+                            li {
+                                "Start mining with "
+                                a {
+                                    class: "text-teal-500 hover:text-teal-700",
+                                    href: "https://spam.supply/apps",
+                                    "CLI"
+                                }
+                            }
+                        }
+                    }
+                    
+                    p {
+                        class: "mt-4",
+                        "Want to know more about how SPAM works? "
+                        a {
+                            class: "text-teal-500 hover:text-teal-700",
+                            href: "https://spam.supply/spam-doc",
+                            "Explore our FAQ and Documentation"
+                        }
+                    }
+                }
             }
         }
     }

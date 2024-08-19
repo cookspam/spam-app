@@ -293,7 +293,7 @@ pub fn Description(cx: Scope) -> Element {
                 class: "text-center text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-20 px-8",
                 p {
                     class: "mt-8 mb-4",  
-                    "Spam is a low-difficulty proof-of-work token."
+                    "Spam is a low-difficulty proof-of-work token, forked from ORE v1."
                 }
                 p {
                     class: "mb-12 ",  

@@ -127,8 +127,8 @@ pub fn SpamDoc(cx: Scope) -> Element {
 				div {
 					class: "h-16", // Adds a 5rem (80px) space above the FAQ section
 				}
-				h3 {
-					class: "text-2xl sm:text-3xl md:text-4xl font-semibold mb-8 text-white",
+				p {
+					class: "text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-8 font-hero",
 					"FAQ"
 				}
 				

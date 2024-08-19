@@ -167,12 +167,12 @@ fn Hero(cx: Scope) -> Element {
         div {
             class: "bg-white max-w-[1280px] mx-auto",
             div {
-                class: "relative w-full min-h-screen md:min-h-[100vh] z-20",
+                class: "relative w-full z-20",
                 Navbar {}
                 div {
-                    class: "relative flex flex-col items-center gap-y-8 sm:gap-y-10 md:gap-y-12 mx-auto pb-24 px-4 sm:px-8 max-w-7xl",
+                    class: "relative flex flex-col items-center gap-y-8 sm:gap-y-10 md:gap-y-12 mx-auto pb-48 px-4 sm:px-8 max-w-7xl",
                     div {
-                        class: "w-full h-screen",
+                        class: "w-full",
                         img {
                             src: "{bg_img}",
                             class: "w-full h-auto object-scale-down m-auto"

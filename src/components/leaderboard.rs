@@ -79,9 +79,11 @@ pub fn SupplyStats(cx: Scope) -> Element {
     //let selected_option = use_state(&cx, || "hourly".to_string());
     let count_sum = use_state(&cx, || 0);
     let show_dropdown = use_state(&cx, || false);
+    let is_fetched = use_state(&cx, || false); // Flag to track if data is fetched
+    
     
     use_future(&cx, selected_option, |selected_option| {
-        to_owned![transaction_counts, max_count, selected_option, count_sum];
+        to_owned![transaction_counts, max_count, selected_option, count_sum, is_fetched];
         async move {
             transaction_counts.set(Vec::new());
             let url = match *selected_option.get() {
@@ -154,29 +156,39 @@ pub fn SupplyStats(cx: Scope) -> Element {
                         }
                     }).collect();
                     transaction_counts.set(transformed_data.clone());
-                    // for tx in transformed_data.iter() {
-                    //     console::log_1(&format!("Count: {}, Height: {}, Timestamp: {}", tx.count, tx.height, tx.timestamp).into());
-                    // }
-
+                   is_fetched.set(true); // Mark data as fetched
                 },
                 Err(err) => console::log_1(&format!("Error fetching transaction counts: {}", err).into()),
             }
         }
     });
-    let recent_last_tx_count = transaction_counts
+    let recent_tx_counts: Vec<u32> = transaction_counts
     .get()
-    .last()
+    .iter()
+    .rev()  // Reverse the iterator to get the last items first
+    .take(2)  // Take the last 4 hours' counts
     .map(|tx| tx.count)
-    .unwrap_or(0);
+    .collect();
 
     // Log the last transaction count to the console
-    console::log_1(&format!("recent_last_tx_count: {}", recent_last_tx_count).into());
+  
+    console::log_1(&format!("recent_last_tx_count: {:?}", recent_tx_counts).into());
 
-    // Check if the last transaction count is less than 100
-    let recent_low_tx_count = recent_last_tx_count < 100;
+    let average_tx_count: u32 = if recent_tx_counts.len() == 2 {
+        recent_tx_counts.iter().sum::<u32>() / 2
+    } else {
+        0
+    };
 
-    // Log the result to the console
-    console::log_1(&format!("recent_low_tx_count: {}", recent_low_tx_count).into());
+    
+    // Log the average of the last 4 hours to the console
+    console::log_1(&format!("recent_tx_counts: {:?}", recent_tx_counts).into());
+    console::log_1(&format!("average_tx_count: {}", average_tx_count).into());
+    
+    // Check if the average of the last 4 transactions is less than 1500
+  
+    let recent_low_tx_count = *is_fetched.get() && average_tx_count < 1500;
+
 
     
     let (treasury, _) = use_treasury(cx);

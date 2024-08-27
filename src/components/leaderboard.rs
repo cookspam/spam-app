@@ -163,6 +163,20 @@ pub fn SupplyStats(cx: Scope) -> Element {
             }
         }
     });
+    let recent_last_tx_count = transaction_counts
+    .get()
+    .last()
+    .map(|tx| tx.count)
+    .unwrap_or(0);
+
+    // Log the last transaction count to the console
+    console::log_1(&format!("recent_last_tx_count: {}", recent_last_tx_count).into());
+
+    // Check if the last transaction count is less than 100
+    let recent_low_tx_count = recent_last_tx_count < 100;
+
+    // Log the result to the console
+    console::log_1(&format!("recent_low_tx_count: {}", recent_low_tx_count).into());
 
     
     let (treasury, _) = use_treasury(cx);
@@ -201,10 +215,19 @@ pub fn SupplyStats(cx: Scope) -> Element {
     let y_40 = (y_max as f64 * 0.40).round();
     let y_60 = (y_max as f64 * 0.60).round();
     let y_80 = (y_max as f64 * 0.80).round();
+
+    let final_class = if recent_low_tx_count {
+        "w-3/5 flex flex-col gap-20 border p-8 border-teal-500 rounded-lg"
+    } else {
+        "w-3/5 flex flex-col gap-48 border p-8 border-teal-500 rounded-lg"
+    };
     render! {
         div {
+            
             class: "flex flex-col md:flex-row gap-10 relative",
+            
             div{
+                
                 class: "w-2/5 flex flex-col gap-20 border p-8 border-teal-500 rounded-lg",
                 div {
                     class: "flex flex-col flex-1 pr-10",
@@ -251,7 +274,8 @@ pub fn SupplyStats(cx: Scope) -> Element {
                 
             // Right section: Transaction count chart
         div {
-            class: "w-3/5 flex flex-col gap-48  border p-8 border-teal-500 rounded-lg",
+            // Conditionally apply gap-48 or gap-24 based on whether the alert banner is shown
+            class: final_class,
             // Upper section with total transaction and dropdown
             div {
                 class: "flex justify-between items-center h-1/10",
@@ -331,6 +355,14 @@ pub fn SupplyStats(cx: Scope) -> Element {
                     }
                     
                 }
+            }
+            if recent_low_tx_count {
+                rsx!(
+                    div {
+                        class: "bg-red-500 text-white p-2 rounded-lg text-center animate-pulse",  // Added banner with minimal margins
+                            "Warning: Solana testnet is currently facing issues (Transactions may not be processing)."
+                    }
+                )
             }
             div {
                 class: "relative flex w-full flex-col",
@@ -507,31 +539,6 @@ pub fn QuerySpamBalance(cx: Scope) -> Element {
         }
     }
 }
-
-
-// async fn query_spam_balance(pubkey: Pubkey) -> f64 {
-//     // Replace with actual implementation to fetch the user's spam balance using use_ore_balance_user
-//     let balance = use_ore_balance_user(&cx, pubkey);  
-//     match balance {
-//         AsyncResult::Ok(balance) => {
-//             // Convert the string to a float
-//             balance.real_number_string().parse::<f64>().unwrap_or(0.0)
-//         },
-//         _ => 0.0,
-//     }
-// }
-
-// async fn query_claimable_spam_balance(pubkey: Pubkey) -> f64 {
-//     // Replace with actual implementation to fetch the user's claimable spam balance using use_user_proof
-//     let proof = use_user_proof(&cx, pubkey); 
-//     match proof {
-//         AsyncResult::Ok(proof) => {
-//             // Calculate the claimable rewards as a float
-//             (proof.claimable_rewards as f64) / 10f64.powf(ore::TOKEN_DECIMALS as f64)
-//         },
-//         _ => 0.0,
-//     }
-// }
 
 #[component]
 pub fn TopHolders(cx: Scope) -> Element {

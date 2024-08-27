@@ -288,60 +288,69 @@ pub fn SupplyStats(cx: Scope) -> Element {
                     }
                 } 
                // console::log_1(&format!("max {}", max).into());
-                div {
-                    class: "relative inline-block",
-                    button {
-                        class: "mr-12 dropdown-button border text-center w-20 border-teal-500 rounded-lg text-black dark:text-white",
-                        onclick: move |_| {
-                            console::log_1(&JsValue::from_str(&format!("{}", *show_dropdown.get())));
-                            show_dropdown.set(!*show_dropdown.get());
-                        },
-                        match *selected_option.get() {
-                            "hourly" => "12H",
-                            "daily" => "7D",
-                            "daily_30" => "30D",
-                            "weekly" => "Weekly",
-                            "monthly" => "Monthly",
-                            _ => "12H",
-                        }
+               div {
+                class: "relative inline-block",
+                button {
+                    class: if *show_dropdown.get() {
+                        "mr-12 dropdown-button border text-center w-20 border-teal-500 rounded-lg"
+                    } else {
+                        "mr-12 dropdown-button border text-center w-20 border-teal-500 rounded-lg text-black dark:text-white hover:bg-teal-500 hover:text-white"
+                    },
+                    style: if *show_dropdown.get() {
+                        "background-color: rgba(162, 216, 243, 0.75); color: white;"
+                    } else {
+                        ""
+                    },
+                    onclick: move |_| {
+                        show_dropdown.set(!*show_dropdown.get());
+                    },
+                    match *selected_option.get() {
+                        "hourly" => "12H",
+                        "daily" => "7D",
+                        "daily_30" => "30D",
+                        "weekly" => "Weekly",
+                        "monthly" => "Monthly",
+                        _ => "12H",
                     }
-                    if *show_dropdown.get() {
-                        render!{
-                            div {
-                                class: "dropdown-content w-20 text-center absolute dark:text-white border border-teal-500 rounded mt-2",
-                                button {
-                                    class: "block w-full px-4 py-2 text-sm ",
-                                    onclick: move |_| {
-                                        selected_option.set("hourly");
-                                        show_dropdown.set(false);
-                                    },
-                                    "12H"
-                                }
-                                button {
-                                    class: "block w-full px-4 py-2 text-sm ",
-                                    onclick: move |_| {
-                                        selected_option.set("daily");
-                                        show_dropdown.set(false);
-                                    },
-                                    "7D"
-                                }
-                                button {
-                                    class: "block w-full px-4 py-2 text-sm ",
-                                    onclick: move |_| {
-                                        selected_option.set("daily_30");
-                                        show_dropdown.set(false);
-                                    },
-                                    "30D"
-                                }
-                                // button {
-                                //     class: "block w-full px-4 py-2 text-sm ",
-                                //     onclick: move |_| {
-                                //         selected_option.set("weekly");
-                                //         show_dropdown.set(false);
-                                //     },
-                                //     "Weekly"
-                                // }
-                                // button {
+                }
+                if *show_dropdown.get() {
+                    render!{
+                        div {
+                            class: "dropdown-content w-20 text-center absolute bg-teal-500 text-white border border-teal-500 rounded mt-2",
+                            style: "background-color: rgba(162, 216, 243, 0.75); color: white;", 
+                            button {
+                                class: "block w-full px-4 py-2 text-sm hover:text-black", // Text turns black on hover
+                                onclick: move |_| {
+                                    selected_option.set("hourly");
+                                    show_dropdown.set(false);
+                                },
+                                "12H"
+                            }
+                            button {
+                                class: "block w-full px-4 py-2 text-sm hover:text-black", // Text turns black on hover
+                                onclick: move |_| {
+                                    selected_option.set("daily");
+                                    show_dropdown.set(false);
+                                },
+                                "7D"
+                            }
+                            button {
+                                class: "block w-full px-4 py-2 text-sm hover:text-black", // Text turns black on hover
+                                onclick: move |_| {
+                                    selected_option.set("daily_30");
+                                    show_dropdown.set(false);
+                                },
+                                "30D"
+                            }
+                            // button {
+                            //     class: "block w-full px-4 py-2 text-sm hover:text-black", // Text turns black on hover
+                            //     onclick: move |_| {
+                            //         selected_option.set("weekly");
+                            //         show_dropdown.set(false);
+                            //     },
+                            //     "Weekly"
+                            // }      
+                            // button {
                                 //     class: "block w-full px-4 py-2 text-sm ",
                                 //     onclick: move |_| {
                                 //         selected_option.set("monthly");

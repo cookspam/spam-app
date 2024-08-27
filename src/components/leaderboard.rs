@@ -85,6 +85,7 @@ pub fn SupplyStats(cx: Scope) -> Element {
     use_future(&cx, selected_option, |selected_option| {
         to_owned![transaction_counts, max_count, selected_option, count_sum, is_fetched];
         async move {
+            is_fetched.set(false);
             transaction_counts.set(Vec::new());
             let url = match *selected_option.get() {
                 "daily" => {

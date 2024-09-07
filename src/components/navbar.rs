@@ -42,59 +42,59 @@ pub fn Navbar(cx: Scope) -> Element {
             div {
                 class: "flex w-full",
                 div {
-                    class: "max-w-[96rem] w-full flex flex-row justify-between mx-auto px-4 sm:px-8 py-6",
+                    class: "max-w-[96rem] w-full flex flex-row justify-between mx-auto px-4 sm:px-8 py-4",  // Reduce py for smaller screens
                     Link {
                         to: Route::Landing {},
-                        class: "flex flex-row h-10 gap-1",
+                        class: "flex flex-row h-10 gap-1 my-auto",
                         SpamIcon {
-                            class: "w-6 h-6 my-auto "
+                            class: "w-5 h-5 sm:w-6 sm:h-6 my-auto"  // Smaller logo on small screens
                         }
                         p {
-                            class: "text-2xl font-semibold my-auto text-gray-300 dark:text-gray-700 hover:text-black dark:hover:text-white",
+                            class: "text-lg sm:text-2xl font-semibold my-auto text-gray-300 dark:text-gray-700 hover:text-black dark:hover:text-white",  // Smaller text on small screens
                             "SPAM"
                         }
                     }
                     div {
-                        class: "flex flex-row gap-6 md:gap-8 lg:gap-10",
+                        class: "flex flex-row gap-1 sm:gap-1 md:gap-2 lg:gap-3 flex-wrap sm:flex-nowrap",  // Reduced gap for smaller screens
                         Link {
-                            class: "transition-colors flex items-center gap-2 px-4 py-2 rounded-full text-gray-300 dark:text-gray-700 hover:text-black dark:hover:text-white",
+                            class: "transition-colors flex flex-col items-center gap-1 sm:gap-2 px-2 sm:px-0 py-2 rounded-full text-gray-300 dark:text-gray-700 hover:text-black dark:hover:text-white",  // Reduced padding
                             to: Route::Home {},
                             span {
-                                class: "text-2xl font-bold sm:text-xl sm:font-bold",
+                                class: "w-5 h-5",  // Smaller icon on small screens
                                 "⛏️"
                             }
                             span {
-                                class: "text-sm sm:text-base md:text-lg",
+                                class: "text-xs sm:text-base md:text-lg",  // Smaller text on small screens
                                 "Mine"
                             }
                         }
                         Link {
-                            class: "transition-colors flex items-center gap-2 px-4 py-2 rounded-full text-gray-300 dark:text-gray-700 hover:text-black dark:hover:text-white",
+                            class: "transition-colors flex flex-col items-center gap-1 sm:gap-1 md:gap-2 lg:gap-3 px-2 sm:px-0 py-2 rounded-full text-gray-300 dark:text-gray-700 hover:text-black dark:hover:text-white",  // Reduced padding
                             to: Route::Stats {},
                             StatsIcon {}
                             span {
-                                class: "text-sm sm:text-base md:text-lg",
+                                class: "text-xs sm:text-base md:text-lg",  // Smaller text on small screens
                                 "Stats"
                             }
                         }
                         Link {
-                            class: "transition-colors flex items-center gap-2 px-4 py-2 rounded-full text-black dark:text-gray-700 hover:text-gray-600 dark:hover:text-white",
+                            class: "transition-colors flex flex-col items-center gap-1 sm:gap-1 md:gap-2 lg:gap-3 px-2 sm:px-0 py-2 rounded-full text-black dark:text-gray-700 hover:text-gray-600 dark:hover:text-white",  // Reduced padding
                             to: Route::Apps {},
                             span {
-                                class: "text-2xl font-bold sm:text-xl sm:font-bold",
+                                class: "w-5 h-5",  // Smaller icon on small screens
                                 "📦"
                             }
                             span {
-                                class: "text-sm font-semibold sm:text-base md:text-lg",
+                                class: "text-xs sm:text-base md:text-lg",  // Smaller text on small screens
                                 "Apps"
                             }
                         }
                         Link {
-                            class: "transition-colors flex items-center gap-2 px-4 py-2 rounded-full text-gray-300 dark:text-gray-700 hover:text-black dark:hover:text-white",
+                            class: "transition-colors flex flex-col items-center gap-1 sm:gap-1 md:gap-2 lg:gap-3 px-2 sm:px-0 py-2 rounded-full text-gray-300 dark:text-gray-700 hover:text-black dark:hover:text-white",  // Reduced padding
                             to: Route::Settings {},
                             MyPageIcon {}
                             span {
-                                class: "text-sm sm:text-base md:text-lg",
+                                class: "text-xs sm:text-base md:text-lg",  // Smaller text on small screens
                                 "My Page"
                             }
                         }
@@ -112,11 +112,12 @@ pub fn Navbar(cx: Scope) -> Element {
     }
 }
 
+
 #[component]
 fn StatsIcon(cx: Scope) -> Element {
     render! {
         svg {
-            class: "w-5 h-5 sm:w-6 sm:h-6",
+            class: "w-5 h-5",
             fill: "none",
             stroke: "currentColor",
             view_box: "0 0 24 24",
@@ -135,7 +136,7 @@ fn StatsIcon(cx: Scope) -> Element {
 fn MyPageIcon(cx: Scope) -> Element {
     render! {
         span {
-            class: "w-5 h-5 sm:w-6 sm:h-6",
+            class: "w-5 h-5 ",
             "👤"
         }
     }

@@ -33,12 +33,12 @@ pub fn Activity(cx: Scope) -> Element {
             class: "relative flex flex-col h-64 w-full mt-24",
             img {
                 src: "{spam_gang}",
-                class: "absolute bottom-24 left-8 w-128 h-48 md:w-128 md:h-48",
+                class: "absolute bottom-24 left-0 md:left-8 lg:left-8 w-128 h-48 md:w-128 md:h-48",
             
             }
             img {
                 src: "{go}",
-                class: "absolute bottom-24 left-72 w-32 h-16 md:w-32 md:h-16 animate-jump_right",
+                class: "absolute bottom-24 left-72 w-32 h-16 md:w-32 md:h-16 animate-jump_right sm:hidden",
             }
             img {
                 src: "{back}",

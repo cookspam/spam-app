@@ -42,7 +42,7 @@ pub fn Navbar(cx: Scope) -> Element {
             div {
                 class: "flex w-full",
                 div {
-                    class: "max-w-[96rem] w-full flex flex-row justify-between mx-auto px-4 sm:px-8 py-4",  // Reduce py for smaller screens
+                    class: "max-w-[96rem] w-full flex flex-row justify-between mx-auto px-4 sm:px-8 py-6",  // Reduce py for smaller screens
                     Link {
                         to: Route::Landing {},
                         class: "flex flex-row h-10 gap-1 my-auto",
@@ -55,12 +55,12 @@ pub fn Navbar(cx: Scope) -> Element {
                         }
                     }
                     div {
-                        class: "flex flex-row gap-1 sm:gap-1 md:gap-2 lg:gap-3 flex-wrap sm:flex-nowrap",  // Reduced gap for smaller screens
+                        class: "flex flex-row gap-1 sm:gap-2 md:gap-4 lg:gap-10 flex-wrap sm:flex-nowrap",  // Reduced gap for smaller screens
                         Link {
-                            class: "transition-colors flex flex-col items-center gap-1 sm:gap-2 px-2 sm:px-0 py-2 rounded-full text-gray-300 dark:text-gray-700 hover:text-black dark:hover:text-white",  // Reduced padding
+                            class: "transition-colors flex flex-col sm:flex-row items-center gap-1 sm:gap-1 md:gap-2 lg:gap-3 px-2 sm:px-0 py-2 rounded-full text-gray-300 dark:text-gray-700 hover:text-black dark:hover:text-white",  // Reduced padding
                             to: Route::Home {},
                             span {
-                                class: "w-5 h-5",  // Smaller icon on small screens
+                                class: "w-5 h-5 sm:w-6 sm:h-6 my-auto",  // Smaller icon on small screens
                                 "⛏️"
                             }
                             span {
@@ -69,7 +69,7 @@ pub fn Navbar(cx: Scope) -> Element {
                             }
                         }
                         Link {
-                            class: "transition-colors flex flex-col items-center gap-1 sm:gap-1 md:gap-2 lg:gap-3 px-2 sm:px-0 py-2 rounded-full text-gray-300 dark:text-gray-700 hover:text-black dark:hover:text-white",  // Reduced padding
+                            class: "transition-colors flex flex-col items-center sm:flex-row gap-1 sm:gap-1 md:gap-2 lg:gap-3 px-2 sm:px-0 py-2 rounded-full text-gray-300 dark:text-gray-700 hover:text-black dark:hover:text-white",  // Reduced padding
                             to: Route::Stats {},
                             StatsIcon {}
                             span {
@@ -78,7 +78,7 @@ pub fn Navbar(cx: Scope) -> Element {
                             }
                         }
                         Link {
-                            class: "transition-colors flex flex-col items-center gap-1 sm:gap-1 md:gap-2 lg:gap-3 px-2 sm:px-0 py-2 rounded-full text-black dark:text-gray-700 hover:text-gray-600 dark:hover:text-white",  // Reduced padding
+                            class: "transition-colors flex flex-col items-center sm:flex-row gap-1 sm:gap-1 md:gap-2 lg:gap-3 px-2 sm:px-0 py-2 rounded-full text-black dark:text-gray-700 hover:text-gray-600 dark:hover:text-white",  // Reduced padding
                             to: Route::Apps {},
                             span {
                                 class: "w-5 h-5",  // Smaller icon on small screens
@@ -90,7 +90,7 @@ pub fn Navbar(cx: Scope) -> Element {
                             }
                         }
                         Link {
-                            class: "transition-colors flex flex-col items-center gap-1 sm:gap-1 md:gap-2 lg:gap-3 px-2 sm:px-0 py-2 rounded-full text-gray-300 dark:text-gray-700 hover:text-black dark:hover:text-white",  // Reduced padding
+                            class: "transition-colors flex flex-col items-center sm:flex-row  gap-1 sm:gap-1 md:gap-2 lg:gap-3 px-2 sm:px-0 py-2 rounded-full text-gray-300 dark:text-gray-700 hover:text-black dark:hover:text-white",  // Reduced padding
                             to: Route::Settings {},
                             MyPageIcon {}
                             span {

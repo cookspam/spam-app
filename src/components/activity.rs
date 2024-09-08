@@ -22,59 +22,31 @@ pub enum ActivityFilter {
 
 #[component]
 pub fn Activity(cx: Scope) -> Element {
-    // let filter = use_state(cx, || ActivityFilter::Global);
-    // let offset = use_state(cx, || 0u64);
-    // let (transfers, has_more) = use_transfers(cx, filter, offset);
+   
     let spam_gang = asset_path("mining_gang_resized.png");
     let go = asset_path("letsgo.png");
     let back = asset_path("letsback.png");
     
-    // match transfers {
-        // AsyncResult::Ok(transfers) => {
-        //     render! {
-        //         div {
-        //             class: "flex flex-col gap-4 grow w-full h-2/3 pb-20 min-h-16 rounded justify-start",
-        //             div {
-        //                 class: "flex flex-row justify-between",
-        //                 h2 {
-        //                     class: "text-lg md:text-2xl font-bold my-auto",
-        //                     "Activity"
-        //                 }
-        //                 FilterButtons {
-        //                     filter: filter,
-        //                     offset: offset
-        //                 }
-        //             }
-        //             ActivityTable{
-        //                 offset: offset,
-        //                 transfers: transfers,
-        //                 has_more: has_more
-        //             }
-        //         }
-        //     }
-        // }
-        // _ => {
-            render! {
-                div {
-                   // class: "flex flex-row h-64 w-full loading rounded",
-                   class: "relative flex flex-col h-64 w-full mt-24",
-                   img {
-                       src: "{spam_gang}",
-                       class: "absolute bottom-24 left-8 w-128 h-48 md:w-128 md:h-48",
-                   
-                    }
-                    img {
-                        src: "{go}",
-                        class: "absolute bottom-24 left-72 w-32 h-16 md:w-32 md:h-16 animate-jump_right",
-                    }
-                    img {
-                        src: "{back}",
-                        class: "absolute bottom-24 left-72 w-32 h-20 md:w-32 md:h-20 animate-move_left",
-                    }
-                }
+    render! {
+        div {
+            // class: "flex flex-row h-64 w-full loading rounded",
+            class: "relative flex flex-col h-64 w-full mt-24",
+            img {
+                src: "{spam_gang}",
+                class: "absolute bottom-24 left-8 w-128 h-48 md:w-128 md:h-48",
+            
             }
-    //     }
-    // }
+            img {
+                src: "{go}",
+                class: "absolute bottom-24 left-72 w-32 h-16 md:w-32 md:h-16 animate-jump_right",
+            }
+            img {
+                src: "{back}",
+                class: "absolute bottom-24 left-72 w-32 h-20 md:w-32 md:h-20 animate-move_left",
+            }
+        }
+    }
+   
 }
 
 #[derive(Props, PartialEq)]

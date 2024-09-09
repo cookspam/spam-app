@@ -61,7 +61,7 @@ futures = "0.3.30"
 futures-timer = "0.6"
 gloo = { version = "0.11.0", optional = true }
 gloo-storage = { version = "0.3.0", optional = true }
-home = { verison = "0.5.9", optional = true }
+home = { version = "0.5.9", optional = true }
 is-url = { version = "1.0.4" }
 js-sys = { version = "0.3.67", optional = true }
 log = "0.4.20"
@@ -77,7 +77,7 @@ serde = { version = "1.0", features = ["derive"] }
 serde-wasm-bindgen = { version = "0.6.3", optional = true }
 serde_json = "1.0"
 solana-account-decoder = { version = "1.17.4", optional = true }
-solana-client = { verison = "1.17.4", optional = true }
+solana-client = { version = "1.17.4", optional = true }
 solana-client-wasm = { version = "1.17.4", optional = true }
 solana-extra-wasm = { version = "1.17.4", optional = true }
 solana-sdk = { version = "1.17.4", optional = true }
@@ -86,7 +86,7 @@ spl-memo = { version = "^4", features = ["no-entrypoint"], optional = true }
 spl-token = { version = "^4", features = ["no-entrypoint"], optional = true }
 spl-associated-token-account = { version = "^2.2", features = [ "no-entrypoint" ], optional = true }
 url = "2.5.0"
-wasm-bindgen = { version = "0.2.91", optional = true }
+wasm-bindgen = { version = "0.2.93", optional = true }
 wasm-bindgen-futures = { version = "0.4.41", optional = true }
 wasm-logger = { version = "0.2.0", optional = true }
 web-time = { version = "1.0.0", optional = true }

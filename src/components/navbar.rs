@@ -101,7 +101,7 @@ pub fn Navbar(cx: Scope) -> Element {
                     }
                 }
             }
-            div {
+            div { 
                 class: "flex flex-col h-full py-4 px-4 sm:px-8 grow w-full max-w-[96rem] mx-auto",
                 Outlet::<Route> {}
             }

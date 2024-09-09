@@ -38,8 +38,9 @@ pub fn Activity(cx: Scope) -> Element {
             }
             img {
                 src: "{go}",
-                class: "absolute bottom-24 left-72 w-32 h-16 md:w-32 md:h-16 animate-jump_right sm:hidden",
+                class: "absolute bottom-24 left-72 w-32 h-16 md:w-32 md:h-16 animate-jump_right hidden md:inline-block",  // Hidden on small screens, shown as inline-block on medium and up
             }
+            
             img {
                 src: "{back}",
                 class: "absolute bottom-24 left-72 w-32 h-20 md:w-32 md:h-20 animate-move_left",

@@ -1,5 +1,6 @@
 use std::{rc::Rc, str::FromStr,};
 use std::string::String;
+use web_sys::window;
 //use plotters::prelude::*;
 use wasm_bindgen::prelude::*;
 use web_sys::console;
@@ -175,6 +176,9 @@ pub fn SupplyStats(cx: Scope) -> Element {
   
     console::log_1(&format!("recent_last_tx_count: {:?}", recent_tx_counts).into());
 
+    let screen_size = is_small_screen();
+    console::log_1(&format!("is_small_screen: {}", screen_size).into());
+
     let average_tx_count: u32 = if recent_tx_counts.len() == 2 {
         recent_tx_counts.iter().sum::<u32>() / 2
     } else {
@@ -229,11 +233,14 @@ pub fn SupplyStats(cx: Scope) -> Element {
     let y_60 = (y_max as f64 * 0.60).round();
     let y_80 = (y_max as f64 * 0.80).round();
 
-    let final_class = if recent_low_tx_count {
-        "w-3/5 flex flex-col gap-20 border p-8 border-teal-500 rounded-lg"
+    let final_class = if screen_size {
+       "w-full md:w-3/5 flex flex-col gap-24 border p-8 border-teal-500 rounded-lg"
     } else {
-        "w-3/5 flex flex-col gap-48 border p-8 border-teal-500 rounded-lg"
+       "w-full md:w-3/5 flex flex-col gap-48 border p-8 border-teal-500 rounded-lg"
     };
+    
+
+   
     render! {
         div {
             
@@ -288,7 +295,7 @@ pub fn SupplyStats(cx: Scope) -> Element {
             // Right section: Transaction count chart
         div {
             // Conditionally apply gap-48 or gap-24 based on whether the alert banner is shown
-            class: "w-full md:w-3/5 flex flex-col gap-48 border p-8 border-teal-500 rounded-lg", // Right side takes full width on small, 3/5 on larger screens",
+            class:final_class, // Right side takes full width on small, 3/5 on larger screens",
             // Upper section with total transaction and dropdown
             div {
                 class: "flex justify-between  h-1/10",
@@ -347,14 +354,14 @@ pub fn SupplyStats(cx: Scope) -> Element {
                                 },
                                 "7D"
                             }
-                            button {
-                                class: "block w-full px-4 py-2 text-sm hover:text-black", // Text turns black on hover
-                                onclick: move |_| {
-                                    selected_option.set("daily_30");
-                                    show_dropdown.set(false);
-                                },
-                                "30D"
-                            }
+                            // button {
+                            //     class: "hidden md:block w-full px-4 py-2 text-sm hover:text-black", // Text turns black on hover
+                            //     onclick: move |_| {
+                            //         selected_option.set("daily_30");
+                            //         show_dropdown.set(false);
+                            //     },
+                            //     "30D"
+                            // }
                             // button {
                             //     class: "block w-full px-4 py-2 text-sm hover:text-black", // Text turns black on hover
                             //     onclick: move |_| {
@@ -388,34 +395,41 @@ pub fn SupplyStats(cx: Scope) -> Element {
             }
             div {
                 class: "relative flex w-full flex-col",
+              
                 div {
-                    class: "absolute ml-2 top-[100%] text-xs text-gray-500",
+                    class: "absolute top-[100%] text-xs text-gray-500 pr-4",
                     p {"(UTC)"}
                 }
                 div {
-                    class: "absolute ml-2 top-[76%] text-xs text-gray-500",
+                    class: "absolute top-[76%] text-xs text-gray-500 mr-2",
                     p { format!("{:.0}", y_20) }
                 }
                 div {
-                    class: "absolute ml-2 top-[56%] text-xs text-gray-500",
+                    class: "absolute top-[56%] text-xs text-gray-500 mr-2",
                     p { format!("{:.0}", y_40) }
                 }
                 div {
-                    class: "absolute ml-2 top-[36%] text-xs text-gray-500",
+                    class: "absolute top-[36%] text-xs text-gray-500 mr-2",
                     p { format!("{:.0}", y_60) }
                 }
                 div {
-                    class: "absolute ml-2 top-[16%] text-xs text-gray-500",
+                    class: "absolute top-[16%] text-xs text-gray-500 mr-2",
                     p { format!("{:.0}", y_80) }
                 }
+               
+
                 ul {
-                    class: "chart h-auto dark:chart_dark",
+                    class: "chart h-auto dark:chart_dark pl-4",
                     for tx in page_data.iter() {
+                        // Use conditional logic to truncate or show full count
+                       
                         li {
                             span {
+                                
+                                // Use screen size-based conditional formatting (Tailwind utility classes)
                                 style:"height: {tx.height}%; --bar-height: {tx.height}%;",
                                 title: "{tx.timestamp}",
-                                "data-count": "{tx.count}",
+                                  "data-count":  "{tx.count}"  // Display truncated or full timestamp
                             }
                         }
                     }
@@ -428,6 +442,15 @@ pub fn SupplyStats(cx: Scope) -> Element {
         }
     }
 }
+
+fn is_small_screen() -> bool {
+    // You can use some logic or store screen size globally and return it here
+    let window = web_sys::window().unwrap();
+    let width = window.inner_width().unwrap().as_f64().unwrap();
+
+    width < 640.0 // Returns true for small screens (less than 640px)
+}
+
 
 #[component]
 fn OreValue(cx: Scope, title: String, detail: String, amount: String) -> Element {
@@ -518,7 +541,7 @@ pub fn QuerySpamBalance(cx: Scope) -> Element {
         div {
             class: "flex flex-col gap-6 border p-8 border-teal-500 rounded-lg",
             h2 {
-                class: "text-lg md:text-2xl font-bold mb-8",
+                class: "text-lg md:text-2xl font-bold mb-2 lg:mb-4",
                 "Query Spam Balance"
             }
             input {
@@ -660,9 +683,17 @@ pub fn TokenBalanceRow<'a>(cx: Scope, i: usize, token_account: &'a UiTokenAccoun
     let owner = if token_account.owner.eq(&ore::TREASURY_ADDRESS.to_string()) {
         "Spam Treasury".to_string()
     } else {
-        token_account.owner.clone()
+        // Show only the first 6 characters of the owner account
+        let mut account_display = token_account.owner.clone();
+        if account_display.len() > 6 {
+            account_display = format!("{}...", &account_display[..6]);
+        }
+        account_display
     };
-    let amount = &token_account.token_amount.ui_amount_string;
+     // Parse the amount to a float and format to 2 decimal places
+     let amount = token_account.token_amount.ui_amount_string.parse::<f64>()
+     .map(|val| format!("{:.2}", val)) // Format to 2 decimal places
+     .unwrap_or_else(|_| token_account.token_amount.ui_amount_string.clone()); // Handle parsing errors by falling back to the original string
     render! {
         Link {
             to: Route::User { id: token_account.owner.clone() },

@@ -59,6 +59,15 @@ module.exports = {
 
     }),
     extend: {
+      gap: {
+        '36': '9rem', 
+        '48': '12rem', // Custom gap value for large screen 
+      },
+      screens: {
+       'sm': '576px',
+      'md': '960px',
+      'lg': '1440px',
+      },
       fontFamily: {
         mono: ['GeistMono', 'ui-monospace', 'monospace'],
         sans: ['Geist', 'ui-sans-serif', 'system-ui'],
@@ -89,16 +98,25 @@ module.exports = {
         move_left: {
           '0%': { transform: 'translateX(100vw)' },
           '100%': { transform: 'translateX(0)' },
+        },
       },
-    },
       animation: {
         jump_up:  'jump_up 1s ease-in-out',
         jump_right: 'jump_right 10s ease-in-out',
         move_left: 'move_left 10s linear 13s infinite',
       },
+      variants: {
+        extend: {
+          display: ['responsive', 'group-hover', 'focus-within', 'hover', 'focus'],
+        },
+      },
     },
-    },
+  },
   
-  variants: {},
+    variants: {
+      extend: {
+        display: ['responsive', 'group-hover', 'focus-within', 'hover', 'focus'],
+      },
+    },
   plugins: [],
 }

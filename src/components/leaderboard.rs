@@ -237,11 +237,11 @@ pub fn SupplyStats(cx: Scope) -> Element {
     render! {
         div {
             
-            class: "flex flex-col md:flex-row gap-10 relative",
+            class: "flex flex-col md:flex-row gap-10 relative w-full",
             
             div{
                 
-                class: "w-2/5 flex flex-col gap-20 border p-8 border-teal-500 rounded-lg",
+                class: "w-full md:w-2/5 flex flex-col gap-20 border p-8 border-teal-500 rounded-lg", // Left side takes full width on small, 2/5 on larger screens",
                 div {
                     class: "flex flex-col flex-1 pr-10",
                     h2 {
@@ -288,10 +288,10 @@ pub fn SupplyStats(cx: Scope) -> Element {
             // Right section: Transaction count chart
         div {
             // Conditionally apply gap-48 or gap-24 based on whether the alert banner is shown
-            class: final_class,
+            class: "w-full md:w-3/5 flex flex-col gap-48 md:gap-24 border p-8 border-teal-500 rounded-lg", // Right side takes full width on small, 3/5 on larger screens",
             // Upper section with total transaction and dropdown
             div {
-                class: "flex justify-between items-center h-1/10",
+                class: "flex justify-between  h-1/10",
                 h2 {
                     class: "text-lg md:text-2xl font-bold mb-8",
                     "Total Transaction: "
@@ -302,12 +302,12 @@ pub fn SupplyStats(cx: Scope) -> Element {
                 } 
                // console::log_1(&format!("max {}", max).into());
                div {
-                class: "relative inline-block",
+                class: "relative inline-block self-end",
                 button {
                     class: if *show_dropdown.get() {
-                        "mr-12 dropdown-button border text-center w-20 border-teal-500 rounded-lg"
+                        "mr-0 md:mr-12 mb-2 dropdown-button border text-center w-20 border-teal-500 rounded-lg"
                     } else {
-                        "mr-12 dropdown-button border text-center w-20 border-teal-500 rounded-lg text-black dark:text-white hover:bg-teal-500 hover:text-white"
+                        "mr-0 md:mr-12 mb-2 dropdown-button border text-center w-20 border-teal-500 rounded-lg text-black dark:text-white hover:bg-teal-500 hover:text-white"
                     },
                     style: if *show_dropdown.get() {
                         "background-color: rgba(162, 216, 243, 0.75); color: white;"

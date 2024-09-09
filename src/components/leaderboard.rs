@@ -524,7 +524,7 @@ pub fn QuerySpamBalance(cx: Scope) -> Element {
             input {
                 class: "p-4 border border-gray-300 rounded-lg text-black w-full",
                 r#type: "text",
-                placeholder: "Enter Solana Address",
+                placeholder: "🔍  Enter Solana Address",
                 value: "{address}",
                 oninput: move |evt| address.set(evt.value.clone()),
                 onfocus: move |_| address.set("".to_string()),
@@ -579,9 +579,9 @@ pub fn TopHolders(cx: Scope) -> Element {
 
     render! {
         div {
-            class: "flex flex-col md:flex-row gap-24 relative border p-8 border-teal-500 rounded-lg",  // Added border, padding, and rounded corners
+            class: "flex flex-col md:flex-row gap-12 relative border p-8 border-teal-500 rounded-lg",  // Added border, padding, and rounded corners
             div {
-                class: "flex flex-col flex-1 pr-10",
+                class: "flex flex-col flex-1 pr-0 md:pr-10",
                 h2 {
                     class: "text-lg md:text-2xl font-bold mb-8",
                     "Top Holders"
@@ -602,28 +602,12 @@ pub fn TopHolders(cx: Scope) -> Element {
                         }
                     }
                 }
-                //
-                // div {
-                //     class: "relative mb-4 mt-4",  // Container for the search bar
-                //     span {
-                //         class: "absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400",
-                //         "🔍"  // Simple magnifying glass icon
-                //     }
-                //     input {
-                //         class: "pl-10 pr-4 py-2 border-b border-gray-300 focus:outline-none focus:border-black w-full",
-                //         r#type: "text",
-                //         placeholder: "Search your address...",
-                //         oninput: move |evt| {
-                //             search_query.set(evt.value.clone());
-                //         }
-                //     }
-                // }
             }
             div {
-                class: "flex items-end",  // Align the image at the bottom
+                class: "flex justify-end items-end",  // Align the image at the right side and bottom for all screens
                 img {
                     src: "{solo}",  // Adjust the image path accordingly
-                    class: "w-48 h-48 md:w-64 md:h-64",
+                    class: "w-24 h-24 sm:w-32 sm:h-32 md:w-64 md:h-64",
                     alt: "Mining Solo"
                 }
             }

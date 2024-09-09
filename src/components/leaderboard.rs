@@ -260,12 +260,12 @@ pub fn SupplyStats(cx: Scope) -> Element {
                         OreValue {
                             title: "Circulating supply".to_string(),
                             detail: "The total amount of Spam that has been mined and claimed.".to_string(),
-                            amount: circulating_supply.to_string()
+                            amount:  format!("{:.3}", circulating_supply) 
                         }
                         OreValue {
                             title: "Total supply".to_string(),
                             detail: "The total amount of Spam that has ever been mined.".to_string(),
-                            amount: spam_supply.to_string()
+                            amount: format!("{:.3}", spam_supply)
                         }
                     }
                 }
@@ -686,7 +686,7 @@ pub fn TokenBalanceRow<'a>(cx: Scope, i: usize, token_account: &'a UiTokenAccoun
         // Show only the first 6 characters of the owner account
         let mut account_display = token_account.owner.clone();
         if account_display.len() > 6 {
-            account_display = format!("{}...", &account_display[..6]);
+            account_display = format!("{}...", &account_display[..8]);
         }
         account_display
     };

@@ -70,22 +70,22 @@ fn Navbar(cx: Scope) -> Element {
             class: "max-w-[96rem] w-full flex flex-row justify-between mx-auto px-4 sm:px-8 py-6",
             Link {
                 to: Route::Landing {},
-                class: "flex flex-row h-10 gap-1",
+                class: "flex flex-row h-10 gap-1 my-auto",
                 SpamIcon {
-                    class: "w-6 h-6 my-auto "
+                    class: "w-5 h-5 sm:w-6 sm:h-6 my-auto"
                 }
                 p {
-                    class: "text-2xl font-semibold my-auto",
+                    class: "text-lg sm:text-2xl font-semibold my-auto",
                     "SPAM"
                 }
             }
             div {
-                class: "flex flex-row gap-6 md:gap-8 lg:gap-10",
+                class: "flex flex-row gap-1 sm:gap-2 md:gap-4 lg:gap-10 flex-wrap sm:flex-nowrap",
                 Link {
-                    class: "transition-colors flex items-center gap-2 px-4 py-2 rounded-full text-black dark:text-gray-600 hover:text-gray-700 dark:hover:text-white",
+                    class: "transition-colors flex flex-col sm:flex-row items-center gap-1 sm:gap-1 md:gap-2 lg:gap-3 px-2 sm:px-0 py-2 rounded-full text-black dark:text-gray-600 hover:text-gray-700 dark:hover:text-white",
                     to: Route::Home {},
                     span {
-                        class: "text-2xl font-bold sm:text-xl sm:font-bold",
+                        class: "w-5 h-5 sm:w-6 sm:h-6 my-auto",
                         "⛏️"
                     }
                     span {
@@ -94,7 +94,7 @@ fn Navbar(cx: Scope) -> Element {
                     }
                 }
                 Link {
-                    class: "transition-colors flex items-center gap-2 px-4 py-2 rounded-full text-black dark:text-gray-700 hover:text-gray-600 dark:hover:text-white",
+                    class: "transition-colors flex flex-col sm:flex-row items-center gap-1 sm:gap-1 md:gap-2 lg:gap-3 px-2 sm:px-0 py-2 rounded-full text-black dark:text-gray-600 hover:text-gray-700 dark:hover:text-white",
                     to: Route::Stats {},
                     StatsIcon {}
                     span {
@@ -103,10 +103,10 @@ fn Navbar(cx: Scope) -> Element {
                     }
                 }
                 Link {
-                    class: "transition-colors flex items-center gap-2 px-4 py-2 rounded-full text-black dark:text-gray-700 hover:text-gray-600 dark:hover:text-white",
+                    class: "transition-colors flex flex-col sm:flex-row items-center gap-1 sm:gap-1 md:gap-2 lg:gap-3 px-2 sm:px-0 py-2 rounded-full text-black dark:text-gray-600 hover:text-gray-700 dark:hover:text-white",
                     to: Route::Apps {},
                     span {
-                        class: "text-2xl font-bold sm:text-xl sm:font-bold",
+                        class: "w-5 h-5 sm:w-6 sm:h-6 my-auto",
                         "📦"
                     }
                     span {
@@ -115,7 +115,7 @@ fn Navbar(cx: Scope) -> Element {
                     }
                 }
                 Link {
-                    class: "transition-colors flex items-center gap-2 px-4 py-2 rounded-full text-black dark:text-gray-700 hover:text-gray-600 dark:hover:text-white",
+                    class: "transition-colors flex flex-col sm:flex-row items-center gap-1 sm:gap-1 md:gap-2 lg:gap-3 px-2 sm:px-0 py-2 rounded-full text-black dark:text-gray-600 hover:text-gray-700 dark:hover:text-white",
                     to: Route::Settings {},
                     MyPageIcon {}
                     span {
@@ -183,8 +183,7 @@ fn Hero(cx: Scope) -> Element {
                                 class: "pt-32 text-center text-7xl min-[480px]:text-5xl min-[600px]:text-6xl md:text-3xl lg:text-7xl font-bold font-hero text-black",
                                 style: "text-shadow: 5px 5px 8px white, 0 0 50px white, 0 0 30px white;",
                               
-                                    "Let's Spam Solana!"
-                                
+                                    "Let's Spam Solana!"   
                             }
                         }
                         div {

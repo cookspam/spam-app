@@ -50,21 +50,21 @@ pub fn Navbar(cx: Scope) -> Element {
                             class: "w-5 h-5 sm:w-6 sm:h-6 my-auto"  // Smaller logo on small screens
                         }
                         p {
-                            class: "text-lg sm:text-2xl font-semibold my-auto text-gray-300 dark:text-gray-700 hover:text-black dark:hover:text-white",  // Smaller text on small screens
+                            class: "text-lg sm:text-2xl font-semibold my-auto text-gray-300 dark:text-gray-700 hover:text-black dark:hover:text-white", 
                             "SPAM"
                         }
                     }
                     div {
-                        class: "flex flex-row gap-1 sm:gap-2 md:gap-4 lg:gap-10 flex-wrap sm:flex-nowrap",  // Reduced gap for smaller screens
+                        class: "flex flex-row gap-1 sm:gap-2 md:gap-4 lg:gap-10 flex-wrap sm:flex-nowrap", 
                         Link {
                             class: "transition-colors flex flex-col sm:flex-row items-center gap-1 sm:gap-1 md:gap-2 lg:gap-3 px-2 sm:px-0 py-2 rounded-full text-gray-300 dark:text-gray-700 hover:text-black dark:hover:text-white",  // Reduced padding
                             to: Route::Home {},
                             span {
-                                class: "w-5 h-5 sm:w-6 sm:h-6 my-auto",  // Smaller icon on small screens
+                                class: "w-5 h-5 sm:w-6 sm:h-6 my-auto",  
                                 "⛏️"
                             }
                             span {
-                                class: "text-xs sm:text-base md:text-lg",  // Smaller text on small screens
+                                class: "text-xs sm:text-base md:text-lg",  
                                 "Mine"
                             }
                         }
@@ -73,7 +73,7 @@ pub fn Navbar(cx: Scope) -> Element {
                             to: Route::Stats {},
                             StatsIcon {}
                             span {
-                                class: "text-xs sm:text-base md:text-lg",  // Smaller text on small screens
+                                class: "text-xs sm:text-base md:text-lg",  
                                 "Stats"
                             }
                         }
@@ -81,11 +81,11 @@ pub fn Navbar(cx: Scope) -> Element {
                             class: "transition-colors flex flex-col items-center sm:flex-row gap-1 sm:gap-1 md:gap-2 lg:gap-3 px-2 sm:px-0 py-2 rounded-full text-black dark:text-gray-700 hover:text-gray-600 dark:hover:text-white",  // Reduced padding
                             to: Route::Apps {},
                             span {
-                                class: "w-5 h-5",  // Smaller icon on small screens
+                                class: "w-5 h-5", 
                                 "📦"
                             }
                             span {
-                                class: "text-xs sm:text-base md:text-lg",  // Smaller text on small screens
+                                class: "text-xs sm:text-base md:text-lg",  
                                 "Apps"
                             }
                         }
@@ -94,7 +94,7 @@ pub fn Navbar(cx: Scope) -> Element {
                             to: Route::Settings {},
                             MyPageIcon {}
                             span {
-                                class: "text-xs sm:text-base md:text-lg",  // Smaller text on small screens
+                                class: "text-xs sm:text-base md:text-lg", 
                                 "My Page"
                             }
                         }
@@ -102,7 +102,7 @@ pub fn Navbar(cx: Scope) -> Element {
                 }
             }
             div { 
-                class: "flex flex-col h-full py-4 px-4 sm:px-8 grow w-full max-w-[96rem] mx-auto",
+                class: "flex flex-col h-full py-4 px-4 sm:px-8 grow w-full max-w-[96rem] mx-auto", 
                 Outlet::<Route> {}
             }
             Footer {

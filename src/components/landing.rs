@@ -243,7 +243,7 @@ fn DataItem(cx: Scope, title: String, value: String) -> Element {
             
             // Value with responsive font size and some margin-bottom for spacing
             p {
-                class: "text-base sm:text-xl mb-2",  // Adjusted font size for value, with margin-bottom
+                class: "text-sm sm:text-xl md:text-xl mb-2",  // Adjusted font size for value, with margin-bottom
                 "{value}"
             }
         }

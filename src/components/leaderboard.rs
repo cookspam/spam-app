@@ -288,7 +288,7 @@ pub fn SupplyStats(cx: Scope) -> Element {
             // Right section: Transaction count chart
         div {
             // Conditionally apply gap-48 or gap-24 based on whether the alert banner is shown
-            class: "w-full md:w-3/5 flex flex-col gap-48 md:gap-24 border p-8 border-teal-500 rounded-lg", // Right side takes full width on small, 3/5 on larger screens",
+            class: "w-full md:w-3/5 flex flex-col gap-48 border p-8 border-teal-500 rounded-lg", // Right side takes full width on small, 3/5 on larger screens",
             // Upper section with total transaction and dropdown
             div {
                 class: "flex justify-between  h-1/10",

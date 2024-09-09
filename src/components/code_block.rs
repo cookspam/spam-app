@@ -22,9 +22,9 @@ pub fn CodeBlock<'a>(cx: Scope, text: &'a str) -> Element {
     let strs = text.split('\n');
     render! {
         div {
-            class: "flex flex-row justify-between py-2 pl-4 pr-2 bg-gray-100 text-black dark:bg-gray-900 dark:text-white font-mono rounded",
+            class: "flex flex-row justify-between py-2 pl-4 pr-4 bg-gray-100 text-black dark:bg-gray-900 dark:text-white font-mono rounded",
             div {
-                class: "flex flex-col",
+                class: "flex flex-col break-words pr-4",
                 for s in strs {
                     render! {
                         p {

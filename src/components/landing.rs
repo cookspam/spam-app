@@ -167,7 +167,7 @@ fn Hero(cx: Scope) -> Element {
         div {
             class: "bg-white max-w-[1280px] mx-auto",
             div {
-                class: "relative w-full z-20",
+                class: "relative w-full z-20 mb-20",
                 Navbar {}
                 div {
                     class: "relative flex flex-col items-center gap-y-8 sm:gap-y-10 md:gap-y-12 mx-auto pb-48 px-4 sm:px-8 max-w-7xl",
@@ -180,47 +180,48 @@ fn Hero(cx: Scope) -> Element {
                         div{
                             class: "absolute top-0 left-0 w-full",
                             div {
-                                class: "pt-32 text-center text-7xl min-[480px]:text-5xl min-[600px]:text-6xl md:text-3xl lg:text-7xl font-bold font-hero text-black",
-                                style: "text-shadow: 5px 5px 8px white, 0 0 50px white, 0 0 30px white;",
-                              
-                                    "Let's Spam Solana!"   
+                                class: "text-center pt-32 text-3xl sm:text-6xl md:text-6xl lg:text-7xl font-bold font-hero text-black",
+                                style: "text-shadow: 5px 5px 8px white, 0 0 50px white, 0 0 30px white;",  // Keep the shadow and other styles
+                                "Let's Spam Solana!"
                             }
+                            
                         }
                         div {
-                            class: "absolute -mt-[10vh] left-1/2 transform -translate-x-1/2 w-[86%] h-[20%] items-center flex flex-row justify-between bg-white p-4 rounded-lg shadow-md",
-                            DataItem {
-                                title: "Mining Difficulty".to_string(),
-                                value: "1/256".to_string()
-                            }
-                            DataItem {
-                                title: "Circulating Supply".to_string(),
-                                value: circulating_supply
-                            }
-                            DataItem {
-                                title: " Total Supply ".to_string(),
-                                value: ore_supply 
-                            }
-                            DataItem {
-                                title: "Reward Rate".to_string(),
-                                value: reward_rate
-                            }
+                            class: "absolute -mt-[20vh] left-1/2 transform -translate-x-1/2 w-[86%] h-[25%] items-center flex flex-col justify-between bg-white p-4 rounded-lg shadow-md",
+                            
+                            // DataItems section
                             div {
-                                class: "flex flex-col items-center bg-teal-500 hover:bg-teal-700 rounded-lg p-4 shadow-md w-1/5 text-white text-lg ",
-                              
-                                    Link {
-                                        class: " py-4 ",  // Adjusted padding and height
-                                        to: Route::Home {},
-                                        "SPAM →"
-                                    }
-                                
+                                class: "flex flex-row justify-between w-full",  // Keep DataItems in a row on large screens
+                                DataItem {
+                                    title: "Mining Difficulty".to_string(),
+                                    value: "1/256".to_string()
+                                }
+                                DataItem {
+                                    title: "Circulating Supply".to_string(),
+                                    value: circulating_supply
+                                }
+                                DataItem {
+                                    title: "Total Supply".to_string(),
+                                    value: ore_supply 
+                                }
+                                DataItem {
+                                    title: "Reward Rate".to_string(),
+                                    value: reward_rate
+                                }
+                            }
+                            
+                            // Button section
+                            div {
+                                class: "flex flex-col items-center bg-teal-500 hover:bg-teal-700 rounded-lg p-0 sm:p-4 md:p-4 lg:p-6 shadow-md w-full sm:w-auto lg:w-[19%] text-white text-lg mt-4 sm:mt-0", 
+                                Link {
+                                    class: "py-4 lg:py-2",  // Keep padding flexible for smaller screens and adjust on larger screens
+                                    to: Route::Home {},
+                                    "SPAM →"
+                                }
                             }
                         }
                         
-                    }
-
-                    
-
-        
+                    }        
                 }
             }
         }
@@ -232,18 +233,23 @@ fn Hero(cx: Scope) -> Element {
 fn DataItem(cx: Scope, title: String, value: String) -> Element {
     render! {
         div {
-            class: "flex flex-col items-center bg-real_white rounded-lg p-4 shadow-md w-1/4",
+            class: "flex flex-col items-center bg-real_white rounded-lg p-4 shadow-md w-1/4 mb-2",
+            
+            // Title with specific padding for top and left, reduced margin-bottom
             p {
-                class: "text-gray-700 text-lg font-medium",
+                class: "text-sm sm:text-lg md:text-lg lg:text-lg text-gray-700 font-medium pt-2 pl-2 mb-1",  // Padding on top (pt) and left (pl), with smaller margin-bottom
                 "{title}"
             }
+            
+            // Value with responsive font size and some margin-bottom for spacing
             p {
-                class: "text-xl",
+                class: "text-base sm:text-xl mb-2",  // Adjusted font size for value, with margin-bottom
                 "{value}"
             }
         }
     }
 }
+
 
 
 #[component]
@@ -295,7 +301,7 @@ pub fn Description(cx: Scope) -> Element {
                     "Spam is a low-difficulty proof-of-work token, forked from ORE v1."
                 }
                 p {
-                    class: "mb-12 ",  
+                    class: "mb-8 ",  
                     "Anyone can mine to help stress-test and improve Solana's performance."
                 }
             }
@@ -309,9 +315,9 @@ pub fn Description(cx: Scope) -> Element {
                         "Why Spam?"
                     }
                     ul {
-                        class: "list-disc pl-5",
-                        li { class: "mb-4", "Boost Solana’s Network: Your mining efforts contribute directly to stress-testing and enhancing Solana’s blockchain stability." }
-                        li { class: "mb-4", "Easy to Start: No complex setup required—just start mining with minimal resources." }
+                        class: "list-disc pl-5 pb-5",
+                        li { "Boost Solana’s Network: Your mining efforts contribute directly to stress-testing and enhancing Solana’s blockchain stability." }
+                        li { "Easy to Start: No complex setup required—just start mining with minimal resources." }
                         li { "Earn Rewards: Get rewarded for helping to optimize the Solana network." }
                     }
                 }
@@ -325,7 +331,7 @@ pub fn Description(cx: Scope) -> Element {
                     ul {
                         class: "list-disc pl-5",
                         li {
-                            class: "mb-4",
+                          
                             "Set Up: "
                             a {
                                 class: "text-teal-500 hover:text-teal-700",
@@ -340,7 +346,7 @@ pub fn Description(cx: Scope) -> Element {
                             }
                             "."
                         }
-                        li { class: "mb-4", "Configure: Enter your mining key and select your preferred settings." }
+                        li { "Configure: Enter your mining key and select your preferred settings." }
                         li { "Mine: Your browser or CLI will automatically mine SPAM tokens, contributing to Solana's stress tests." }
                     }
                     
@@ -353,7 +359,7 @@ pub fn Description(cx: Scope) -> Element {
                         "Get Started"
                     }
                     p {
-                        class: "mb-4", 
+                      
                         "Ready to join the SPAM network? - Choose your tool ⚒️:"
                         ul {
                             class: "pl-5 mt-2",

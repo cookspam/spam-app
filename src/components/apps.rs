@@ -88,11 +88,82 @@ pub fn Apps(cx: Scope) -> Element {
 					}
 				}
             ),
-           "Chrome Extension" => rsx!(
+			"Chrome Extension" => rsx!(
 				div {
+					div {
+						class: "h-16", // This adds a 5rem (80px) space above the element
+					}
+					p {
+						class: "text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-8 font-hero",
+						"Chrome Extension"
+					}
+					p {
+						class: "text-lg leading-relaxed mb-4",
+						"The Spam Chrome extension is designed to seamlessly integrate mining into your browser experience. "
+						"This extension allows you to mine while browsing the web, without interrupting your regular activities."
+					}
+					h3 {
+						class: "text-xl sm:text-2xl md:text-3xl font-semibold mb-8 mt-8",
+						"Features include:"
+					}
+					ul {
+						class: "list-disc list-inside pl-4 text-lg",
+						li { "Browser integration for seamless mining" }
+						li { "Background operation with minimal impact on browsing speed" }
+						li { "RPC-friendly, consuming fewer RPC counts compared to other options" }
+					}
+					a {
+						class: "text-teal-500 text-lg hover:text-teal-700 font-semibold mt-8 inline-flex items-center",
+						href: "https://chromewebstore.google.com/detail/spam-chrome-extension/okchhmhmdibmceakkjehbfjipibmonbe",
+						target: "_blank",
+						img {
+							src: "{spam_img}", 
+							alt: "Spam Character",
+							style: "width: 24px; height: 24px; margin-right: 16px;" 
+						}
+						"Install Spam Chrome Extension"
+					}
+			
+				}
+			
+			),
+			"Desktop App" => rsx!(
+				div {
+					div {
+						class: "h-16", // This adds a 5rem (80px) space above the element
+					}
+					p {
+						class: "text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-8 font-hero",
+						"Desktop App (Ore Dual Mining)"
+					}
+					p {
+						class: "text-lg leading-relaxed mb-8",
+						"The Spam desktop application delivers the power of CLI mining with a user-friendly interface, offering the same level of effectiveness while providing an improved user experience, making mining accessible to a wider audience."
+					}
+
+					h3 {
+						class: "text-xl sm:text-2xl md:text-3xl font-semibold mb-8 mt-8",
+						"Features include:"
+					}
+					ul {
+						class:  "list-disc list-inside pl-4 text-lg",
+						li { "Same effectiveness as CLI mining, with improved user experience" }
+						li { "Dual mining: mine both Ore (CPU/GPU) and Spam (network)" }
+						li { "Maximizes efficiency and rewards by combining both processes" }
+					}
+					p {
+						class: "text-teal-500 text-lg leading-relaxed mb-8 mt-8",
+						"⚙️ Desktop app is coming soon "
+					}
+					// Uncomment and update when download link is available
+					// a {
+					//     class: "font-semibold hover:underline hover:text-green-500",
+					//     href: \"{DESKTOP_DOWNLOAD_MAC}\",
+					//     "Download for Mac"
+					// }
 					// Chrome extension content as before
 				}
-           ),
+			),
            _ => rsx!(p { "Select a tab to view more information." }),
         }
     };

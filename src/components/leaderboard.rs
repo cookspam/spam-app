@@ -686,14 +686,23 @@ pub fn TokenBalanceRow<'a>(cx: Scope, i: usize, token_account: &'a UiTokenAccoun
         // Show only the first 6 characters of the owner account
         let mut account_display = token_account.owner.clone();
         if account_display.len() > 6 {
-            account_display = format!("{}...", &account_display[..8]);
+            if is_small_screen() {
+                account_display = format!("{}...", &account_display[..8]);
+            }    
         }
         account_display
     };
      // Parse the amount to a float and format to 2 decimal places
      let amount = token_account.token_amount.ui_amount_string.parse::<f64>()
-     .map(|val| format!("{:.2}", val)) // Format to 2 decimal places
-     .unwrap_or_else(|_| token_account.token_amount.ui_amount_string.clone()); // Handle parsing errors by falling back to the original string
+    .map(|val| {
+        if is_small_screen() {
+            format!("{:.2}", val) // Format to 2 decimal places for small screens
+        } else {
+            format!("{:.3}", val) // Format to 3 decimal places for larger screens
+        }
+    })
+    .unwrap_or_else(|_| token_account.token_amount.ui_amount_string.clone());
+
     render! {
         Link {
             to: Route::User { id: token_account.owner.clone() },

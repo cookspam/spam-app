@@ -42,6 +42,7 @@ pub fn Stats(cx: Scope) -> Element {
                 class: "flex-grow", // Take remaining space
                 div {
                     class: "flex flex-col gap-16 pt-10 pb-10",
+                  //  ActiveUser{}
                     SupplyStats {}
                     QuerySpamBalance {}
                     TopHolders {}

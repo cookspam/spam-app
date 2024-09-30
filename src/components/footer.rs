@@ -43,7 +43,7 @@ pub fn Footer(cx: Scope, hidden: bool) -> Element {
                     }
                 }
                 Link {
-                    to: "https://discord.gg/",
+                    to: "https://discord.gg/Kn9p4Syx",
                     class: "flex h-10 w-10 hover:bg-gray-900 active:bg-gray-800 transition-colors rounded-full text-white",
                     img {
                         src: "{discord_img}",  // Adjust the image path accordingly
